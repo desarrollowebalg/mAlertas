@@ -14,14 +14,14 @@
 	float:right;
 	margin-top:5px;
 }
-#contenedorFormTarea{
+#contenedorFormAlerta{
 	border:0px solid #FF0000;
 	width:96%;
 	height:98%;
 	position:absolute;
 	/*overflow:auto;*/
 }
-#divTextTareaNombre{
+#divTextAlertaNombre{
 	margin-bottom:15px;
 }
 #txtNombreTarea{

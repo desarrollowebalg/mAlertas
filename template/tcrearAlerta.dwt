@@ -1,9 +1,9 @@
 <!--Formulario nueva tarea-->
 <div id="divNuevaTarea" title="Agregar tarea ...">
-    <form name="frmNuevaTarea" id="frmNuevaTarea">
-        <div id="contenedorFormTarea">
-            <div id="divTextTareaNombre">
-                <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre tarea..." value="">
+    <form name="frmNuevaAlerta" id="frmNuevaAlerta">
+        <div id="contenedorFormAlerta">
+            <div id="divTextAlertaNombre">
+                <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre alerta..." value="">
                 <!--<button id="btnAvanzado" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonAvanzado" role="button"><span class="ui-button-text">Avanzado...</span></button>-->
             </div>
             <table border="0" cellpadding="1" cellspacing="1" width="100%">
