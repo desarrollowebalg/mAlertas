@@ -1,3 +1,4 @@
+
 //funciones para el modulo
 /*
 *Muestra los usuarios para ser seleccionados mediante el catalogo
