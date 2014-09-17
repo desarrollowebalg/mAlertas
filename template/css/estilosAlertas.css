@@ -1,0 +1,166 @@
+.divContenedorBotones1{
+	position:absolute;
+	right:10px;
+	top:5px;
+	border:0px solid #990000;
+	height:24px;
+	width:300px;
+	text-align:right;
+}
+.botonesImportadorTarea{
+	margin-left: 10px;
+}
+.botonAvanzado{
+	float:right;
+	margin-top:5px;
+}
+#contenedorFormTarea{
+	border:0px solid #FF0000;
+	width:96%;
+	height:98%;
+	position:absolute;
+	/*overflow:auto;*/
+}
+#divTextTareaNombre{
+	margin-bottom:15px;
+}
+#txtNombreTarea{
+	font-size:20px;
+	width:300px;
+}
+.fieldset{
+	border-bottom:0px;
+	border-left:0px;
+	border-right:0px;
+}
+#usuariosAsignados{
+	height:100px;
+	width:100%;
+	border:1px solid #CCC;
+	overflow: auto;
+}
+.busquedaVentanaEmergente{
+	width:250px;
+}
+/*Listado Usuarios*/
+#listadoUsuariosTareas{
+	border:1px solid #CCC;
+	width:99%;
+	height:170px;
+	overflow: auto;
+}
+.estiloListadoUsuarios{
+	border:1px solid #F0F0F0;
+	margin:3px;
+	height:15px;
+	padding:5px;
+	background: #FFF;
+}
+.estiloListadoUsuarios:hover{
+	background: #F0F0F0;
+}
+.estiloUsuariosAgregadosDiv{
+	border:1px solid #CCC;
+	margin:5px;
+	padding:3px;
+	background: #F0F0F0;
+}
+/*estilos acciones cuestionarios*/
+#cuestionariosAsignados{
+	height:60px;
+	width:100%;
+	border:1px solid #CCC;
+	overflow: auto;
+}
+#listadoCuestionarioTareas{
+	border:1px solid #CCC;
+	width:99%;
+	height:170px;
+	overflow: auto;
+}
+.listadoCuestionariosTareas{
+	border:1px solid #F0F0F0;
+	margin:3px;
+	height:15px;
+	padding:5px;
+	background: #FFF;
+}
+
+/*obligatorios*/
+.camposObligatorios{
+	color:#FF0000;
+	font-weight:bold;
+	font-size:14px;
+}
+.estiloTextoLeyenda{
+	color: #000;
+	font-weight: bold;
+	font-size: 10px;
+	text-align: right;
+}
+.direccion{
+	width: 250px;
+	font-size: 12px;
+}
+/*Estilos extra para el grid*/
+.alternarRegistros { 
+	background-color: #F0F0F0;/*#DDDDDC*/
+	background-image: none; 
+}
+/*Estilos para la tabla del detalle de la tarea*/
+.datosTablaTitulo{
+	height:15px;
+	padding:5px;
+	border-bottom: 1px solid #CCC;
+	background: #F0F0F0;
+} 
+.datosTabla{
+	height:15px;
+	padding:5px;
+	border-bottom: 1px solid #CCC;
+}
+/*Estilos para la edicion*/
+#txtNombreTareaEditar{
+	font-size:20px;
+	width:300px;
+}
+#usuariosAsignadosEditar{
+	height:100px;
+	width:100%;
+	border:1px solid #CCC;
+	overflow: auto;
+}
+#cuestionariosAsignadosEditar{
+	height:60px;
+	width:100%;
+	border:1px solid #CCC;
+	overflow: auto;
+}
+
+/************* espacio para el importador *************/
+
+#respuestas_importador_cabecera{
+	width:100%;
+	height:50px;
+	border: #a6c9e2 solid 1px;
+}
+
+#total_cargas{
+	width:100%;
+	height:50px;
+	border: #a6c9e2 solid 1px;
+}
+
+#respuestas_importador_cuerpo{
+	width:100%;
+	height:75%;
+	border:#a6c9e2 solid 1px;	
+	overflow: auto;
+    overflow-x: hidden; 
+}
+
+#img_impotador{
+color:#2e6e9e;	
+height:18px;
+width:18px;
+}

@@ -1,0 +1,98 @@
+<!--Formulario nueva tarea-->
+<div id="divNuevaTarea" title="Agregar tarea ...">
+    <form name="frmNuevaTarea" id="frmNuevaTarea">
+        <div id="contenedorFormTarea">
+            <div id="divTextTareaNombre">
+                <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre tarea..." value="">
+                <!--<button id="btnAvanzado" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonAvanzado" role="button"><span class="ui-button-text">Avanzado...</span></button>-->
+            </div>
+            <table border="0" cellpadding="1" cellspacing="1" width="100%">
+                <tr>
+                    <td width="53%">
+                        <fieldset class="fieldset"><legend>Detalle de la tarea</legend>
+                            <p><span class="camposObligatorios">*</span><input type="text" id="fechaProgramada" placeholder="Fecha programada..." readonly /></p>
+                            <p><span class="camposObligatorios">*</span><textarea id="txtDescripcionTarea" cols="40" rows="3" placeholder="Descripci&oacute;n de la tarea..."></textarea></p>
+                        </fieldset>
+                    </td>
+                    <td width="2%">&nbsp;</td>
+                    <td width="45%" rowspan="3" valign="top">
+                        <fieldset class="fieldset"><legend>Adicional</legend>
+                            <table border="0" width="100%">
+                                <tr>
+                                    <td><span class="camposObligatorios">*</span>Prioridad:</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="cboPrioridad" id="cboPrioridad">
+                                            <option value="--">Selecciona...</option>
+                                            <option value="1" selected="selected">Normal</option>
+                                            <option value="2">Obligatorio</option>
+                                            <option value="3">Urgente</option>
+                                            <option value="4">Obligatorio Urgente</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="camposObligatorios">*</span>
+                                        <button id="btnAgregaUsuarios" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonesImportadorTarea" role="button"><span class="ui-button-text">Agregar usuarios</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><div id="usuariosAsignados"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" id="habilitaCuestionarios" onClick="if(this.checked == true){habilitaSeccionCuestionarios(0)} else{habilitaSeccionCuestionarios(1)}"><label for="habilitaCuestionarios">Habilitar selecci&oacute;n de cuestionarios</label></td>
+                                </tr>
+                                <tr id="seleccionCuestionariosBtn" style="display:none;">
+                                    <td>
+                                        <button id="btnAgregaCuestionarios" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonesImportadorTarea" role="button"><span class="ui-button-text">Agregar cuestionario</span></button>
+                                    </td>
+                                </tr>
+                                <tr id="seleccionCuestionariosDiv" style="display:none;">
+                                    <td><div id="cuestionariosAsignados"></div></td>
+                                </tr>
+                            </table>
+                        </fieldset>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <fieldset class="fieldset"><legend>Ubicaci&oacute;n</legend>
+                            <table>
+                                <tr>
+                                    <td><input type="text" id="txtCalle" class="direccion" placeholder="Calle..." /></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="txtColonia" class="direccion" placeholder="Colonia..." /></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="txtMunicipio" class="direccion" placeholder="Municipio..." /></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="txtEstado" class="direccion" placeholder="Estado..." /></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="txtCP" placeholder="CP..." size="5" maxlength="5" /></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+                    <td>&nbsp;</td>                    
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>                    
+                </tr>
+            </table>
+            <div class="estiloTextoLeyenda">Los campos marcados con <span class="camposObligatorios">*</span> son obligatorios</div>
+        </div>
+        <input type="hidden" id="hdnEliminaTarea" />
+    </form>    
+</div>
+<!--Fin formulario nueva tarea-->
