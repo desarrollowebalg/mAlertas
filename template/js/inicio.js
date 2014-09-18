@@ -60,6 +60,9 @@ $(document).ready(function(){
     redimensionarAlertas();
     //peticion para listar las tareas
     //cargarTareas("today");
+	//esto es nuevo cre
+	//que no me lo reconoce
+	
 	
 });
 
