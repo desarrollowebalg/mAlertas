@@ -2,8 +2,9 @@
 /*ja ya llego el nuevo git*/
 
 function hey2(){
-var f= 'hola';	
+	var f= 'hola';	
 	alert(f);
+	/*pos se ve que esta jalando bien esta cosa...*/
 }
 //funciones para el modulo
 /*
