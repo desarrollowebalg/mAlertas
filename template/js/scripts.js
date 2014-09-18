@@ -1,4 +1,10 @@
 
+/*ja ya llego el nuevo git*/
+
+function hey2(){
+var f= 'hola';	
+	alert(f);
+}
 //funciones para el modulo
 /*
 *Muestra los usuarios para ser seleccionados mediante el catalogo
