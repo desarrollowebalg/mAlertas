@@ -5,6 +5,10 @@ function hey2(){
 var f= 'hola';	
 	alert(f);
 }
+
+function pruebaXXX(){
+	alert("Prueba de la funcion");
+}
 //funciones para el modulo
 /*
 *Muestra los usuarios para ser seleccionados mediante el catalogo
