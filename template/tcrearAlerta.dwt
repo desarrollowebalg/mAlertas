@@ -3,7 +3,7 @@
     <form name="frmNuevaAlerta" id="frmNuevaAlerta">
         <div id="contenedorFormAlerta">
             <div id="divTextAlertaNombre">
-                <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre alerta..." value="xxxxxxx">
+                <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre alerta..." value="">
             </div>
             <table border="0" cellpadding="1" cellspacing="1" width="100%">
                 <tr>
