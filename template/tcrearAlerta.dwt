@@ -17,7 +17,7 @@
                 <tr>
                     <td colspan="2">
                            <span class="camposObligatorios">*</span>
-                           <input type="text" style="width:90%;" name="txtCorreoElectronico" id="txtCorreoElectronico" placeholder="Correo(s) electronico(s)" readonly />
+                           <input type="text" style="width:85%;" name="txtCorreoElectronico" id="txtCorreoElectronico" placeholder="Correo(s) electronico(s)" readonly />
                            <button id="btnAgragarCorreo">+</button>
                   </td>
                 </tr>  
@@ -87,7 +87,7 @@
                      <td valign="top" width="50%">
                           <span class="camposObligatorios">*</span>
                           <button id="btnAgragarExpresion">Agregar Unidades</button>
-                          <textarea id="txtUnidades" cols="35" rows="10" placeholder="Unidades Asignadas"></textarea></p>
+                          <textarea id="txtUnidades" cols="35" rows="8" placeholder="Unidades Asignadas"></textarea></p>
                      </td>                  
                 </tr>
             </table>
