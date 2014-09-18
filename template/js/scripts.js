@@ -6,6 +6,10 @@ function hey2(){
 	alert(f);
 	/*pos se ve que esta jalando bien esta cosa...*/
 }
+
+function pruebaXXX(){
+	alert("Prueba de la funcion");
+}
 //funciones para el modulo
 /*
 *Muestra los usuarios para ser seleccionados mediante el catalogo
