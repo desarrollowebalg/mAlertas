@@ -4,12 +4,11 @@
         <div id="contenedorFormAlerta">
             <div id="divTextAlertaNombre">
                 <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre alerta..." value="">
-                <!--<button id="btnAvanzado" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonAvanzado" role="button"><span class="ui-button-text">Avanzado...</span></button>-->
             </div>
             <table border="0" cellpadding="1" cellspacing="1" width="100%">
                 <tr>
                     <td width="53%">
-                        <fieldset class="fieldset"><legend>Detalle de la tarea</legend>
+                        <fieldset class="fieldset"><legend>Asignación de correo(s) electrónico(s):</legend>
                             <p><span class="camposObligatorios">*</span><input type="text" id="fechaProgramada" placeholder="Fecha programada..." readonly /></p>
                             <p><span class="camposObligatorios">*</span><textarea id="txtDescripcionTarea" cols="40" rows="3" placeholder="Descripci&oacute;n de la tarea..."></textarea></p>
                         </fieldset>
