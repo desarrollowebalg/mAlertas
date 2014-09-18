@@ -1,92 +1,94 @@
 <!--Formulario nueva tarea-->
-<div id="divNuevaTarea" title="Agregar tarea ...">
+<div id="divNuevaTarea" title="Agregar Alerta">
     <form name="frmNuevaAlerta" id="frmNuevaAlerta">
         <div id="contenedorFormAlerta">
-            <div id="divTextAlertaNombre">
-                <span class="camposObligatorios">*</span><input type="text" name="txtNombreTarea" id="txtNombreTarea" placeholder="Nombre alerta..." value="">
-            </div>
-            <table border="0" cellpadding="1" cellspacing="1" width="100%">
+            <table border="0" cellpadding="1" cellspacing="1" width="100%" height="100%" style="border-collapse:collapse;">
                 <tr>
-                    <td width="53%">
-                        <fieldset class="fieldset"><legend>Asignación de correo(s) electrónico(s):</legend>
-                            <p><span class="camposObligatorios">*</span><input type="text" id="fechaProgramada" placeholder="Fecha programada..." readonly /></p>
-                            <p><span class="camposObligatorios">*</span><textarea id="txtDescripcionTarea" cols="40" rows="3" placeholder="Descripci&oacute;n de la tarea..."></textarea></p>
-                        </fieldset>
-                    </td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="45%" rowspan="3" valign="top">
-                        <fieldset class="fieldset"><legend>Adicional</legend>
-                            <table border="0" width="100%">
-                                <tr>
-                                    <td><span class="camposObligatorios">*</span>Prioridad:</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <select name="cboPrioridad" id="cboPrioridad">
-                                            <option value="--">Selecciona...</option>
-                                            <option value="1" selected="selected">Normal</option>
-                                            <option value="2">Obligatorio</option>
-                                            <option value="3">Urgente</option>
-                                            <option value="4">Obligatorio Urgente</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="camposObligatorios">*</span>
-                                        <button id="btnAgregaUsuarios" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonesImportadorTarea" role="button"><span class="ui-button-text">Agregar usuarios</span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><div id="usuariosAsignados"></div></td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id="habilitaCuestionarios" onClick="if(this.checked == true){habilitaSeccionCuestionarios(0)} else{habilitaSeccionCuestionarios(1)}"><label for="habilitaCuestionarios">Habilitar selecci&oacute;n de cuestionarios</label></td>
-                                </tr>
-                                <tr id="seleccionCuestionariosBtn" style="display:none;">
-                                    <td>
-                                        <button id="btnAgregaCuestionarios" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonesImportadorTarea" role="button"><span class="ui-button-text">Agregar cuestionario</span></button>
-                                    </td>
-                                </tr>
-                                <tr id="seleccionCuestionariosDiv" style="display:none;">
-                                    <td><div id="cuestionariosAsignados"></div></td>
-                                </tr>
-                            </table>
-                        </fieldset>                        
+                   <td width="50%">
+                           <span class="camposObligatorios">*</span>
+                           <input type="text" name="txtNombreAlerta" id="txtNombreAlerta" placeholder="Nombre de la alerta" value="">
+                          
+                  </td>
+                  <td>
+                         <input type="checkbox" name="chkVigente" id="chkVigente" /> Vigente
+                           <input type="checkbox" name="chkActiva"  id="chkActiva"  /> Activa
+                   </td>
+                </tr>  
+                <tr>
+                    <td colspan="2">
+                           <span class="camposObligatorios">*</span>
+                           <input type="text" style="width:90%;" name="txtCorreoElectronico" id="txtCorreoElectronico" placeholder="Correo(s) electronico(s)" readonly />
+                           <button id="btnAgragarCorreo">+</button>
+                  </td>
+                </tr>  
+                  <tr>
+                    <td colspan="2" valign="top">      
+                          <table width="100%" border="0">  
+                           <tr>
+                             <td width="1%">
+                                  <span class="camposObligatorios">*</span>
+                            </td>
+                            <td width="70%">
+                           <textarea id="txtExpresionAlertas" cols="70" rows="10" placeholder="Expresi&oacute;n de la Alerta"></textarea></p>
+   							</td>
+                             <td valign="top">
+                                <button id="btnAgregarExpresion">+</button>
+                             </td>   
+                            </tr>    
+                            </table>    
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <fieldset class="fieldset"><legend>Ubicaci&oacute;n</legend>
-                            <table>
+                        <fieldset class="fieldset"><legend>Condiciones de d&iacute;as y Horarios</legend>
+                            <table border="0" width="100%">
                                 <tr>
-                                    <td><input type="text" id="txtCalle" class="direccion" placeholder="Calle..." /></td>
+                                    <td><input type="checkbox" id="chkLunes" />LUNES</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" id="txtColonia" class="direccion" placeholder="Colonia..." /></td>
+                                    <td><input type="checkbox" id="chkMartes" />MARTES</td>
+                                    <td><input type="checkbox" id="chkViernes" />VIERNES</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" id="txtMunicipio" class="direccion" placeholder="Municipio..." /></td>
+                                    <td><input type="checkbox" id="chkMiercoles" />MIERCOLES</td>
+                                    <td><input type="checkbox" id="chkSabado" />S&Aacute;BADO</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" id="txtEstado" class="direccion" placeholder="Estado..." /></td>
+                                    <td><input type="checkbox" id="chkJueves" />JUEVES</td>
+                                    <td><input type="checkbox" id="chkDomingo" />DOMINGO</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" id="txtCP" placeholder="CP..." size="5" maxlength="5" /></td>
+                                    <td>
+                                    <select id="hrInicio">
+                                     <option>00</option>
+                                    </select>:
+                                   <select id="mnInicio">
+                                     <option>00</option>
+                                    </select>
+                                    </td>
+                                    <td> HORA DE INICIO</td>
                                 </tr>
+								<tr>
+                                    <td>
+                                   <select id="hrFin">
+                                     <option>00</option>
+                                    </select>:
+                                   <select id="mnFin">
+                                     <option>00</option>
+                                    </select>
+                                    </td>
+                                   <td> HORA DE FIN</td>
+                                </tr>
+                                
                             </table>
                         </fieldset>
                     </td>
-                    <td>&nbsp;</td>                    
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>                    
+                     <td valign="top" width="50%">
+                          <span class="camposObligatorios">*</span>
+                          <button id="btnAgragarExpresion">Agregar Unidades</button>
+                          <textarea id="txtUnidades" cols="35" rows="10" placeholder="Unidades Asignadas"></textarea></p>
+                     </td>                  
                 </tr>
             </table>
             <div class="estiloTextoLeyenda">Los campos marcados con <span class="camposObligatorios">*</span> son obligatorios</div>
