@@ -12,6 +12,9 @@ $(document).ready(function(){
     	cargarTareas("pendientes");
     });
 
+
+
+
 	$("#vencidas").click(function(){
     	cargarTareas("vencidas");
     });    
@@ -56,6 +59,13 @@ $(document).ready(function(){
 		ajaxTareas("mostrarFormularioAlerta","controlador",parametros,"agregarAlerta","agregarAlerta","GET");
     })
     
+	
+	
+	// boton de expresiones
+	$("#jala").click(function(){
+	 alert('hola');
+	})
+	
     //se redimensionan los tabs
     redimensionarAlertas();
     //peticion para listar las tareas

@@ -1,6 +1,6 @@
 <!--Formulario nueva tarea-->
 <div id="divNuevaTarea" title="Agregar Alerta">
-    <form name="frmNuevaAlerta" id="frmNuevaAlerta">
+   <!-- <form name="frmNuevaAlerta" id="frmNuevaAlerta">-->
         <div id="contenedorFormAlerta">
             <table border="0" cellpadding="1" cellspacing="1" width="100%" height="96%" style="border-collapse:collapse;">
                 <tr>
@@ -22,7 +22,7 @@
                     <td colspan="2">      
                         <span class="camposObligatorios" style="float:left;">*</span>
                         <div id="txtExpresionAlertas" style="margin:5px;float:left;height:100px;width:90%;border:1px solid #CCC;"></div>
-   						<button id="btnAgregarExpresion" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>    
+                       <input type="button" id="btnAgregarExpresion" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all" value="+"/>    
                     </td>
                 </tr>
                 <tr>
@@ -81,6 +81,6 @@
             <div class="estiloTextoLeyenda">Los campos marcados con <span class="camposObligatorios">*</span> son obligatorios</div>
         </div>
         <input type="hidden" id="hdnEliminaTarea" />
-    </form>    
+   <!-- </form>    -->
 </div>
 <!--Fin formulario nueva tarea-->

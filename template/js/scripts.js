@@ -1,12 +1,4 @@
 
-/*ja ya llego el nuevo git*/
-
-function hey2(){
-	var f= 'hola';	
-	alert(f);
-	/*pos se ve que esta jalando bien esta cosa...*/
-}
-
 function pruebaXXX(){
 	alert("Prueba de la funcion");
 }
