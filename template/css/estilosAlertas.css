@@ -180,3 +180,11 @@ color:#2e6e9e;
 height:18px;
 width:18px;
 }
+/*nuevos estilos email*/
+#agregaCajaEmail{
+	border-left: 0;
+	border-top: 0;
+	border-right: 0;
+	color: #CCC;
+	float: left;
+}

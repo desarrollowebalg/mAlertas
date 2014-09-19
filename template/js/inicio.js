@@ -63,6 +63,7 @@ $(document).ready(function(){
 	//esto es nuevo cre
 	//que no me lo reconoce
 	
+
 	
 });
 

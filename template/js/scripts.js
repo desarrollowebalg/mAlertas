@@ -1,4 +1,14 @@
-
+/*
+*permite la captura masiva de correos electronicos
+*/
+var cajaEmail=0;
+function agregarCajaCorreo(){
+	alert("Hola");
+	idCajaMail="cajaMail_"+cajaEmail;
+	var cajaMail="<input type='text' id='"+idCajaMail+"' style='float:left;' />"
+	$("#txtCorreoElectronico").append(cajaMail);
+	$("#"+idCajaMail).focus();
+}
 /*ja ya llego el nuevo git*/
 
 function hey2(){
