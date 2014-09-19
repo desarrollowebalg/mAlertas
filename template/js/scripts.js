@@ -1,4 +1,56 @@
 
+/*
+*permite la captura masiva de correos electronicos
+*/
+
+
+//*************************************** funcion para cargar el dwt de expresiones
+function expresionesAlertas() {
+	    $.ajax({
+          url: "index.php?m=mAlertas&c=mExpresiones",
+          success: function(data) {
+            var result = data; 
+            $('#dialogo_generar_expresiones').html('');
+            $('#dialogo_generar_expresiones').dialog('open');
+			$('#dialogo_generar_expresiones').html(result); 
+		  }
+      });
+	 
+}
+
+//*************************************** funcion para cargar el tipo PDI/GC/RSI
+
+function tipoPDIgcRSI(tipes) {
+	  /*  $.ajax({
+          url: "index.php?m=mAlertas&c=mPDIgcRSI",
+		   data : {
+            tip_g:tipes
+		   },
+		  type: "POST",
+          success: function(data) {
+            var result = data; 
+            $('#dialogo_generar_expresiones').html('');
+            $('#dialogo_generar_expresiones').dialog('open');
+			$('#dialogo_generar_expresiones').html(result); 
+		  }
+      });*/
+	  
+	  alert(tipes);
+	 
+}
+
+
+
+var cajaEmail=0;
+function agregarCajaCorreo(){
+	alert("Hola");
+	idCajaMail="cajaMail_"+cajaEmail;
+	var cajaMail="<input type='text' id='"+idCajaMail+"' style='float:left;' />"
+	$("#txtCorreoElectronico").append(cajaMail);
+	$("#"+idCajaMail).focus();
+}
+
+
 function pruebaXXX(){
 	alert("Prueba de la funcion");
 }

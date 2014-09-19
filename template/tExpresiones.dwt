@@ -1,0 +1,106 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+  		$("#rd2").click(function(){
+			tipoPDIgcRSI($("#rd2").val());
+		})
+		
+		$("#rd3").click(function(){
+			tipoPDIgcRSI($("#rd3").val());
+		})
+		
+		$("#rd4").click(function(){
+			tipoPDIgcRSI($("#rd4").val());
+		})
+		
+    });
+</script>
+
+<table border="0" width="100%">
+  <tr>
+    <td>
+       <fieldset class="fieldset"><legend>Condiciones Basicas de la Alerta</legend>
+          <table border="1" width="100%" style="border-collapse:collapse; border:#CCCCCC;">
+            <tr>
+              <td width="150"> <input type="checkbox" id="velocidadEvento"/> Velocidad >=</td> 
+              <td> <input type="text" id="txtVelocidad" size="10" /></td> 
+            </tr>
+            
+			<tr>
+              <td> <input type="checkbox" id="eEvento"/> Evento</td> 
+              <td>
+ 				<select style=" width:150px;" id="selEventos">
+                   <!-- BEGIN eventos -->
+                        <option value="{eventos.CLV_EVENTO}">{eventos.DESCRIPCION}</option>
+                   <!-- END eventos -->
+                </select>	              
+              </td> 
+            </tr>            
+            <tr>
+             <td> <input type="checkbox" id="prioridadEvento"/> Prioridad del Evento</td> 
+              <td>
+ 					<!--<select style=" width:150px;" id="selPriori">
+                   BEGIN prioridades 
+                       <option value="{prioridades.CLV_PRIORIDAD}">{prioridades.DESCRIPCION}</option>
+                    END prioridades 
+                </select>	-->  
+                
+                <select style=" width:150px;" id="selPriori">
+                  <option value="0">Alta</option>
+                  <option value="1">Normal</option>
+                </select>            
+              </td> 
+   
+            </tr>
+          </table>
+       </fieldset>
+    </td>
+    <td>
+       <table>
+         <!--<tr>
+           <td>
+             <input type="radio" name="r1" id="rd1" />Base
+           </td>
+         </tr>-->
+         <tr>
+           <td>
+             <input type="radio" name="r1" id="rd2" value="G" />Punto de interes
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <input type="radio" name="r1" id="rd3"  value="C"/>Geocerca
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <input type="radio" name="r1" id="rd4" value="R" />Ruta
+           </td>
+         </tr>
+       </table>
+    </td>
+    
+    <td>
+       <table>
+         <tr>
+           <td>
+           <div id="selec_tipo_pgr" style="width:100%; border:#000000 solid 1px;">
+                        <select>
+              <option>
+                Elegir opci&oacute;n
+              </option>
+             </select>
+           </div>
+
+           </td>
+         </tr>
+         <tr>
+           <td>
+              <input type="checkbox" id="eEntrada" /> Entrada <br>
+              <input type="checkbox" id="eSalida"  /> Salida  <br>
+              <input type="checkbox" id="ePermanencia" /> Permanencia
+           </td>
+         </tr>
+       </table>
+    </td>
+  </tr>
+</table>

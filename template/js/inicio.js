@@ -59,13 +59,24 @@ $(document).ready(function(){
 		ajaxTareas("mostrarFormularioAlerta","controlador",parametros,"agregarAlerta","agregarAlerta","GET");
     })
     
-	
-	
-	// boton de expresiones
-	$("#jala").click(function(){
-	 alert('hola');
-	})
-	
+
+
+    $("#dialogo_generar_expresiones").dialog({
+		autoOpen: false,
+		height: 200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Cancelar: function() {
+				$("#dialogo_generar_expresiones").dialog( "close" );
+			},
+			Agregar:function(){
+				//se llama a la funcion para agregar las expresiones
+			}
+		}
+   	});
+
+
     //se redimensionan los tabs
     redimensionarAlertas();
     //peticion para listar las tareas
@@ -73,6 +84,7 @@ $(document).ready(function(){
 	//esto es nuevo cre
 	//que no me lo reconoce
 	
+
 	
 });
 

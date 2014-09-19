@@ -54,7 +54,7 @@
 <div id="divConfirmacionesMenssajesTareas"></div>
 
 <!--div dialog importador-->
- <div id="dialogo_importador"></div>
+ <div id="dialogo_generar_expresiones"  title="Generador de Expresiones"></div>
 <!--Fin div dialog importador-->
 <!--div dialog mensajes de aviso-->
  <div id="dialogo_mensajes_importador"></div>

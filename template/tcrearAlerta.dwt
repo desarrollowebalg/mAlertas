@@ -1,3 +1,19 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#agregaCajaEmail").click(function(){
+            agregarCajaCorreo();
+        });
+		
+		// boton de expresiones
+		$("#btnAgregarExpresion").click(function(){
+			expresionesAlertas();
+		})
+		$("#rd2").click(function(){
+			tipoPDIgcRSI(111);
+		})
+		
+    });
+</script>
 <!--Formulario nueva tarea-->
 <div id="divNuevaTarea" title="Agregar Alerta">
    <!-- <form name="frmNuevaAlerta" id="frmNuevaAlerta">-->
@@ -14,8 +30,10 @@
                 <tr>
                     <td colspan="2">
                         <span class="camposObligatorios" style="float:left;">*</span>
-                        <div id="txtCorreoElectronico" style="margin:5px;float:left;min-height:16px;padding:5px;height:auto;width:88%;border:1px solid #CCC;"></div>
-                        <button id="btnAgragarCorreo" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>
+                        <div id="txtCorreoElectronico" style="margin:5px;float:left;min-height:16px;padding:5px;height:auto;width:88%;border:1px solid #CCC;">
+                            <div id="agregaCajaEmail">Agregar correo...</div>
+                        </div>
+                        <button id="btnAgregarCorreo" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>
                   </td>
                 </tr>  
                 <tr>
