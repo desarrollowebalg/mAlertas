@@ -1,24 +1,62 @@
 /*
 *permite la captura masiva de correos electronicos
 */
-var cajaEmail=0;
+var cajaEmail=0;//contador para las cajas de texto
+/*
+*Funcion para agregar una caja de texto para introducir el correo electronico
+*/
 function agregarCajaCorreo(){
-	alert("Hola");
 	idCajaMail="cajaMail_"+cajaEmail;
-	var cajaMail="<input type='text' id='"+idCajaMail+"' style='float:left;' />"
-	$("#txtCorreoElectronico").append(cajaMail);
+	cajaMail="<input type='text' id='"+idCajaMail+"' class='cajaMails' onkeypress='verificarMail(idCajaMail,event)' />"
+	$("#txtCorreoElectronico").prepend(cajaMail);
 	$("#"+idCajaMail).focus();
+	cajaEmail+=1;
+	cajaMail="";
 }
-/*ja ya llego el nuevo git*/
-
-function hey2(){
-	var f= 'hola';	
-	alert(f);
-	/*pos se ve que esta jalando bien esta cosa...*/
+/*
+*Funcion para verificar el mail introducido
+*/
+function verificarMail(idCaja,evento){
+	if(evento.which==13){
+		//se recupera el correo electronico
+		mailAValidar=$("#"+idCaja).val();
+		if(mailAValidar==''){
+			alert("Ingrese un email");
+		}else if(validar_email(mailAValidar)==false){
+			alert("El mail no es valido");
+		}else{
+			//si el mail es valido se elimina la caja de texto y se agrega un div con la opcion de eliminar el correo
+			$("#"+idCaja).remove();
+			if(mailAValidar.length > 23){
+				mailAValidar=mailAValidar.substring(0,21)+"...";
+			}
+			strDiv="<div id='"+idCaja+"' class='destinatarios ui-corner-all' title='"+mailAValidar+"'>";
+            strDiv+="<div class='destinatariosMail'>"+mailAValidar+"</div>";
+            strDiv+="<div class='eliminarDestinatario'>";
+            strDiv+="<a href='#' onclick='eliminaCorreo(\""+idCaja+"\")'><span class='ui-icon ui-icon-circle-close'></span></a>";
+            strDiv+="</div></div>";
+            $("#txtCorreoElectronico").prepend(strDiv);
+            strDiv="";
+		}
+	}
 }
-
-function pruebaXXX(){
-	alert("Prueba de la funcion");
+/*
+*Funcion para eliminar un destinatario de los existentes
+*/
+function eliminaCorreo(idCajaAEliminar){
+	$("#"+idCajaAEliminar).remove();
+}
+/*
+*Funcion para validar si el mail es valido
+*/
+function validar_email(valor){
+	// creamos nuestra regla con expresiones regulares.
+	var filter = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+	// utilizamos test para comprobar si el parametro valor cumple la regla
+	if(filter.test(valor))
+		return true;
+	else
+		return false;
 }
 //funciones para el modulo
 /*

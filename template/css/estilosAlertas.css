@@ -181,10 +181,57 @@ height:18px;
 width:18px;
 }
 /*nuevos estilos email*/
+#txtCorreoElectronico{
+	max-height:50px;
+	overflow:auto;
+	margin:5px;
+	float:left;
+	min-height:16px;
+	padding:5px;
+	height:auto;
+	width:88%;
+	border:1px solid #CCC;
+}
 #agregaCajaEmail{
 	border-left: 0;
 	border-top: 0;
 	border-right: 0;
 	color: #CCC;
+	border:0px solid #FF0000;
+	width: 100px;
 	float: left;
+	margin-left: 5px;
 }
+#agregaCajaEmail:hover{
+	cursor: pointer;
+}
+.cajaMails{
+	float:left;
+	border:1px solid #CCC;
+	margin-right:3px;
+	margin-left:3px;
+}
+/*****************/
+.destinatarios{
+	border:1px solid #A9D0F5;
+	background:#E0ECF8;
+	height:15px;
+	width:163px;
+	float: left;
+	margin-left: 3px;
+}
+.destinatariosMail{
+	float:left;
+}
+.eliminarDestinatario{
+	float:left;
+	margin-left:5px;
+}
+
+/*extras*/
+.float_right{
+	float: right;
+	display: inline;
+}
+
+
