@@ -15,8 +15,13 @@
     });
 </script>
 <!--Formulario nueva tarea-->
+<<<<<<< HEAD
 <div id="divNuevaTarea" title="Agregar Alerta">
    <!-- <form name="frmNuevaAlerta" id="frmNuevaAlerta">-->
+=======
+<div id="divNuevaAlerta">
+    <!--<form name="frmNuevaAlerta" id="frmNuevaAlerta">-->
+>>>>>>> baaf540474dbaf933a742fffd38e2bb59ea02faa
         <div id="contenedorFormAlerta">
             <table border="0" cellpadding="1" cellspacing="1" width="100%" height="96%" style="border-collapse:collapse;">
                 <tr>
@@ -30,7 +35,7 @@
                 <tr>
                     <td colspan="2">
                         <span class="camposObligatorios" style="float:left;">*</span>
-                        <div id="txtCorreoElectronico" style="margin:5px;float:left;min-height:16px;padding:5px;height:auto;width:88%;border:1px solid #CCC;">
+                        <div id="txtCorreoElectronico">
                             <div id="agregaCajaEmail">Agregar correo...</div>
                         </div>
                         <button id="btnAgregarCorreo" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>
@@ -99,6 +104,10 @@
             <div class="estiloTextoLeyenda">Los campos marcados con <span class="camposObligatorios">*</span> son obligatorios</div>
         </div>
         <input type="hidden" id="hdnEliminaTarea" />
+<<<<<<< HEAD
    <!-- </form>    -->
+=======
+    <!--</form>-->
+>>>>>>> baaf540474dbaf933a742fffd38e2bb59ea02faa
 </div>
 <!--Fin formulario nueva tarea-->
