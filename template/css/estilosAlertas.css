@@ -2,10 +2,25 @@
 	position:absolute;
 	right:10px;
 	top:5px;
-	border:0px solid #990000;
+	border:0px solid #FF0000;
 	height:24px;
 	width:300px;
-	text-align:right;
+}
+.btnInfoAlertas{
+  color:#000;
+  border: 1px solid #000;
+  padding: 4px;
+  float: right;
+  text-decoration: none;
+  margin-top: -1.7px;
+}
+.btnAgregarUnidades{
+  color:#000;
+  border: 1px solid #000;
+  padding: 4px;
+  
+  text-decoration: none;
+  margin-top: -1.7px;
 }
 .botonesImportadorTarea{
 	margin-left: 10px;
@@ -24,20 +39,21 @@
 #divTextAlertaNombre{
 	margin-bottom:15px;
 }
-#txtNombreTarea{
-	font-size:20px;
-	width:300px;
+#txtNombreAlerta{
+	font-size:18px;
+	width:280px;
 }
 .fieldset{
 	border-bottom:0px;
 	border-left:0px;
 	border-right:0px;
 }
-#usuariosAsignados{
-	height:100px;
-	width:100%;
+#txtUnidadesAsignadas{
+	height:120px;
+	width:95%;
 	border:1px solid #CCC;
 	overflow: auto;
+	margin: 5px;
 }
 .busquedaVentanaEmergente{
 	width:250px;

@@ -2,61 +2,48 @@
 <div id="divNuevaTarea" title="Agregar Alerta">
     <form name="frmNuevaAlerta" id="frmNuevaAlerta">
         <div id="contenedorFormAlerta">
-            <table border="0" cellpadding="1" cellspacing="1" width="100%" height="100%" style="border-collapse:collapse;">
+            <table border="0" cellpadding="1" cellspacing="1" width="100%" height="96%" style="border-collapse:collapse;">
                 <tr>
-                   <td width="50%">
-                           <span class="camposObligatorios">*</span>
-                           <input type="text" name="txtNombreAlerta" id="txtNombreAlerta" placeholder="Nombre de la alerta" value="">
-                          
-                  </td>
-                  <td>
-                         <input type="checkbox" name="chkVigente" id="chkVigente" /> Vigente
-                           <input type="checkbox" name="chkActiva"  id="chkActiva"  /> Activa
+                   <td colspan="2">
+                        <span class="camposObligatorios">*</span>
+                        <input type="text" name="txtNombreAlerta" id="txtNombreAlerta" placeholder="Nombre de la alerta" value="">
+                        <input type="checkbox" name="chkVigente" id="chkVigente" /> Vigente
+                        <input type="checkbox" name="chkActiva"  id="chkActiva"  /> Activa
                    </td>
                 </tr>  
                 <tr>
                     <td colspan="2">
-                           <span class="camposObligatorios">*</span>
-                           <input type="text" style="width:85%;" name="txtCorreoElectronico" id="txtCorreoElectronico" placeholder="Correo(s) electronico(s)" readonly />
-                           <button id="btnAgragarCorreo">+</button>
+                        <span class="camposObligatorios" style="float:left;">*</span>
+                        <div id="txtCorreoElectronico" style="margin:5px;float:left;min-height:16px;padding:5px;height:auto;width:88%;border:1px solid #CCC;"></div>
+                        <button id="btnAgragarCorreo" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>
                   </td>
                 </tr>  
-                  <tr>
-                    <td colspan="2" valign="top">      
-                          <table width="100%" border="0">  
-                           <tr>
-                             <td width="1%">
-                                  <span class="camposObligatorios">*</span>
-                            </td>
-                            <td width="70%">
-                           <textarea id="txtExpresionAlertas" cols="70" rows="10" placeholder="Expresi&oacute;n de la Alerta"></textarea></p>
-   							</td>
-                             <td valign="top">
-                                <button id="btnAgregarExpresion">+</button>
-                             </td>   
-                            </tr>    
-                            </table>    
+                <tr>
+                    <td colspan="2">      
+                        <span class="camposObligatorios" style="float:left;">*</span>
+                        <div id="txtExpresionAlertas" style="margin:5px;float:left;height:100px;width:90%;border:1px solid #CCC;"></div>
+   						<button id="btnAgregarExpresion" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>    
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td width="50%">
                         <fieldset class="fieldset"><legend>Condiciones de d&iacute;as y Horarios</legend>
                             <table border="0" width="100%">
                                 <tr>
                                     <td><input type="checkbox" id="chkLunes" />LUNES</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id="chkMartes" />MARTES</td>
                                     <td><input type="checkbox" id="chkViernes" />VIERNES</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" id="chkMiercoles" />MIERCOLES</td>
+                                    <td><input type="checkbox" id="chkMartes" />MARTES</td>
                                     <td><input type="checkbox" id="chkSabado" />S&Aacute;BADO</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" id="chkJueves" />JUEVES</td>
+                                    <td><input type="checkbox" id="chkMiercoles" />MIERCOLES</td>
                                     <td><input type="checkbox" id="chkDomingo" />DOMINGO</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" id="chkJueves" />JUEVES</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -84,10 +71,10 @@
                             </table>
                         </fieldset>
                     </td>
-                     <td valign="top" width="50%">
+                     <td valign="top">
                           <span class="camposObligatorios">*</span>
-                          <button id="btnAgragarExpresion">Agregar Unidades</button>
-                          <textarea id="txtUnidades" cols="35" rows="8" placeholder="Unidades Asignadas"></textarea></p>
+                          <button id="btnAgragarExpresion" class="btnAgregarUnidades ui-state-default ui-corner-all">Agregar Unidades</button>
+                          <div id="txtUnidadesAsignadas"></div>
                      </td>                  
                 </tr>
             </table>

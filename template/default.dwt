@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="{PATH}/css/estilosTareas.css">
+<link rel="stylesheet" type="text/css" href="{PATH}/css/estilosAlertas.css">
 <script src="{PATH}/js/inicio.js"></script>
 <script src="{PATH}/js/scripts.js"></script>
 
@@ -14,7 +14,7 @@
         <li><a href="#tabs-3" id="inactivas">Inactivas</a></li>
     </ul>
     <div class="divContenedorBotones1">
-        <button id="crearAlerta" style="background:#FF0000;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only botonesImportadorTarea" role="button"><span class="ui-button-text"><span class="ui-icon-plus">Crear Alerta</span></span></button>
+        <button id="crearAlerta" class="btnInfoAlertas ui-state-default ui-corner-all" title="Cerrar Sesión"><span class="ui-icon ui-icon-plus float_left"></span>Crear Alerta</button>
     </div>
 
     <div id="tabs-1">
