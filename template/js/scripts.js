@@ -1,4 +1,4 @@
-
+var cajaEmail=0;//contador para las cajas de texto
 /*
 *permite la captura masiva de correos electronicos
 */
@@ -36,8 +36,6 @@ function tipoPDIgcRSI(tipes) {
 	  alert('ya se corrigio '+tipes);
 	 
 }
-
-var cajaEmail=0;//contador para las cajas de texto
 /*
 *Funcion para agregar una caja de texto para introducir el correo electronico
 */
