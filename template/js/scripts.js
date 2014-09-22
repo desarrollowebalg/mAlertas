@@ -33,7 +33,7 @@ function tipoPDIgcRSI(tipes) {
 		  }
       });*/
 	  
-	  alert(tipes);
+	  alert('ya se corrigio '+tipes);
 	 
 }
 
