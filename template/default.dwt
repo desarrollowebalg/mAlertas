@@ -38,7 +38,12 @@
     <div id="listadoUsuariosTareas" style="overflow:auto;"></div>
 </div>
 <!--Fin div agregar Usuarios-->
-
+<!--Div detalle tarea-->
+<div id="detalleAgregarCorreos" title="Agregar correos...">
+    <!--Buscar:<input type="text" id="txtBuscarCorreosCliente" class="busquedaVentanaEmergente" onkeyup="buscarCorreosClientes()">-->
+    <!--<hr style="background:#CCC;">-->
+    <div id="listadoUsuariosEmail" style="overflow:auto;"></div>
+</div>
 <!--Div detalle tarea-->
 <div id="detalleTarea" title="Detalle tarea..."></div>
 <!--Fin div detalle tarea-->
@@ -49,7 +54,7 @@
 <div id="eliminarTareas" title="Eliminar tareas..."></div>
 <!--Fin div eliminar tareas-->
 <!--div mensajes/errores-->
-<div id="divMenssajesTareas"></div>
+<div id="divMenssajesAlertas"></div>
 <!--div confirmaciones-->
 <div id="divConfirmacionesMenssajesTareas"></div>
 

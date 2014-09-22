@@ -53,7 +53,7 @@ $(document).ready(function(){
     	idClienteAlerta=$("#idClienteAlertas").val();
     	idUsuarioAlerta=$("#idUsuarioAlertas").val();
     	parametros="action=mostrarFormularioAlerta&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta;
-		ajaxTareas("mostrarFormularioAlerta","controlador",parametros,"agregarAlerta","agregarAlerta","GET");
+		ajaxAlertas("mostrarFormularioAlerta","controlador",parametros,"agregarAlerta","agregarAlerta","GET");
     })
     
 
@@ -72,6 +72,34 @@ $(document).ready(function(){
 			}
 		}
    	});
+
+    $("#detalleAgregarCorreos").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
+			Cancelar: function() {
+				$("#detalleAgregarCorreos").dialog( "close" );
+			},
+			Agregar:function(){
+				//se llama a la funcion para agregar los emails seleccionados
+				agregarCorreosElectronicos();
+			}
+		}
+    });
+
+    //mensajes de error
+	$("#divMenssajesAlertas").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Cerrar: function() {
+				$("#divMenssajesAlertas").dialog( "close" );
+			}
+		}
+	});
+
     //se redimensionan los tabs
     redimensionarAlertas();
     //peticion para listar las tareas
@@ -86,7 +114,7 @@ $(document).ready(function(){
 /*
 *Funcion que controla las peticiones ajax
 */
-function ajaxTareas(accion,c,parametros,divCarga,divResultado,tipoPeticion){
+function ajaxAlertas(accion,c,parametros,divCarga,divResultado,tipoPeticion){
 	$.ajax({
 		url: "index.php?m=mAlertas&c="+c,
 		type: tipoPeticion,
@@ -107,6 +135,9 @@ function controladorAcciones(accion,data,divResultado){
 	switch(accion){
 		case "mostrarFormularioAlerta":
 			$("#"+divResultado).show().html(data);
+		break;
+		case "mostrarCorreosCliente":
+			$("#listadoUsuariosEmail").html(data);
 		break;
 	}
 }

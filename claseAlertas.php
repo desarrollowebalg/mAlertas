@@ -17,11 +17,11 @@ class alertas{
 
 	function __construct() {
 		include "config/database.php";
-		$this->host=$config_bd['host'];
-		$this->port=$config_bd['port'];
-		$this->bname=$config_bd['bname'];
-		$this->user=$config_bd['user'];
-		$this->pass=$config_bd['pass'];
+		$this->host=$config_bd3['host'];
+		$this->port=$config_bd3['port'];
+		$this->bname=$config_bd3['bname'];
+		$this->user=$config_bd3['user'];
+		$this->pass=$config_bd3['pass'];
    	}
 	/**
 	*@method 			iniciar Conexion con la BD
@@ -39,6 +39,10 @@ class alertas{
    	private function iniciarConexionDb(){
    		$objBd=new sql($this->host,$this->port,$this->bname,$this->user,$this->pass);
    		return $objBd;
+   	}
+   	private function iniciarConexionAlertas(){
+   		$objBDA=new sql($this->host,$this->port,$this->bname,$this->user,$this->pass);
+   		return $objBDA;
    	}
    	/**
 	*@method 		escribir en archivo log
@@ -77,6 +81,31 @@ class alertas{
 		}else{
 			echo "<br>Error al encontrar el archivo";
 		}
+	}
+	/**
+	*@method 		listarCuestionariosFiltro
+	*@description 	Funcion para mostrar los cuestionarios asociados al cliente para agregar a la tarea
+	*@paramas 				
+	*
+	*/
+	public function mostrarCorreosCliente($idCliente,$idUsuarioAlerta,$filtro){
+		$mensaje="";
+		$objDb=$this->iniciarConexionAlertas();
+		$objDb ->sqlQuery("SET NAMES 'utf8'");
+		
+		if($filtro=="S/N"){
+			$sqlE="SELECT CORREO_ELECTRONICO FROM ALERT_XP_EMAIL WHERE COD_CLIENT='".$idCliente."'";
+		}else{
+
+		}
+		$resE=$objDb->sqlQuery($sqlE);
+		if($objDb->sqlEnumRows($resE)==0){
+			$mensaje="S/N";
+		}else{
+			$rowE=$objDb->sqlFetchArray($resE);
+			$mensaje=$rowE["CORREO_ELECTRONICO"];
+		}
+		return $mensaje;
 	}
    	/**
 	*@method 		listarCuestionariosFiltro

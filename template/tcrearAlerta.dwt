@@ -13,7 +13,7 @@
 		})
 		
     $("#btnAgregarCorreo").click(function(){
-      mostrarDireccionesCliente();
+      mostrarDireccionesCliente("S/N");
     });
 
   });
