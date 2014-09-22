@@ -72,14 +72,6 @@ $(document).ready(function(){
 			}
 		}
    	});
-
-   	$("#btnAgregarCorreo").click(function(){
-   		alert("mostrar direcciones cliente");
-   	});
-
-   	
-
-
     //se redimensionan los tabs
     redimensionarAlertas();
     //peticion para listar las tareas
