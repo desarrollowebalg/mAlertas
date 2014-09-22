@@ -2,9 +2,6 @@
 /*
 *permite la captura masiva de correos electronicos
 */
-<<<<<<< HEAD
-
-
 //*************************************** funcion para cargar el dwt de expresiones
 function expresionesAlertas() {
 	    $.ajax({
@@ -40,15 +37,10 @@ function tipoPDIgcRSI(tipes) {
 	 
 }
 
-
-
-var cajaEmail=0;
-=======
 var cajaEmail=0;//contador para las cajas de texto
 /*
 *Funcion para agregar una caja de texto para introducir el correo electronico
 */
->>>>>>> baaf540474dbaf933a742fffd38e2bb59ea02faa
 function agregarCajaCorreo(){
 	idCajaMail="cajaMail_"+cajaEmail;
 	cajaMail="<input type='text' id='"+idCajaMail+"' class='cajaMails' onkeypress='verificarMail(idCajaMail,event)' />"
@@ -57,12 +49,6 @@ function agregarCajaCorreo(){
 	cajaEmail+=1;
 	cajaMail="";
 }
-<<<<<<< HEAD
-
-
-function pruebaXXX(){
-	alert("Prueba de la funcion");
-=======
 /*
 *Funcion para verificar el mail introducido
 */
@@ -107,7 +93,6 @@ function validar_email(valor){
 		return true;
 	else
 		return false;
->>>>>>> baaf540474dbaf933a742fffd38e2bb59ea02faa
 }
 //funciones para el modulo
 /*

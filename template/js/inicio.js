@@ -12,9 +12,6 @@ $(document).ready(function(){
     	cargarTareas("pendientes");
     });
 
-
-
-
 	$("#vencidas").click(function(){
     	cargarTareas("vencidas");
     });    
