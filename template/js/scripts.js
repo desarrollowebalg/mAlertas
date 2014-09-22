@@ -19,7 +19,15 @@ function expresionesAlertas() {
 //*************************************** funcion para cargar el tipo PDI/GC/RSI
 
 function tipoPDIgcRSI(tipes) {
-	  /*  $.ajax({
+	
+	var sel = '<select style=" width:100px;">'+
+              '<option>'+
+               'Cargando'+
+              '</option>'+
+             '</select>';
+
+	 $('#selec_tipo_pgr').html(sel);
+		    $.ajax({
           url: "index.php?m=mAlertas&c=mPDIgcRSI",
 		   data : {
             tip_g:tipes
@@ -27,14 +35,85 @@ function tipoPDIgcRSI(tipes) {
 		  type: "POST",
           success: function(data) {
             var result = data; 
-            $('#dialogo_generar_expresiones').html('');
-            $('#dialogo_generar_expresiones').dialog('open');
-			$('#dialogo_generar_expresiones').html(result); 
+       		$('#selec_tipo_pgr').html(result); 
 		  }
-      });*/
+      });
 	  
-	  alert('ya se corrigio '+tipes);
+	 // alert('ya se corrigio '+tipes);
 	 
+}
+
+function liberarCerrar(iD,valor){
+
+	if(valor === true){
+		var b = false;
+		$("#banSino").val( parseInt($("#banSino").val())+1);  
+	}else{
+		var b = true;
+		$("#banSino").val( parseInt($("#banSino").val())-1);  
+	}
+	$("#"+iD).prop('disabled', b); 
+	
+}
+
+//*************************************** funcion para validar expresiones
+function validarExpersiones(){
+	
+   if(parseInt(($("#banSino").val()) ===0)){
+	   alert('Debe de especificar una expresion, verifique!!');  
+	   return false;
+   }
+		 
+   if($("#velocidadEvento").is(':checked')) { 
+        
+         $("#txtVelocidad").prop('disabled', false); 
+        if($("#txtVelocidad").val()===''){     
+		   alert('Campo velocidad vacio, Verifique!!'); 
+		    return false; 
+		}
+		 	
+		
+   } else{
+	    $("#txtVelocidad").prop('disabled', true);
+   }
+   
+   if($("#eEvento").is(':checked')) {  
+      
+	   $("#selEventos").prop('disabled', false);
+        if($("#selEventos").val()==='-1'){     
+		   alert('Elija un evento');  
+		    return false;
+		}
+   } else{
+	   $("#selEventos").prop('disabled', true);
+   }
+   
+   if($("#prioridadEvento").is(':checked')) {  
+                
+		 $("#selPriori").prop('disabled', false);
+		if($("#selPriori").val()==='-1'){     
+		   alert('Elija una prioridad'); 
+		    return false; 
+		}
+   } else{
+	    $("#selPriori").prop('disabled', true);
+   }
+   
+ /*  if($("#rd2").is(':checked') || $("#rd3").is(':checked') || $("#rd4").is(':checked')) {  
+    	$("#banSino").val(1); 	
+       
+   } else{
+      if($("#banSino").val()==='0'){   
+	   alert('Debe de especificar la expresion a usar');  
+	   return false;
+	  }
+   }*/
+   
+   
+   
+   
+   
+   
 }
 /*
 *Funcion para agregar una caja de texto para introducir el correo electronico

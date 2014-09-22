@@ -8,10 +8,7 @@
 		$("#btnAgregarExpresion").click(function(){
 			expresionesAlertas();
 		})
-		$("#rd2").click(function(){
-			tipoPDIgcRSI(111);
-		})
-		
+			
     });
 </script>
 <!--Formulario nueva tarea-->

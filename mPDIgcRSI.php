@@ -16,16 +16,21 @@
 	
 	$idCliente   = $userAdmin->user_info['ID_CLIENTE'];
 	$idUsuario	 = $userAdmin->user_info['ID_USUARIO'];
-	
+	$select = '';
 	
 	//******************************* tipos
 	
-	$sql_tipo = "SELECT ID_OBJECT_MAP,DESCRIPCION FROM 	ADM_GEOREFERENCIAS WHERE TIPO = '".$_GET['tip_g']."' ID_CLIENTE =".$idCliente;
+	$sql_tipo = "SELECT ID_OBJECT_MAP,DESCRIPCION FROM 	ADM_GEOREFERENCIAS WHERE TIPO = '".$_POST['tip_g']."' AND ID_CLIENTE =".$idCliente;
 	$qry_tipo = $db->sqlQuery($sql_tipo);
 	$cnt = $db->sqlEnumRows($qry_tipo);
 	if($cnt > 0){
+		$select = '<select style=" width:100px;" id="TiposPDIGCRSI">';
+		  $select .= '<option value="-1">Elegir opci&oacute;n</option>';
 	    while($row_tipo = $db->sqlFetchArray($qry_tipo)){	
-		 echo $row_tipo['ID_OBJECT_MAP'];	
+		  $select .= '<option value="'.$row_tipo['ID_OBJECT_MAP'].'">'.$row_tipo['DESCRIPCION'].'</option>';
 	   }
+	    $select .= '</select>';
 	}
+	
+	echo $select;
 ?>

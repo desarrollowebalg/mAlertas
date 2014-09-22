@@ -11,7 +11,10 @@
 		$("#rd4").click(function(){
 			tipoPDIgcRSI($("#rd4").val());
 		})
-		
+		 $('#txtVelocidad').numeric();
+		 $("#txtVelocidad").prop('disabled', true);
+		 $("#selEventos").prop('disabled', true);
+  	     $("#selPriori").prop('disabled', true);
     });
 </script>
 
@@ -21,14 +24,15 @@
        <fieldset class="fieldset"><legend>Condiciones Basicas de la Alerta</legend>
           <table border="1" width="100%" style="border-collapse:collapse; border:#CCCCCC;">
             <tr>
-              <td width="150"> <input type="checkbox" id="velocidadEvento"/> Velocidad >=</td> 
+              <td width="150"> <input type="checkbox" id="velocidadEvento" onClick="liberarCerrar('txtVelocidad',this.checked);"/> Velocidad >=</td> 
               <td> <input type="text" id="txtVelocidad" size="10" /></td> 
             </tr>
             
 			<tr>
-              <td> <input type="checkbox" id="eEvento"/> Evento</td> 
+              <td> <input type="checkbox" id="eEvento" onClick="liberarCerrar('selEventos',this.checked);"/> Evento</td> 
               <td>
  				<select style=" width:150px;" id="selEventos">
+                        <option value="-1">Elegir opci&oacute;n</option>
                    <!-- BEGIN eventos -->
                         <option value="{eventos.CLV_EVENTO}">{eventos.DESCRIPCION}</option>
                    <!-- END eventos -->
@@ -36,15 +40,16 @@
               </td> 
             </tr>            
             <tr>
-             <td> <input type="checkbox" id="prioridadEvento"/> Prioridad del Evento</td> 
+             <td> <input type="checkbox" id="prioridadEvento" onClick="liberarCerrar('selPriori',this.checked);"/> Prioridad del Evento</td> 
               <td>
- 					<!--<select style=" width:150px;" id="selPriori">
+ 				<!--<select style=" width:150px;" id="selPriori">
                    BEGIN prioridades 
                        <option value="{prioridades.CLV_PRIORIDAD}">{prioridades.DESCRIPCION}</option>
                     END prioridades 
                 </select>	-->  
                 
                 <select style=" width:150px;" id="selPriori">
+                  <option value="-1">Elegir opci&oacute;n</option>
                   <option value="0">Alta</option>
                   <option value="1">Normal</option>
                 </select>            
@@ -83,8 +88,8 @@
        <table>
          <tr>
            <td>
-           <div id="selec_tipo_pgr" style="width:100%; border:#000000 solid 1px;">
-                        <select>
+           <div id="selec_tipo_pgr" style="width:100%; border:#000000 solid 0px;">
+             <select>
               <option>
                 Elegir opci&oacute;n
               </option>
@@ -95,12 +100,13 @@
          </tr>
          <tr>
            <td>
-              <input type="checkbox" id="eEntrada" /> Entrada <br>
-              <input type="checkbox" id="eSalida"  /> Salida  <br>
-              <input type="checkbox" id="ePermanencia" /> Permanencia
+              <input  type="radio" name="resp1" id="eEntrada"      /> Entrada <br>
+              <input  type="radio" name="resp1" id="eSalida"       /> Salida  <br>
+              <input  type="radio" name="resp1" id="ePermanencia"  /> Permanencia
            </td>
          </tr>
        </table>
     </td>
   </tr>
 </table>
+<input type="text" id="banSino" value="0" />

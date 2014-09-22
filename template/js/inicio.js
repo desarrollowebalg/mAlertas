@@ -68,6 +68,7 @@ $(document).ready(function(){
 				$("#dialogo_generar_expresiones").dialog( "close" );
 			},
 			Agregar:function(){
+				validarExpersiones();
 				//se llama a la funcion para agregar las expresiones
 			}
 		}
