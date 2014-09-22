@@ -1,0 +1,8 @@
+<form name="frmListadoEmailsAlertas" id="frmListadoEmailsAlertas">	
+	<!-- BEGIN listadoEmails -->	
+		<div class="estiloListadoUsuarios ui-corner-all">
+			<input type='checkbox' id='{listadoEmails.EMAIL}' value='{listadoEmails.EMAIL}' />
+			<label for='{listadoEmails.EMAIL}'>{listadoEmails.EMAIL}</label>
+		</div>
+	<!-- END listadoEmails -->
+</form>

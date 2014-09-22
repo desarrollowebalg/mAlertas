@@ -1,7 +1,5 @@
 var cajaEmail=0;//contador para las cajas de texto
-/*
-*permite la captura masiva de correos electronicos
-*/
+
 //*************************************** funcion para cargar el dwt de expresiones
 function expresionesAlertas() {
 	    $.ajax({
@@ -171,54 +169,51 @@ function validar_email(valor){
 	else
 		return false;
 }
-//funciones para el modulo
 /*
-*Muestra los usuarios para ser seleccionados mediante el catalogo
+*Funcion para extraer las direcciones guardadas de los clientes
 */
-function cargarUsuarios(txtFiltro,origen){
-	$("#accionTareaEditar").attr("value",origen);
-	(txtFiltro=="N/A") ? filtro=txtFiltro : filtro=txtFiltro;
-	idCliente=$("#idClienteTareas").val();
-	idUsuario=$("#idUsuarioTareas").val();
-	parametros="action=listarUsuarios&idCliente="+idCliente+"&idUsuario="+idUsuario+"&filtro="+filtro;
-	//ajaxTareas(accion,c,parametros,divCarga,divResultado,tipoPeticion)
-	ajaxTareas("listarUsuarios","controlador",parametros,"listadoUsuariosTareas","listadoUsuariosTareas","GET");
+function mostrarDireccionesCliente(filtro){
+	$("#detalleAgregarCorreos").dialog("open");
+	idClienteAlerta=$("#idClienteAlertas").val();
+    idUsuarioAlerta=$("#idUsuarioAlertas").val();
+    parametros="action=mostrarCorreosCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro=S/N";
+	ajaxAlertas("mostrarCorreosCliente","controlador",parametros,"listadoUsuariosEmail","listadoUsuariosEmail","GET");
 }
-/*
-*Muestra los cuestionarios para ser seleccionados mediante el catalogo
-*/
-function cargarCuestionarios(txtFiltro,origen){
-	$("#accionTareaEditar").attr("value",origen);
-	(txtFiltro=="N/A") ? filtro=txtFiltro : filtro=txtFiltro;
-	idCliente=$("#idClienteTareas").val();
-	idUsuario=$("#idUsuarioTareas").val();
-	parametros="action=listarCuestionarios&idCliente="+idCliente+"&idUsuario="+idUsuario+"&filtro="+filtro;
-	ajaxTareas("listarCuestionarios","controlador",parametros,"listadoCuestionarioTareas","listadoCuestionarioTareas","GET");
+function buscarCorreosClientes(){
+	correoE=$("#txtBuscarCorreosCliente").val();
+	mostrarDireccionesCliente(correoE);
 }
-/*
-*Funcion para recuperar el contenido de la caja de texto de las busqueda de usuarios
-*/
-function buscarUsuariosTareas(){
-	txtFiltro=$("#txtBuscarUsuariosTarea").val();
-	if(txtFiltro.length >=3 ){
-		//se llama a la funcion cargarUsuarios
-		cargarUsuarios(txtFiltro);
+function agregarCorreosElectronicos(){
+	var elementos="";
+	for (var i=0;i<document.frmListadoEmailsAlertas.elements.length;i++){
+	 	if (document.frmListadoEmailsAlertas.elements[i].type=="checkbox"){
+	 		if (document.frmListadoEmailsAlertas.elements[i].checked){				
+	 			if (elementos=="")
+	 				elementos=elementos+document.frmListadoEmailsAlertas.elements[i].value;
+	 			else
+	 				elementos=elementos+",,,"+document.frmListadoEmailsAlertas.elements[i].value;
+	 		}	
+	 	}
+	}
+	if(elementos==""){
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, seleccione por lo menos un correo electronico del listado.</p>");
+		$("#divMenssajesAlertas").dialog("open");
 	}else{
-		cargarUsuarios('N/A');
+		posicionesMail=elementos.split(",,,");
+		idCajaS="cajaMail_"+cajaEmail;		
+		for(i=0;i<posicionesMail.length;i++){
+			strDiv="<div id='"+idCajaS+"' class='destinatarios ui-corner-all' title='"+posicionesMail[i]+"'>";
+	        strDiv+="<div class='destinatariosMail'>"+posicionesMail[i]+"</div>";
+	        strDiv+="<div class='eliminarDestinatario'>";
+	        strDiv+="<a href='#' onclick='eliminaCorreo(\""+idCajaS+"\")'><span class='ui-icon ui-icon-circle-close'></span></a>";
+	        strDiv+="</div></div>";
+	        $("#txtCorreoElectronico").prepend(strDiv);
+	        strDiv="";
+		}
+		$("#detalleAgregarCorreos").dialog("close");
 	}
 }
-/*
-*Funcion para recuperar el contenido de la caja de texto de las busqueda de cuestionarios
-*/
-function buscarCuestionariosTareas(){
-	txtFiltro=$("#txtBuscarCuestionariosTarea").val();
-	if(txtFiltro.length >=1 ){
-		//se llama a la funcion cargarUsuarios
-		cargarCuestionarios(txtFiltro);
-	}else{
-		cargarCuestionarios('N/A');
-	}
-}
+
 
 
 	

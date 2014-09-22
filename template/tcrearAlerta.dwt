@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function(){
+  $(document).ready(function(){
         $("#agregaCajaEmail").click(function(){
             agregarCajaCorreo();
         });
@@ -8,8 +8,15 @@
 		$("#btnAgregarExpresion").click(function(){
 			expresionesAlertas();
 		})
-			
+		$("#rd2").click(function(){
+			tipoPDIgcRSI(111);
+		})
+		
+    $("#btnAgregarCorreo").click(function(){
+      mostrarDireccionesCliente("S/N");
     });
+
+  });
 </script>
 <!--Formulario nueva tarea-->
 <div id="divNuevaAlerta">

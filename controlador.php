@@ -10,7 +10,7 @@ if($_SERVER["HTTP_REFERER"]==""){
 }else{
 	include "claseAlertas.php";
 	//se instancia la clase que contiene las funciones de los cuestionarios
-	$objT=new alertas();
+	$objA=new alertas();
 	
 	switch($_GET["action"]){
 		case "mostrarFormularioAlerta":
@@ -24,6 +24,27 @@ if($_SERVER["HTTP_REFERER"]==""){
 			));
 			//se muestra el template
 			$tpl->pparse('controlador');
+		break;
+		case "mostrarCorreosCliente":
+			/*echo "<pre>";
+			print_r($_GET);
+			echo "</pre>";*/
+			$correosE=$objA->mostrarCorreosCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
+			
+			if($correosE=="S/N"){
+				echo "( 0 ) registros encontrados.";
+			}else{
+				$correosET=explode(";",$correosE);
+				
+				$tpl->set_filenames(array('controlador' => 'tCorreosElectronicos'));
+
+				for($i=0;$i<count($correosET);$i++){
+					$tpl->assign_block_vars('listadoEmails',array(
+	                    'EMAIL' =>	$correosET[$i]
+	                ));
+				}
+				$tpl->pparse('controlador');
+			}
 		break;
 	}
 	
