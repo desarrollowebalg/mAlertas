@@ -213,7 +213,13 @@ function agregarCorreosElectronicos(){
 		$("#detalleAgregarCorreos").dialog("close");
 	}
 }
-
+function mostrarUnidadesCliente(){
+	$("#agregarUnidades").dialog("open");
+	idClienteAlerta=$("#idClienteAlertas").val();
+    idUsuarioAlerta=$("#idUsuarioAlertas").val();
+    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro=S/N";
+	ajaxAlertas("mostrarUnidadesCliente","controlador",parametros,"listadoUnidadesAlertas","listadoUnidadesAlertas","GET");
+}
 
 
 	

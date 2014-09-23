@@ -58,7 +58,7 @@
 .busquedaVentanaEmergente{
 	width:250px;
 }
-/*Listado Usuarios*/
+/*Listado Email*/
 #listadoUsuariosEmail{
 	border:1px solid #CCC;
 	width:99%;
@@ -233,5 +233,8 @@ width:18px;
 	float: right;
 	display: inline;
 }
-
+#listadoUnidadesAlertas{
+	border:1px solid #CCC;
+	height:225px;
+}
 

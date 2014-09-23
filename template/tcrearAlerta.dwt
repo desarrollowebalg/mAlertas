@@ -16,6 +16,9 @@
       mostrarDireccionesCliente("S/N");
     });
 
+    $("#btnAgragarExpresion").click(function(){
+      mostrarUnidadesCliente();
+    });
   });
 </script>
 <!--Formulario nueva tarea-->

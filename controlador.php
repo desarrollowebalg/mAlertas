@@ -46,6 +46,12 @@ if($_SERVER["HTTP_REFERER"]==""){
 				$tpl->pparse('controlador');
 			}
 		break;
+		case "mostrarUnidadesCliente":
+			echo "<pre>";
+			print_r($_GET);
+			echo "</pre>";
+			$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
+		break;
 	}
 	
 	switch($_POST["action"]){

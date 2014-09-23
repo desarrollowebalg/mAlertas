@@ -37,7 +37,8 @@ class alertas{
    		return $objBd;
    	}
    	private function iniciarConexionDb(){
-   		$objBd=new sql($this->host,$this->port,$this->bname,$this->user,$this->pass);
+   		include "config/database.php";
+   		$objBd=new sql($config_bd['host'],$config_bd['port'],$config_bd['bname'],$config_bd['user'],$config_bd['pass']);
    		return $objBd;
    	}
    	private function iniciarConexionAlertas(){
@@ -83,8 +84,28 @@ class alertas{
 		}
 	}
 	/**
-	*@method 		listarCuestionariosFiltro
-	*@description 	Funcion para mostrar los cuestionarios asociados al cliente para agregar a la tarea
+	*@method 		mostrarUnidadesCliente
+	*@description 	Funcion para mostrar las diferentes unidades de los cientes
+	*@paramas 				
+	*
+	*/
+	public function mostrarUnidadesCliente($idCliente,$idUsuarioAlerta,$filtro){
+		$mensaje="";
+		$objMovi=$this->iniciarConexionDb();
+		$objMovi->sqlQuery("SET NAMES 'utf8'");
+		if($filtro=="S/N"){
+			$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
+            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) 
+		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
+            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' ORDER BY NOMBRE,COD_ENTITY";
+		}else{
+
+		}
+		echo $sqlG;
+	}
+	/**
+	*@method 		mostrarCorreosCliente
+	*@description 	Funcion para mostrar los correos electronicos del cliente seleccionado
 	*@paramas 				
 	*
 	*/

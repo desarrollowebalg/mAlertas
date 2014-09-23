@@ -33,8 +33,8 @@ $(document).ready(function(){
 
    	$("#agregarUnidades").dialog({
 		autoOpen: false,
-		height: 300,
-		width: 350,
+		height: 350,
+		width: 400,
 		modal: true,
 		buttons: {
 			Cancelar: function() {
@@ -139,6 +139,9 @@ function controladorAcciones(accion,data,divResultado){
 		break;
 		case "mostrarCorreosCliente":
 			$("#listadoUsuariosEmail").html(data);
+		break;
+		case "mostrarUnidadesCliente":
+			$("#listadoUnidadesAlertas").html(data);
 		break;
 	}
 }
