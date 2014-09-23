@@ -30,8 +30,8 @@
                    <td colspan="2">
                         <span class="camposObligatorios">*</span>
                         <input type="text" name="txtNombreAlerta" id="txtNombreAlerta" placeholder="Nombre de la alerta" value="">
-                        <input type="checkbox" name="chkVigente" id="chkVigente" /> Vigente
-                        <input type="checkbox" name="chkActiva"  id="chkActiva"  /> Activa
+                        <input type="checkbox" name="chkVigente" id="chkVigente" value="1" checked="checked" /> Vigente
+                        <input type="checkbox" name="chkActiva"  id="chkActiva" value="1" checked="checked"  /> Activa
                    </td>
                 </tr>  
                 <tr>
