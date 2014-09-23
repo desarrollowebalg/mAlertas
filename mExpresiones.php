@@ -48,6 +48,29 @@
 	   }
 	}	
 	
+	//************************** por defualt se cargan los PDI
+	
+	$sql_tipo = "SELECT ID_OBJECT_MAP,DESCRIPCION FROM 	ADM_GEOREFERENCIAS WHERE TIPO = 'G' AND ID_CLIENTE =".$idCliente;
+	$qry_tipo = $db->sqlQuery($sql_tipo);
+	$cnt_tipo = $db->sqlEnumRows($qry_tipo);
+	if($cnt_tipo > 0){
+	   while($row_tipo = $db->sqlFetchArray($qry_tipo)){	
+		  $tpl->assign_block_vars('tipos_x',array(
+			'ID_OBJECT_MAP'  => $row_tipo['ID_OBJECT_MAP'],
+			'DESCRIPCION'    => $Functions->codif($row_tipo['DESCRIPCION'])
+		  ));
+	   }
+	   
+	}else{
+		 $tpl->assign_block_vars('tipos_x',array(
+			'ID_OBJECT_MAP'  => -1,
+			'DESCRIPCION'    => 'Sin PDI'
+		  ));
+		
+	}
+	
+	
+	
 	$tpl->assign_vars(array(
 		'PAGE_TITLE'	=> "Expresiones",	
 		'PATH'			=> $dir_mod,

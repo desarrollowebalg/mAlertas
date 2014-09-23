@@ -40,7 +40,17 @@ function tipoPDIgcRSI(tipes) {
 	 // alert('ya se corrigio '+tipes);
 	 
 }
+//******************************** funcion para cambiar valor de caja de pdi_in, out, on
 
+function cambiaPDIinONout(dato){
+	$("#parte3").val(dato);
+}
+
+function cambiaPDIcod(dato2){
+	$("#parte2").val("ID_OBJECT_MAP="+dato2);
+}
+
+//********************************* funcion activa desactiva combos y textbox
 function liberarCerrar(iD,valor){
 
 	if(valor === true){
@@ -51,68 +61,148 @@ function liberarCerrar(iD,valor){
 		$("#banSino").val( parseInt($("#banSino").val())-1);  
 	}
 	$("#"+iD).prop('disabled', b); 
+	$("#parte4").val("U");
 	
 }
 
 //*************************************** funcion para validar expresiones
 function validarExpersiones(){
 	
-   if(parseInt(($("#banSino").val()) ===0)){
-	   alert('Debe de especificar una expresion, verifique!!');  
+	
+if($("#chk_sino").is(':checked')) { 
+     if($("#TiposPDIGCRSI").val() ==='-1'){
+	   alert('Elija una opción');  
 	   return false;
-   }
+     }else{
+		 //alert('crear expresion sin 3 checks'); 
 		 
-   if($("#velocidadEvento").is(':checked')) { 
-        
-         $("#txtVelocidad").prop('disabled', false); 
-        if($("#txtVelocidad").val()===''){     
-		   alert('Campo velocidad vacio, Verifique!!'); 
-		    return false; 
-		}
-		 	
-		
-   } else{
-	    $("#txtVelocidad").prop('disabled', true);
-   }
+		 if($("#banSino").val() !== '0') { 
+	      //alert('crear expresion con  3 checks'); 
+		  
+		    if($("#velocidadEvento").is(':checked')) { 
+              $("#txtVelocidad").prop('disabled', false); 
+				if($("#txtVelocidad").val()===''){     
+				   alert('Campo velocidad vacio, Verifique!!'); 
+					return false; 
+				}
+		   } else{
+				$("#txtVelocidad").prop('disabled', true);
+				$("#parte11").val('');
+		   }
+		   
+		   if($("#eEvento").is(':checked')) {  
+			  
+			   $("#selEventos").prop('disabled', false);
+				if($("#selEventos").val()==='-1'){     
+				   alert('Elija un evento');  
+					return false;
+				}
+		   } else{
+			   $("#selEventos").prop('disabled', true);
+			   $("#parte12").val('');
+		   }
+		   
+		   if($("#prioridadEvento").is(':checked')) {  
+						
+				 $("#selPriori").prop('disabled', false);
+				if($("#selPriori").val()==='-1'){     
+				   alert('Elija una prioridad'); 
+					return false; 
+				}
+		   } else{
+				$("#selPriori").prop('disabled', true);
+				$("#parte13").val('');
+		   }
+	
+	    } 
+	 }
    
-   if($("#eEvento").is(':checked')) {  
-      
-	   $("#selEventos").prop('disabled', false);
-        if($("#selEventos").val()==='-1'){     
-		   alert('Elija un evento');  
-		    return false;
-		}
-   } else{
-	   $("#selEventos").prop('disabled', true);
-   }
-   
-   if($("#prioridadEvento").is(':checked')) {  
-                
-		 $("#selPriori").prop('disabled', false);
-		if($("#selPriori").val()==='-1'){     
-		   alert('Elija una prioridad'); 
-		    return false; 
-		}
-   } else{
-	    $("#selPriori").prop('disabled', true);
-   }
-   
- /*  if($("#rd2").is(':checked') || $("#rd3").is(':checked') || $("#rd4").is(':checked')) {  
-    	$("#banSino").val(1); 	
-       
-   } else{
-      if($("#banSino").val()==='0'){   
-	   alert('Debe de especificar la expresion a usar');  
-	   return false;
-	  }
-   }*/
-   
-   
-   
-   
-   
-   
+}else{
+   	
+	if($("#banSino").val() === '0') { 
+	    alert('Debe de especificar las condiciones basicas de la alerta y/o agregar complementos');
+		return false;
+	}else{
+		    if($("#velocidadEvento").is(':checked')) { 
+              $("#txtVelocidad").prop('disabled', false); 
+				if($("#txtVelocidad").val()===''){     
+				   alert('Campo velocidad vacio, Verifique!!'); 
+					return false; 
+				}
+		   } else{
+				$("#txtVelocidad").prop('disabled', true);
+				$("#parte11").val('');
+		   }
+		   
+		   if($("#eEvento").is(':checked')) {  
+			  
+			   $("#selEventos").prop('disabled', false);
+				if($("#selEventos").val()==='-1'){     
+				   alert('Elija un evento');  
+					return false;
+				}
+		   } else{
+			   $("#selEventos").prop('disabled', true);
+			   $("#parte12").val('');
+		   }
+		   
+		   if($("#prioridadEvento").is(':checked')) {  
+						
+				 $("#selPriori").prop('disabled', false);
+				if($("#selPriori").val()==='-1'){     
+				   alert('Elija una prioridad'); 
+					return false; 
+				}
+		   } else{
+				$("#selPriori").prop('disabled', true);
+				$("#parte13").val('');
+		   }
+	}
+	
 }
+	
+   generaExpresiones();
+}
+
+//************************ funcion que genera las expresiones
+
+function generaExpresiones(){
+var resultado = '';	
+
+	  if($("#velocidadEvento").is(':checked')) {
+		   
+		 if($("#parte11").val()==''){ 
+		   $("#parte11").val('uni_velocidad>='+ $("#txtVelocidad").val() );
+	     }
+		 resultado = '<p> velocidad='+ $("#txtVelocidad").val()+'</p>';
+	  }
+	  
+	  if($("#eEvento").is(':checked')) { 
+		 if($("#parte12").val()===''){ 
+		   $("#parte12").val('uni_pk_event='+  $("#selEventos option:selected").html());
+		 }
+		 
+		  resultado =  resultado +'<p> Evento= '+ $("#selEventos option:selected").html()+'</p>';
+		 
+	  }
+	    
+	   if($("#prioridadEvento").is(':checked')) { 
+		 if($("#parte13").val()===''){ 
+		   $("#parte13").val('uni_prio_event='+ $("#selPriori option:selected").html());
+		 }
+		  resultado =  resultado +'<p> Prioridad= '+ $("#selPriori option:selected").html()+'</p>';
+	  }
+	  
+	  if($("#chk_sino").is(':checked')) { 
+	     resultado =  resultado +'<p>'+$("#parte6").val()+'='+$("#TiposPDIGCRSI option:selected").html() +' y validara la '+$("#parte5").val()+'</p>';
+	  }
+	  
+ 
+	  
+	//alert(resultado);
+	$("#txtExpresionAlertas").html(resultado) ;  
+}
+
 /*
 *Funcion para agregar una caja de texto para introducir el correo electronico
 */

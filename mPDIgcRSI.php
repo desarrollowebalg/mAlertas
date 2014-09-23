@@ -24,7 +24,7 @@
 	$qry_tipo = $db->sqlQuery($sql_tipo);
 	$cnt = $db->sqlEnumRows($qry_tipo);
 	if($cnt > 0){
-		$select = '<select style=" width:100px;" id="TiposPDIGCRSI">';
+		$select = '<select style=" width:100px;" id="TiposPDIGCRSI" onChange="cambiaPDIcod(this.value);">';
 		  $select .= '<option value="-1">Elegir opci&oacute;n</option>';
 	    while($row_tipo = $db->sqlFetchArray($qry_tipo)){	
 		  $select .= '<option value="'.$row_tipo['ID_OBJECT_MAP'].'">'.$row_tipo['DESCRIPCION'].'</option>';
