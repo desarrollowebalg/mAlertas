@@ -14,9 +14,6 @@ if($_SERVER["HTTP_REFERER"]==""){
 	
 	switch($_GET["action"]){
 		case "mostrarFormularioAlerta":
-			/*echo "<pre>";
-			print_r($_GET);
-			echo "</pre>";*/
 			$tpl->set_filenames(array('controlador' => 'tcrearAlerta'));
 			$tpl->assign_vars(array(
 				'IDCLIENTE'          	=> $_GET["idCliente"],
@@ -40,16 +37,11 @@ if($_SERVER["HTTP_REFERER"]==""){
 	            	'MINUTOS' =>	$minutos
 	        	));
 			}
-			
 			//se muestra el template
 			$tpl->pparse('controlador');
 		break;
 		case "mostrarCorreosCliente":
-			/*echo "<pre>";
-			print_r($_GET);
-			echo "</pre>";*/
 			$correosE=$objA->mostrarCorreosCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
-			
 			if($correosE=="S/N"){
 				echo "( 0 ) registros encontrados.";
 			}else{
@@ -66,20 +58,12 @@ if($_SERVER["HTTP_REFERER"]==""){
 			}
 		break;
 		case "mostrarUnidadesCliente":
-			/*echo "<pre>";
-			print_r($_GET);
-			echo "</pre>";*/
 			$unidades=$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
 			if($unidades=="S/N"){
 				echo "( 0 ) registros encontrados.";
 			}else{
-				//echo $unidades;
 				$unidades=explode("|||||",$unidades);
-				/*echo "<pre>";
-				print_r($unidades);
-				echo "</pre>";*/
 				$tpl->set_filenames(array('controlador' => 'tListadoUnidades'));
-
 				for($i=0;$i<count($unidades);$i++){
 					$unidad=explode("|||",$unidades[$i]);
 					$tpl->assign_block_vars('listadoUnidades',array(
@@ -89,6 +73,12 @@ if($_SERVER["HTTP_REFERER"]==""){
 				}
 				$tpl->pparse('controlador');
 			}
+		break;
+		case "cargarAlertas":
+			/*echo "<pre>";
+			print_r($_GET);
+			echo "</pre>";*/
+			$objA->listarAlertas($_GET["filtro"],$_GET["idCliente"],$_GET["idUsuarioAlertas"]);
 		break;
 	}
 	
