@@ -4,16 +4,16 @@ $(document).ready(function(){
     $("#tabsAlertas").tabs();
 
     //declaracion de eventos para los tabs
-	$("#today").click(function(){
-    	cargarTareas("today");
+	$("#vigentes").click(function(){
+    	cargarAlertas("vigentes");
     });    
 
-    $("#pendientes").click(function(){
-    	cargarTareas("pendientes");
+    $("#activas").click(function(){
+    	cargarAlertas("activas");
     });
 
-	$("#vencidas").click(function(){
-    	cargarTareas("vencidas");
+	$("#inactivas").click(function(){
+    	cargarAlertas("inactivas");
     });    
 
    	$("#agregarAlerta").dialog({
@@ -41,7 +41,8 @@ $(document).ready(function(){
 				$("#agregarUnidades").dialog( "close" );
 			},
 			Agregar:function(){
-				//se llama a la funcion para agregar los usuarios seleccionados
+				//se llama a la funcion para agregar las unidades seleccionadas
+				agregarUnidadesSeleccionadas();
 			}
 		}
    	});
@@ -104,7 +105,7 @@ $(document).ready(function(){
     //se redimensionan los tabs
     redimensionarAlertas();
     //peticion para listar las tareas
-    //cargarTareas("today");
+    cargarAlertas("vigentes");
 	//esto es nuevo cre
 	//que no me lo reconoce
 	
@@ -143,6 +144,9 @@ function controladorAcciones(accion,data,divResultado){
 		case "mostrarUnidadesCliente":
 			$("#listadoUnidadesAlertas").html(data);
 		break;
+		case "cargarAlertas":
+			$("#"+divResultado).html(data);
+		break;
 	}
 }
 /*
@@ -156,9 +160,10 @@ function cargarAlertas(filtro){
 	}else if(filtro=="inactivas"){
 		div="tabs-3";
 	}
-	idCliente=$("#idClienteTareas").val()
-	parametros="action=cargarTareas&filtro="+filtro+"&idCliente="+idCliente;
-	ajaxTareas("cargarTareas","controlador",parametros,div,div,"GET");
+	idCliente=$("#idClienteAlertas").val();
+    idUsuarioAlerta=$("#idUsuarioAlertas").val();
+	parametros="action=cargarAlertas&filtro="+filtro+"&idCliente="+idCliente+"&idUsuarioAlertas="+idUsuarioAlerta;
+	ajaxAlertas("cargarAlertas","controlador",parametros,div,div,"GET");
 }
 /*
 *Funcion para redimensionar las capas de Tareas

@@ -222,9 +222,11 @@ function verificarMail(idCaja,evento){
 		//se recupera el correo electronico
 		mailAValidar=$("#"+idCaja).val();
 		if(mailAValidar==''){
-			alert("Ingrese un email");
+			$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, ingrese un correo electronico.</p>");
+			$("#divMenssajesAlertas").dialog("open");
 		}else if(validar_email(mailAValidar)==false){
-			alert("El mail no es valido");
+			$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, el correo electronico no es valido.</p>");
+			$("#divMenssajesAlertas").dialog("open");
 		}else{
 			//si el mail es valido se elimina la caja de texto y se agrega un div con la opcion de eliminar el correo
 			$("#"+idCaja).remove();
@@ -292,8 +294,13 @@ function agregarCorreosElectronicos(){
 		posicionesMail=elementos.split(",,,");
 		idCajaS="cajaMail_"+cajaEmail;		
 		for(i=0;i<posicionesMail.length;i++){
+			if(posicionesMail[i].length > 23){
+				mailAdd=posicionesMail[i].substring(0,21)+"...";
+			}else{
+				mailAdd=posicionesMail[i];
+			}
 			strDiv="<div id='"+idCajaS+"' class='destinatarios ui-corner-all' title='"+posicionesMail[i]+"'>";
-	        strDiv+="<div class='destinatariosMail'>"+posicionesMail[i]+"</div>";
+	        strDiv+="<div class='destinatariosMail'>"+mailAdd+"</div>";
 	        strDiv+="<div class='eliminarDestinatario'>";
 	        strDiv+="<a href='#' onclick='eliminaCorreo(\""+idCajaS+"\")'><span class='ui-icon ui-icon-circle-close'></span></a>";
 	        strDiv+="</div></div>";
@@ -303,13 +310,67 @@ function agregarCorreosElectronicos(){
 		$("#detalleAgregarCorreos").dialog("close");
 	}
 }
-function mostrarUnidadesCliente(){
+function mostrarUnidadesCliente(filtro){
 	$("#agregarUnidades").dialog("open");
 	idClienteAlerta=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();
-    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro=S/N";
+    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro="+filtro;
 	ajaxAlertas("mostrarUnidadesCliente","controlador",parametros,"listadoUnidadesAlertas","listadoUnidadesAlertas","GET");
 }
-
+function buscarUnidadesCliente(){
+	txtFiltro=$("#txtBuscarUnidadCliente").val();
+	if(txtFiltro.length >=3 || txtFiltro != ""){
+		//se llama a la funcion cargarUsuarios
+		mostrarUnidadesCliente(txtFiltro);
+	}else{
+		mostrarUnidadesCliente('S/N');
+	}
+}
+function agregarUnidadesSeleccionadas(){
+	var elementos="";
+	for (var i=0;i<document.frmListadoUnidades.elements.length;i++){
+	 	if (document.frmListadoUnidades.elements[i].type=="checkbox"){
+	 		if (document.frmListadoUnidades.elements[i].checked){				
+	 			if (elementos=="")
+	 				elementos=elementos+document.frmListadoUnidades.elements[i].value;
+	 			else
+	 				elementos=elementos+",,,"+document.frmListadoUnidades.elements[i].value;
+	 		}	
+	 	}
+	}
+	if(elementos==""){
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, seleccione por lo menos una unidad para la alerta actual.</p>");
+		$("#divMenssajesAlertas").dialog("open");
+	}else{
+		//alert("Unidades a asignar");
+		$("#agregarUnidades").dialog( "close" );//se cierra el dialog de unidades
+		arrayElementos=elementos.split(",,,");//separacion
+		for(var i=0;i<arrayElementos.length;i++){
+			unidadesAg=arrayElementos[i].split("|");
+			//console.log("usuarioAg :"+unidadesAg);
+			idDivUsuarios="idUnidadDiv_"+unidadesAg[0];
+			//console.log("idDivUsuarios: "+idDivUsuarios);
+			//se arma la estructura
+			unidadesAgDiv="<div id='"+idDivUsuarios+"' class='estiloUsuariosAgregadosDiv'><a href='#' onclick='quitarUnidadesDiv("+unidadesAg[0]+")' title='Quitar Usuario de la tarea'><img src='./public/images/cross.png' border='0' /></a>&nbsp;"+unidadesAg[1]+"</div>";
+			//console.log("usuariosDiv :"+unidadesAgDiv);
+			//se verifica que no exista el usuario ya en el listado
+			//console.log(divRespuesta);
+			if ($('#'+idDivUsuarios).length==0){
+ 				//se agregan los usuarios al divResultado
+				$("#txtUnidadesAsignadas").append(unidadesAgDiv);	
+			}else{
+				console.log("existe :"+idDivUsuarios);
+			}
+			unidadesAgDiv="";
+		}
+	}
+}
+/*
+*Funcion para retirar un usuario del listado seleccionado 
+*/
+function quitarUnidadesDiv(idUsuarioAQuitar){
+	idDivQuitar="idUnidadDiv_"+idUsuarioAQuitar;
+	$("#"+idDivQuitar).remove();
+}
 
 	
