@@ -33,7 +33,7 @@
 <div id="agregarAlerta" title="Agregar Nueva Alerta"></div>
 <!--div agregar Usuarios-->
 <div id="agregarUnidades" title="Agregar Unidades a la Alerta">
-    Buscar:<input type="text" id="txtBuscarUsuariosTarea" class="busquedaVentanaEmergente" onkeyup="buscarUsuariosTareas()">
+    Buscar:<input type="text" id="txtBuscarUnidadCliente" class="busquedaVentanaEmergente" onkeyup="buscarUnidadesCliente()">
     <hr style="background:#CCC;">
     <div id="listadoUnidadesAlertas" style="overflow-y:auto;"></div>
 </div>

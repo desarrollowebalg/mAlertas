@@ -99,9 +99,25 @@ class alertas{
 		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
             WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' ORDER BY NOMBRE,COD_ENTITY";
 		}else{
-
+			$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
+            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) 
+		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
+            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' ORDER BY NOMBRE,COD_ENTITY";
 		}
-		echo $sqlG;
+		//echo $sqlG;
+		$resG=$objMovi->sqlQuery($sqlG);
+		if($objMovi->sqlEnumRows($resG)==0){
+			$mensaje="S/N";
+		}else{
+			while($rowG=$objMovi->sqlFetchArray($resG)){
+				if($mensaje==""){
+					$mensaje=$rowG["ID_GRUPO"]."|||".$rowG["NOMBRE"]."|||".$rowG["COD_ENTITY"]."|||".$rowG["DESCRIPTION"];
+				}else{
+					$mensaje.="|||||".$rowG["ID_GRUPO"]."|||".$rowG["NOMBRE"]."|||".$rowG["COD_ENTITY"]."|||".$rowG["DESCRIPTION"];
+				}
+			}
+		}
+		return $mensaje;
 	}
 	/**
 	*@method 		mostrarCorreosCliente

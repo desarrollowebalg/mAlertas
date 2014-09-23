@@ -47,10 +47,29 @@ if($_SERVER["HTTP_REFERER"]==""){
 			}
 		break;
 		case "mostrarUnidadesCliente":
-			echo "<pre>";
+			/*echo "<pre>";
 			print_r($_GET);
-			echo "</pre>";
-			$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
+			echo "</pre>";*/
+			$unidades=$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
+			if($unidades=="S/N"){
+				echo "( 0 ) registros encontrados.";
+			}else{
+				//echo $unidades;
+				$unidades=explode("|||||",$unidades);
+				/*echo "<pre>";
+				print_r($unidades);
+				echo "</pre>";*/
+				$tpl->set_filenames(array('controlador' => 'tListadoUnidades'));
+
+				for($i=0;$i<count($unidades);$i++){
+					$unidad=explode("|||",$unidades[$i]);
+					$tpl->assign_block_vars('listadoUnidades',array(
+	                    'IDUNIDAD' 	=>	$unidad[2],
+	                    'UNIDAD'	=>	$unidad[3]
+	                ));
+				}
+				$tpl->pparse('controlador');
+			}
 		break;
 	}
 	

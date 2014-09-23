@@ -213,13 +213,67 @@ function agregarCorreosElectronicos(){
 		$("#detalleAgregarCorreos").dialog("close");
 	}
 }
-function mostrarUnidadesCliente(){
+function mostrarUnidadesCliente(filtro){
 	$("#agregarUnidades").dialog("open");
 	idClienteAlerta=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();
-    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro=S/N";
+    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro="+filtro;
 	ajaxAlertas("mostrarUnidadesCliente","controlador",parametros,"listadoUnidadesAlertas","listadoUnidadesAlertas","GET");
 }
-
+function buscarUnidadesCliente(){
+	txtFiltro=$("#txtBuscarUnidadCliente").val();
+	if(txtFiltro.length >=3 || txtFiltro != ""){
+		//se llama a la funcion cargarUsuarios
+		mostrarUnidadesCliente(txtFiltro);
+	}else{
+		mostrarUnidadesCliente('S/N');
+	}
+}
+function agregarUnidadesSeleccionadas(){
+	var elementos="";
+	for (var i=0;i<document.frmListadoUnidades.elements.length;i++){
+	 	if (document.frmListadoUnidades.elements[i].type=="checkbox"){
+	 		if (document.frmListadoUnidades.elements[i].checked){				
+	 			if (elementos=="")
+	 				elementos=elementos+document.frmListadoUnidades.elements[i].value;
+	 			else
+	 				elementos=elementos+",,,"+document.frmListadoUnidades.elements[i].value;
+	 		}	
+	 	}
+	}
+	if(elementos==""){
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, seleccione por lo menos una unidad para la alerta actual.</p>");
+		$("#divMenssajesAlertas").dialog("open");
+	}else{
+		//alert("Unidades a asignar");
+		$("#agregarUnidades").dialog( "close" );//se cierra el dialog de unidades
+		arrayElementos=elementos.split(",,,");//separacion
+		for(var i=0;i<arrayElementos.length;i++){
+			unidadesAg=arrayElementos[i].split("|");
+			//console.log("usuarioAg :"+unidadesAg);
+			idDivUsuarios="idUnidadDiv_"+unidadesAg[0];
+			//console.log("idDivUsuarios: "+idDivUsuarios);
+			//se arma la estructura
+			unidadesAgDiv="<div id='"+idDivUsuarios+"' class='estiloUsuariosAgregadosDiv'><a href='#' onclick='quitarUnidadesDiv("+unidadesAg[0]+")' title='Quitar Usuario de la tarea'><img src='./public/images/cross.png' border='0' /></a>&nbsp;"+unidadesAg[1]+"</div>";
+			//console.log("usuariosDiv :"+unidadesAgDiv);
+			//se verifica que no exista el usuario ya en el listado
+			//console.log(divRespuesta);
+			if ($('#'+idDivUsuarios).length==0){
+ 				//se agregan los usuarios al divResultado
+				$("#txtUnidadesAsignadas").append(unidadesAgDiv);	
+			}else{
+				console.log("existe :"+idDivUsuarios);
+			}
+			unidadesAgDiv="";
+		}
+	}
+}
+/*
+*Funcion para retirar un usuario del listado seleccionado 
+*/
+function quitarUnidadesDiv(idUsuarioAQuitar){
+	idDivQuitar="idUnidadDiv_"+idUsuarioAQuitar;
+	$("#"+idDivQuitar).remove();
+}
 
 	

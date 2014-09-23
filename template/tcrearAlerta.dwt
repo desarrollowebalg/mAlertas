@@ -17,7 +17,7 @@
     });
 
     $("#btnAgragarExpresion").click(function(){
-      mostrarUnidadesCliente();
+      mostrarUnidadesCliente("S/N");
     });
   });
 </script>

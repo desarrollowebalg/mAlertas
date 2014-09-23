@@ -41,7 +41,8 @@ $(document).ready(function(){
 				$("#agregarUnidades").dialog( "close" );
 			},
 			Agregar:function(){
-				//se llama a la funcion para agregar los usuarios seleccionados
+				//se llama a la funcion para agregar las unidades seleccionadas
+				agregarUnidadesSeleccionadas();
 			}
 		}
    	});
