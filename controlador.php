@@ -22,6 +22,25 @@ if($_SERVER["HTTP_REFERER"]==""){
 				'IDCLIENTE'          	=> $_GET["idCliente"],
 				'IDUSUARIO'       		=> $_GET["idUsuarioAlerta"]
 			));
+			for($i=0;$i<24;$i++){
+				if($i<10)
+					$horas=	"0".$i;
+				else
+					$horas= $i;
+				$tpl->assign_block_vars('listadoHoras',array(
+	            	'HORAS' =>	$horas
+	        	));
+			}
+			for($i=0;$i<60;$i++){
+				if($i<10)
+					$minutos="0".$i;
+				else
+					$minutos= $i;
+				$tpl->assign_block_vars('listadoMinutos',array(
+	            	'MINUTOS' =>	$minutos
+	        	));
+			}
+			
 			//se muestra el template
 			$tpl->pparse('controlador');
 		break;

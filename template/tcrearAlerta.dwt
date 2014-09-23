@@ -55,28 +55,32 @@
                         <fieldset class="fieldset"><legend>Condiciones de d&iacute;as y Horarios</legend>
                             <table border="0" width="100%">
                                 <tr>
-                                    <td><input type="checkbox" id="chkLunes" />LUNES</td>
-                                    <td><input type="checkbox" id="chkViernes" />VIERNES</td>
+                                    <td><input type="checkbox" id="chkLunes" value="1" />LUNES</td>
+                                    <td><input type="checkbox" id="chkViernes" value="1" />VIERNES</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" id="chkMartes" />MARTES</td>
-                                    <td><input type="checkbox" id="chkSabado" />S&Aacute;BADO</td>
+                                    <td><input type="checkbox" id="chkMartes" value="1" />MARTES</td>
+                                    <td><input type="checkbox" id="chkSabado" value="1" />S&Aacute;BADO</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" id="chkMiercoles" />MIERCOLES</td>
-                                    <td><input type="checkbox" id="chkDomingo" />DOMINGO</td>
+                                    <td><input type="checkbox" id="chkMiercoles" value="1" />MIERCOLES</td>
+                                    <td><input type="checkbox" id="chkDomingo" value="1" />DOMINGO</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" id="chkJueves" />JUEVES</td>
+                                    <td><input type="checkbox" id="chkJueves" value="1" />JUEVES</td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td>
                                     <select id="hrInicio">
-                                     <option>00</option>
+                                    <!-- BEGIN listadoHoras -->
+                                     <option>{listadoHoras.HORAS}</option>
+                                    <!-- END listadoHoras -->
                                     </select>:
                                    <select id="mnInicio">
-                                     <option>00</option>
+                                    <!-- BEGIN listadoMinutos -->
+                                     <option>{listadoMinutos.MINUTOS}</option>
+                                    <!-- END listadoMinutos -->
                                     </select>
                                     </td>
                                     <td> HORA DE INICIO</td>
@@ -84,10 +88,14 @@
 								<tr>
                                     <td>
                                    <select id="hrFin">
-                                     <option>00</option>
+                                    <!-- BEGIN listadoHoras -->
+                                     <option>{listadoHoras.HORAS}</option>
+                                    <!-- END listadoHoras -->
                                     </select>:
                                    <select id="mnFin">
-                                     <option>00</option>
+                                     <!-- BEGIN listadoMinutos -->
+                                     <option>{listadoMinutos.MINUTOS}</option>
+                                    <!-- END listadoMinutos -->
                                     </select>
                                     </td>
                                    <td> HORA DE FIN</td>
