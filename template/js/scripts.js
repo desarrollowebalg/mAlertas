@@ -132,9 +132,11 @@ function verificarMail(idCaja,evento){
 		//se recupera el correo electronico
 		mailAValidar=$("#"+idCaja).val();
 		if(mailAValidar==''){
-			alert("Ingrese un email");
+			$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, ingrese un correo electronico.</p>");
+			$("#divMenssajesAlertas").dialog("open");
 		}else if(validar_email(mailAValidar)==false){
-			alert("El mail no es valido");
+			$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, el correo electronico no es valido.</p>");
+			$("#divMenssajesAlertas").dialog("open");
 		}else{
 			//si el mail es valido se elimina la caja de texto y se agrega un div con la opcion de eliminar el correo
 			$("#"+idCaja).remove();
