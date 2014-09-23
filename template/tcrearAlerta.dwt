@@ -40,14 +40,14 @@
                         <div id="txtCorreoElectronico">
                             <div id="agregaCajaEmail">Agregar correo...</div>
                         </div>
-                        <button id="btnAgregarCorreo" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>
+                        <button id="btnAgregarCorreo" title="Agregar Direcciones" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all">+</button>
                   </td>
                 </tr>  
                 <tr>
                     <td colspan="2">      
                         <span class="camposObligatorios" style="float:left;">*</span>
                         <div id="txtExpresionAlertas" style="margin:5px;float:left;height:100px;width:90%;border:1px solid #CCC;"></div>
-                       <input type="button" id="btnAgregarExpresion" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all" value="+"/>    
+                       <input type="button" id="btnAgregarExpresion" title="Generar Expresión de la Alerta" style="float:left;margin-top:5px;" class="btnAgregarUnidades ui-state-default ui-corner-all" value="+"/>    
                     </td>
                 </tr>
                 <tr>

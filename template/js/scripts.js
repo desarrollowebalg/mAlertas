@@ -204,8 +204,13 @@ function agregarCorreosElectronicos(){
 		posicionesMail=elementos.split(",,,");
 		idCajaS="cajaMail_"+cajaEmail;		
 		for(i=0;i<posicionesMail.length;i++){
+			if(posicionesMail[i].length > 23){
+				mailAdd=posicionesMail[i].substring(0,21)+"...";
+			}else{
+				mailAdd=posicionesMail[i];
+			}
 			strDiv="<div id='"+idCajaS+"' class='destinatarios ui-corner-all' title='"+posicionesMail[i]+"'>";
-	        strDiv+="<div class='destinatariosMail'>"+posicionesMail[i]+"</div>";
+	        strDiv+="<div class='destinatariosMail'>"+mailAdd+"</div>";
 	        strDiv+="<div class='eliminarDestinatario'>";
 	        strDiv+="<a href='#' onclick='eliminaCorreo(\""+idCajaS+"\")'><span class='ui-icon ui-icon-circle-close'></span></a>";
 	        strDiv+="</div></div>";
