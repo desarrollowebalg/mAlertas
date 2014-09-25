@@ -1,4 +1,4 @@
-<form name="frmListadoUnidades" id="frmListadoUnidades">	
+<form name="frmListadoUnidades" id="frmListadoUnidades">
 	<!-- BEGIN listadoUnidades -->	
 		<div class="estiloListadoUsuarios ui-corner-all">
 			<input type='checkbox' id='{listadoUnidades.IDUNIDAD}' value='{listadoUnidades.IDUNIDAD}|{listadoUnidades.UNIDAD}' />

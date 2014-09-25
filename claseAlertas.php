@@ -104,7 +104,7 @@ class alertas{
 			$sqlADD="SELECT * FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
 			$resADD=$objBDA->sqlQuery($sqlADD);
 			while($rowADD=$objBDA->sqlFetchArray($resADD)){
-				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$rowADD["DESCRIP_ENTITY"]."??";
+				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$rowADD["DESCRIP_ENTITY"];
 			}
 			//se extrae la informacion de los correos electronicos asociados a la alerta
 			$sqlAE="SELECT CORREO_ELECTRONICO 

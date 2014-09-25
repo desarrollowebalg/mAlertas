@@ -543,5 +543,22 @@ function detalleAlerta(idAlerta,e){
 	//ajaxTareas(accion,c,parametros,divCarga,divResultado,tipoPeticion)
 	ajaxAlertas("detalleAlerta","controlador",parametros,"detalleAlerta","detalleAlerta","GET");
 }
+/*
+*Funcion para seleccionar todas la unidades o quitar la seleccion de los checks
+*/
+function seleccionarTodas(opcion){
+	var elementos="";
+	for (var i=0;i<document.frmListadoUnidades.elements.length;i++){
+	 	if (document.frmListadoUnidades.elements[i].type=="checkbox"){
+	 		if(opcion==1){//se seleccionan todas
+				document.frmListadoUnidades.elements[i].checked=1;
+			}else{//se quita la seleccion
+				document.frmListadoUnidades.elements[i].checked=0;
+			}	
+	 	}
+	}
 
-	
+
+
+
+}

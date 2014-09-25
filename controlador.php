@@ -81,18 +81,19 @@ if($_SERVER["HTTP_REFERER"]==""){
 			$objA->listarAlertas($_GET["filtro"],$_GET["idCliente"],$_GET["idUsuarioAlertas"]);
 		break;
 		case "detalleAlerta":
-			/*echo "<pre>";
-			print_r($_GET);
-			echo "</pre>";*/
 			$msgAlerta=$objA->mostrarDetalleAlerta($_GET["idCliente"],$_GET["idUsuario"],$_GET["idAlerta"]);
-			//echo $msgAlerta;
 			//se separa la cadena original
 			$msgAlerta=explode("?????",$msgAlerta);
 			/*echo "<pre>";
 			print_r($msgAlerta);
 			echo "</pre>";*/
-			//se separan los correos electronicos
+			
 			$detalleAlerta=explode("??",$msgAlerta[1]);
+			
+			$correos=explode(";",$msgAlerta[2]);
+			/*echo "<pre>";
+			print_r($correos);
+			echo "</pre>";*/
 			/*echo "<pre>";
 			print_r($detalleAlerta);
 			echo "</pre>";*/
@@ -109,6 +110,11 @@ if($_SERVER["HTTP_REFERER"]==""){
 	                    'IDUNIDAD' 		=>	$detalleAlerta1[1],
 	                    'UNIDAD'		=>	$detalleAlerta1[2]
 	            ));
+			}
+			for($i=0;$i<count($correos);$i++){
+				$tpl->assign_block_vars('listadoCorreos',array(
+						'EMAIL'		=>  $correos[$i]
+	            ));	
 			}
 			($datosAlerta[16]==" ") ? $fechaCreacion="Sin Fecha especificada" : $fechaCreacion=explode(" ",$datosAlerta[16]);
 			

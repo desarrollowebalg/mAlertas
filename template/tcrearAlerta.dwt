@@ -68,12 +68,15 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                </tr>
+                                <tr>
                                     <td>
                                     <select id="hrInicio">
                                     <!-- BEGIN listadoHoras -->
                                      <option>{listadoHoras.HORAS}</option>
                                     <!-- END listadoHoras -->
-                                    </select>:
+                                    </select>&nbsp;:&nbsp;
                                    <select id="mnInicio">
                                     <!-- BEGIN listadoMinutos -->
                                      <option>{listadoMinutos.MINUTOS}</option>
@@ -82,14 +85,16 @@
                                     </td>
                                     <td> HORA DE INICIO</td>
                                 </tr>
-								<tr>
+								                <tr>
                                     <td>
                                    <select id="hrFin">
+                                      <option selected="selected">23</option>
                                     <!-- BEGIN listadoHoras -->
                                      <option>{listadoHoras.HORAS}</option>
                                     <!-- END listadoHoras -->
-                                    </select>:
+                                    </select>&nbsp;:&nbsp;
                                    <select id="mnFin">
+                                      <option selected="selected">59</option>
                                      <!-- BEGIN listadoMinutos -->
                                      <option>{listadoMinutos.MINUTOS}</option>
                                     <!-- END listadoMinutos -->
