@@ -110,7 +110,7 @@
                           <span class="camposObligatorios">*</span>
                           <button id="btnAgragarExpresion" class="btnAgregarUnidades ui-state-default ui-corner-all">Agregar Unidades</button>
                           <div id="txtUnidadesAsignadas"></div>
-                          <input type="text" id="insertExpresion" />
+                          <input type="hidden" id="insertExpresion" />
                           <input type="hidden" id="insertUSUARIO" />
                           <input type="hidden" id="insertNOMBRE" />
                           <!--<textarea id="sql" cols="15" rows="10"/>-->

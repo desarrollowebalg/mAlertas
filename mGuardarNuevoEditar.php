@@ -118,9 +118,9 @@
 					  if($qry_recuperar_unidades){
 					      while($row_recuperar_unidades = $db->sqlFetchArray($qry_recuperar_unidades)){	
 						     if($cadenaMailMaster === ''){
-						$cadenaMailMaster = "('".$id_mail."','".$id_master.'","'.$row_recuperar_unidades['COD_ALERT_ENTITY'].'","'.$row_recuperar_unidades['COD_ENTITY'].'","'.$row_recuperar_unidades['DESCRIP_ENTITY'].'")'; 
+						$cadenaMailMaster = "('".$id_mail."','".$id_master."','".$row_recuperar_unidades['COD_ALERT_ENTITY']."','".$row_recuperar_unidades['COD_ENTITY']."','".$row_recuperar_unidades['DESCRIP_ENTITY']."')"; 
 							 }else{
-						$cadenaMailMaster = $cadenaMailMaster.",('".$id_mail."','".$id_master.'","'.$row_recuperar_unidades['COD_ALERT_ENTITY'].'","'.$row_recuperar_unidades['COD_ENTITY'].'","'.$row_recuperar_unidades['DESCRIP_ENTITY'].'")'; 	 
+						$cadenaMailMaster = $cadenaMailMaster.",('".$id_mail."','".$id_master."','".$row_recuperar_unidades['COD_ALERT_ENTITY']."','".$row_recuperar_unidades['COD_ENTITY']."','".$row_recuperar_unidades['DESCRIP_ENTITY']."')"; 	 
 							 }
 						  }
 						//$cadenaMailMaster = $id_mail.','.$id_master;
