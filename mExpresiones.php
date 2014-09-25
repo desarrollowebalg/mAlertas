@@ -15,9 +15,9 @@
 		echo '<script>window.location="index.php?m=login"</script>';
 	
 	$tpl->set_filenames(array('mExpresiones'=>'tExpresiones'));	
-	$idCliente   = $userAdmin->user_info['ID_CLIENTE'];
-	$idUsuario	 = $userAdmin->user_info['ID_USUARIO'];
-	
+	$idCliente     = $userAdmin->user_info['ID_CLIENTE'];
+	$idUsuario	   = $userAdmin->user_info['ID_USUARIO'];
+	$nombreUsuario = $userAdmin->user_info['NOMBRE_COMPLETO'];
 	
 	//******************************* Eventos
 	
@@ -75,7 +75,8 @@
 		'PAGE_TITLE'	=> "Expresiones",	
 		'PATH'			=> $dir_mod,
 		'IDCLIENTE'		=> $idCliente,
-		'IDUSUARIO'	    => $idUsuario
+		'IDUSUARIO'	    => $idUsuario,
+		'NOMBREUSUARIO' => $nombreUsuario
 	));
 
 	$tpl->pparse('mExpresiones');

@@ -167,41 +167,195 @@ if($("#chk_sino").is(':checked')) {
 //************************ funcion que genera las expresiones
 
 function generaExpresiones(){
-var resultado = '';	
+var resultado  = '';	
+var resulatod2 = '';
 
 	  if($("#velocidadEvento").is(':checked')) {
 		   
 		 if($("#parte11").val()==''){ 
 		   $("#parte11").val('uni_velocidad>='+ $("#txtVelocidad").val() );
+		   
 	     }
 		 resultado = '<p> velocidad='+ $("#txtVelocidad").val()+'</p>';
+		 resulatod2 =  $("#parte11").val();
 	  }
 	  
 	  if($("#eEvento").is(':checked')) { 
 		 if($("#parte12").val()===''){ 
-		   $("#parte12").val('uni_pk_event='+  $("#selEventos option:selected").html());
+		   $("#parte12").val('uni_pk_event='+  $("#selEventos").val());
 		 }
 		 
 		  resultado =  resultado +'<p> Evento= '+ $("#selEventos option:selected").html()+'</p>';
-		 
+		if(resulatod2 == ''){ 
+		     resulatod2  =  $("#parte12").val();
+		}else{
+			 resulatod2  = resulatod2 +' AND '+$("#parte12").val();
+		}
 	  }
 	    
 	   if($("#prioridadEvento").is(':checked')) { 
 		 if($("#parte13").val()===''){ 
-		   $("#parte13").val('uni_prio_event='+ $("#selPriori option:selected").html());
+		   $("#parte13").val('uni_prio_event='+ $("#selPriori").val());
 		 }
 		  resultado =  resultado +'<p> Prioridad= '+ $("#selPriori option:selected").html()+'</p>';
+		 
+		if(resulatod2 == ''){ 
+		    resulatod2 =  $("#parte13").val();
+		}else{
+			resulatod2 = resulatod2 +' AND '+$("#parte13").val();
+		}
 	  }
 	  
 	  if($("#chk_sino").is(':checked')) { 
 	     resultado =  resultado +'<p>'+$("#parte6").val()+'='+$("#TiposPDIGCRSI option:selected").html() +' y validara la '+$("#parte5").val()+'</p>';
+	      if(resulatod2 == ''){ 
+		   resulatod2 =  $("#parte3").val();
+		  }else{
+			resulatod2 = resulatod2 +' AND '+$("#parte3").val();  
+		  }
 	  }
 	  
  
+    resulatod2 = resulatod2+'","'+  $("#parte4").val();
 	  
 	//alert(resultado);
 	$("#txtExpresionAlertas").html(resultado) ;  
+	$("#insertExpresion").val(resulatod2);
+	$("#insertUSUARIO").val($("#parte7").val());
+	 $("#insertNOMBRE").val($("#parte8").val());
+	 $("#dialogo_generar_expresiones").dialog( "close" );
 }
+
+/*********************************/
+function crearInsert(){
+	//alert('g');
+	var insert = 's';
+	var correos = '';
+	var unidades = '';
+	var partes ='';
+	
+	
+		insert = '"'+$("#txtNombreAlerta").val()+'"';
+	
+	   
+	   if($("#chkVigente").is(':checked')) {			// vigente
+		  var vig = 1;
+	   }else{
+		  var vig = 0; 
+	   }
+	   
+	   insert = insert +',"'+vig+'"';
+	   
+	   if($("#chkActiva").is(':checked')) {				// activa
+		  var act = 'S';
+	   }else{
+		  var act = 'N'; 
+	   }
+	   insert = insert +',"'+ act +'"';
+	   
+	   $("#txtCorreoElectronico div").each(function (index) {
+		     if(($( this ).attr( "title" ))!==undefined){
+				  if(correos===''){
+					  correos = $( this ).attr( "title" );
+				  }else{
+					  correos = correos+';'+$( this ).attr( "title" );
+				  }
+			 }
+		     
+	   })
+	    //insert = insert +','+ correos;
+	    insert = insert +',"'+ $("#insertExpresion").val()+'"';
+		
+	    if($("#chkLunes").is(':checked') ) {				// lunes
+		  var lunes = 1;
+	    }else{
+		  var lunes = 0; 
+	    }
+
+       insert = insert +','+ lunes;
+	   
+		if($("#chkMartes").is(':checked') ) {				// martes
+		  var martes = 1;
+	    }else{
+		  var martes = 0; 
+	    }		
+
+	  insert = insert +','+ martes;
+	
+		if($("#chkMiercoles").is(':checked') ) {				// martes
+		  var miercoles = 1;
+	    }else{
+		  var miercoles = 0; 
+	    }		
+	 insert = insert +','+ miercoles;
+
+		if($("#chkJueves").is(':checked') ) {				// martes
+		  var jueves = 1;
+	    }else{
+		  var jueves = 0; 
+	    }		
+	 insert = insert +','+ jueves;
+
+		if($("#chkViernes").is(':checked') ) {				// martes
+		  var viernes = 1;
+	    }else{
+		  var viernes = 0; 
+	    }		
+	 insert = insert +','+ viernes;
+
+		if($("#chkSabado").is(':checked') ) {				// martes
+		  var sabado = 1;
+	    }else{
+		  var sabado = 0; 
+	    }		
+	 insert = insert +','+ sabado;
+
+		if($("#chkDomingo").is(':checked') ) {				// martes
+		  var domingo = 1;
+	    }else{
+		  var domingo = 0; 
+	    }		
+		  
+		  insert = insert +','+ domingo;
+		 
+		  insert = insert +',"'+$("#hrInicio").val()+':'+$("#mnInicio").val()+':00","'+$("#hrFin").val()+':'+$("#mnFin").val()+':00"';
+		 
+		  insert = insert +',"'+$("#insertUSUARIO").val()+'","'+$("#insertNOMBRE").val()+'"';
+
+          insert = insert +'|'+correos;
+		  
+		 $("#txtUnidadesAsignadas div").each(function (index) {   /// div de unidades
+		     if(($( this ).attr( "id" ))!==undefined){
+				partes = $( this ).attr( "id" ).split('_');
+				   if(unidades===''){
+					  unidades = partes[1];
+				  }else{
+					  unidades = unidades+','+partes[1];
+				  }
+				  //console.log($( this ).attr( "id" ))
+			 }
+		     
+	   })  
+		  
+		   insert = insert +'|'+unidades+'|'+$("#parte2").val();
+
+		console.log(insert);	
+	
+  $.ajax({
+          url: "index.php?m=mAlertas&c=mGuardarNuevoEditar",
+		   data : {
+            cadena:insert
+		   },
+		  type: "POST",
+          success: function(data) {
+            var result = data; 
+			$("#agregarAlerta").dialog( "close" );
+       		alert('Alerta guardada con exito'); 
+		  }
+      });
+
+}
+//********************************
 
 /*
 *Funcion para agregar una caja de texto para introducir el correo electronico

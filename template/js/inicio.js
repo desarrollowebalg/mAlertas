@@ -26,6 +26,7 @@ $(document).ready(function(){
 				$("#agregarAlerta").dialog( "close" );
 			},
 			Agregar:function(){
+				crearInsert();
 				//se llama a la funcion para agregar los usuarios seleccionados
 			}
 		}

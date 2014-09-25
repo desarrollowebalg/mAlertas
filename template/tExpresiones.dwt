@@ -155,12 +155,14 @@
     </td>
   </tr>
 </table>
-<input type="text" id="banSino" value="0" />
-<input type="text" id="parte11"  value="" />
-<input type="text" id="parte12"  value="" />
-<input type="text" id="parte13"  value="" />
-<input type="text" id="parte2" value="" />
-<input type="text" id="parte3" value="pdi_in=1" />
-<input type="text" id="parte4" value="P" />
-<input type="text" id="parte5" value="Entrada" />
-<input type="text" id="parte6" value="PDI" />
+<input type="hidden" id="banSino" value="0" />
+<input type="hidden" id="parte11"  value="" />
+<input type="hidden" id="parte12"  value="" />
+<input type="hidden" id="parte13"  value="" />
+<input type="hidden" id="parte2" value="" />
+<input type="hidden" id="parte3" value="pdi_in=1" />
+<input type="hidden" id="parte4" value="P" />
+<input type="hidden" id="parte5" value="Entrada" />
+<input type="hidden" id="parte6" value="PDI" />
+<input type="hidden" id="parte7" value="{IDUSUARIO}" />
+<input type="hidden" id="parte8" value="{NOMBREUSUARIO}" />
