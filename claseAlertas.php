@@ -84,6 +84,39 @@ class alertas{
 		}
 	}
 	/**
+	*@method 		mostrarDetalleAlerta
+	*@description 	Funcion para mostrar el detalle de la alerta generada
+	*@paramas 				
+	*
+	*/
+	public function mostrarDetalleAlerta($idCliente,$idUsuario,$idAlerta){
+		$mensaje="";
+		$objBDA=$this->iniciarConexionAlertas();
+		$objBDA->sqlQuery("SET NAMES 'utf8'");
+		$sqlAD="SELECT * FROM ALERT_XP_MASTER WHERE COD_ALERT_MASTER='".$idAlerta."' AND COD_CLIENT='".$idCliente."'";
+		$resAD=$objBDA->sqlQuery($sqlAD);
+		if($objBDA->sqlEnumRows($resAD)==0){
+			$mensaje="Sin Datos";
+		}else{
+			$rowAD=$objBDA->sqlFetchArray($resAD);
+			$mensaje=$rowAD["COD_ALERT_MASTER"]."||".$rowAD["NAME_ALERT"]."||".$rowAD["HORARIO_FLAG_LUNES"]."||".$rowAD["HORARIO_FLAG_MARTES"]."||".$rowAD["HORARIO_FLAG_MIERCOLES"]."||".$rowAD["HORARIO_FLAG_JUEVES"]."||".$rowAD["HORARIO_FLAG_VIERNES"]."||".$rowAD["HORARIO_FLAG_SABADO"]."||".$rowAD["HORARIO_FLAG_DOMINGO"]."||".$rowAD["HORARIO_HORA_INICIO"]."||".$rowAD["HORARIO_HORA_FIN"]."||".$rowAD["TYPE_EXPRESION"]."||".$rowAD["ACTIVE"]."||".$rowAD["VIGENTE"]."||".$rowAD["COD_USER_CREATE"]."||".$rowAD["NICKNAME_USER_CREATE"]."||".$rowAD["FECHA_CREATE"]."?????";
+			//SE EXTRAE EL DETALLE DE LA ALERTA
+			$sqlADD="SELECT * FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
+			$resADD=$objBDA->sqlQuery($sqlADD);
+			while($rowADD=$objBDA->sqlFetchArray($resADD)){
+				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$rowADD["DESCRIP_ENTITY"]."??";
+			}
+			//se extrae la informacion de los correos electronicos asociados a la alerta
+			$sqlAE="SELECT CORREO_ELECTRONICO 
+			FROM ALERT_XP_EMAIL_MASTER INNER JOIN ALERT_XP_EMAIL ON ALERT_XP_EMAIL_MASTER.COD_ALERT_XP_EMAIL=ALERT_XP_EMAIL.COD_ALERT_XP_EMAIL
+			WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
+			$resAE=$objBDA->sqlQuery($sqlAE);
+			$rowAE=$objBDA->sqlFetchArray($resAE);
+			$mensaje.="?????".$rowAE["CORREO_ELECTRONICO"];
+		}
+		return $mensaje;
+	}
+	/**
 	*@method 		mostrarUnidadesCliente
 	*@description 	Funcion para mostrar las diferentes unidades de los cientes
 	*@paramas 				
@@ -152,15 +185,15 @@ class alertas{
 	*/
 	public function listarAlertas($filtro,$idCliente,$idUsuario){
 		if($filtro=="vigentes"){
-			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE
+			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND VIGENTE='S'";
 		}else if($filtro=="activas"){
-			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE
+			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='1'";
 		}else if($filtro=="inactivas"){
-			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE
+			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='0'";
 		}
@@ -250,20 +283,20 @@ class alertas{
 		$col["resizable"] = true;
 		$col["search"] = true;
 		$cols[] = $col;
-		/*
+		
 		$col = array();
 		$col["title"] = "";
-		$col["name"] = "Detalle";
+		$col["name"] = "MAS";
 		$col["width"] = "7";
 		$col["search"] = false;
 		$col["editable"] = false;
 		$col["sortable"] = false; // this column is not sortable 
 		$col["align"] = "center";
 		//$col["link"] = "http://localhost?id={ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["link"] = "#{ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["linkoptions"] = "title='Ver detalle de la tarea' onclick='detalleTarea(this.href,this.event)'"; // extra params with <a> tag
+		$col["link"] = "#{COD_ALERT_MASTER}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
+		$col["linkoptions"] = "title='Ver detalle de la alerta' onclick='detalleAlerta(this.href,this.event)'"; // extra params with <a> tag
 		$cols[] = $col;
-
+		/*
 		$col = array();
 		$col["title"] = "";
 		$col["name"] = "Editar";
