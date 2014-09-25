@@ -69,21 +69,13 @@
 				$query_w = $db3->sqlQuery($sql_w);
 				$row_w   = $db3->sqlFetchArray($query_w);
                 $id_mail = $row_w['INDX2'];
-				$cadenaMailMaster = $id_mail.','.$id_master;
 				
-				 $sql_mail_master = "INSERT INTO ALERT_XP_EMAIL_MASTER
-									(COD_ALERT_XP_EMAIL,
-									 COD_ALERT_MASTER)
-									 VALUES (".$cadenaMailMaster.")";
-				$qry_mail_master = $db3->sqlQuery($sql_mail_master);					 
-				 if($qry_mail_master){
-				
+			
 				/********************************************************/
-				  
+								  
 				    $con1 = '';
 					for($v=0;$v<count($variables2);$v++){
-				     //  stripslashes(str_replace('>','',str_replace('"','',$variables2[$v])));
-					  $con1 = explode("=", stripslashes(str_replace('>','',str_replace('"','',$variables2[$v]))));
+	  			        $con1 = explode("=", stripslashes(str_replace('>','',str_replace('"','',$variables2[$v]))));
 					    if($insert === ''){
 							$insert = $con1[0];
 							$values = '"'.trim($con1[1]).'"';
@@ -101,6 +93,7 @@
 						 $idObjectMap2  = $idObjectMap[0];
 						 $idObjectMapVal = $idObjectMap[1];   
 					  }
+					  
 					  $insert = $insert.','.$idObjectMap2;
 					  $values = $values.',"'.$idObjectMapVal.'"';
 					  $values2 ='';
@@ -116,25 +109,41 @@
 					 
 					  $sql_varaibles_detalle = "INSERT INTO ALERT_XP_DETAIL_VARIABLES(".$insert.",COD_ENTITY,DESCRIP_ENTITY,COD_ALERT_MASTER) VALUES ".$values2."";
 					 
-					 $qry_detail_variables = $db3->sqlQuery($sql_varaibles_detalle);					 
+				 $qry_detail_variables = $db3->sqlQuery($sql_varaibles_detalle);					 
+				
 				 if($qry_detail_variables){
+				     
+				       $sql_recuperar_unidades = "SELECT COD_ALERT_ENTITY, COD_ENTITY, DESCRIP_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER =".$id_master;
+				       $qry_recuperar_unidades = $db3->sqlQuery($sql_recuperar_unidades);	
+					  if($qry_recuperar_unidades){
+					      while($row_recuperar_unidades = $db->sqlFetchArray($qry_recuperar_unidades)){	
+						     if($cadenaMailMaster === ''){
+						$cadenaMailMaster = "('".$id_mail."','".$id_master.'","'.$row_recuperar_unidades['COD_ALERT_ENTITY'].'","'.$row_recuperar_unidades['COD_ENTITY'].'","'.$row_recuperar_unidades['DESCRIP_ENTITY'].'")'; 
+							 }else{
+						$cadenaMailMaster = $cadenaMailMaster.",('".$id_mail."','".$id_master.'","'.$row_recuperar_unidades['COD_ALERT_ENTITY'].'","'.$row_recuperar_unidades['COD_ENTITY'].'","'.$row_recuperar_unidades['DESCRIP_ENTITY'].'")'; 	 
+							 }
+						  }
+						//$cadenaMailMaster = $id_mail.','.$id_master;
+					  }
 					 
-					 echo "todos guardados";
-				 
+					        $sql_mail_master = "INSERT INTO ALERT_XP_EMAIL_MASTER
+												(COD_ALERT_XP_EMAIL,COD_ALERT_MASTER,COD_ALERT_ENTITY, COD_ENTITY, DESCRIP_ENTITY)
+												 VALUES ".$cadenaMailMaster;
+							$qry_mail_master = $db3->sqlQuery($sql_mail_master);
+							
+							 if($qry_mail_master){
+							  	 echo "todos guardados";
+							 }else{
+								 echo "error en qry_mail_master";
+							 }   
+
 				 }else{
 					  echo "error en qry_detail_variables";
 				 }
-				 
-				 
 				
 				
 				
 				/********************************************************/
-								
-				 }else{
-					 echo "error en qry_mail_master";
-				 }
-
 		 }else{
 					 echo "error en qry_mail";
 		 }
