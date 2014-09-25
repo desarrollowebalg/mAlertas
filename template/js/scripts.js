@@ -222,14 +222,61 @@ var resulatod2 = '';
     resulatod2 = resulatod2+'","'+  $("#parte4").val();
 	  
 	//alert(resultado);
-	$("#txtExpresionAlertas").html(resultado) ;  
-	$("#insertExpresion").val(resulatod2);
-	  $("#insertUSUARIO").val($("#parte7").val());
+	   $("#txtExpresionAlertas").html(resultado) ;  
+	   $("#insertExpresion").val(resulatod2);
+	   $("#insertUSUARIO").val($("#parte7").val());
 	   $("#insertNOMBRE").val($("#parte8").val());
-	 $("#dialogo_generar_expresiones").dialog( "close" );
+	   $("#dialogo_generar_expresiones").dialog( "close" );
 }
 
-/*********************************/
+//************************** funcion que valida antes de inserts
+function validarTodo(){
+ var valorRegreso = 1;
+ var mensajez = ''; 
+ 
+  if($("#txtNombreAlerta").val()==='' ){
+	  mensajez = 'No se ha definido nombre de alerta, verifique!!';
+	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
+      $("#divMenssajesAlertas").dialog("open");
+	   return false;
+  }
+ 
+  if($("#txtCorreoElectronico").find('div').length===1){
+	   mensajez = 'No se ha definido correo(s) electronico(s), verifique!!';
+	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
+      $("#divMenssajesAlertas").dialog("open");
+	   return false;
+  }
+//  console.log($("#txtCorreoElectronico").find('div').length);
+
+
+  if( $('#txtExpresionAlertas').is(':empty')){
+	   mensajez = 'No se ha definido una Expresión, verifique!!';
+	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
+      $("#divMenssajesAlertas").dialog("open");
+	   return false;
+  }
+
+  if(!$("#chkLunes").is(':checked') && !$("#chkMartes").is(':checked') && !$("#chkMiercoles").is(':checked') && !$("#chkJueves").is(':checked') && !$("#chkViernes").is(':checked') && !$("#chkSabado").is(':checked') && !$("#chkDomingo").is(':checked')){
+ 	   mensajez = 'No se ha definido un(os) día(s) , verifique!!';
+	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
+      $("#divMenssajesAlertas").dialog("open");
+	   return false;
+  }
+  
+   if( $('#txtUnidadesAsignadas').is(':empty')){
+	   mensajez = 'No se ha definido unidad(es), verifique!!';
+	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
+      $("#divMenssajesAlertas").dialog("open");
+	   return false;
+  }
+   
+   crearInsert();
+}
+
+
+
+/************************** funcion que crea los inserts *******/
 function crearInsert(){
 	//alert('g');
 	var insert = 's';
@@ -351,10 +398,28 @@ function crearInsert(){
 		   },
 		  type: "POST",
           success: function(data) {
-            var result = data; 
+            var result = data.split(','); 
 			$("#agregarAlerta").dialog( "close" );
-       		alert('Alerta guardada con exito'); 
-			console.log(result);
+			  if(result[0]==='1'){
+				  var mensaje_x = result[1];
+			  }else{
+				    var mensaje_x = result[1];
+			  }
+			  
+			  var current_index = $("#tabsAlertas").tabs("option","selected");
+				if(current_index==0){
+					filtro="vigentes";
+				}else if(current_index==1){
+					filtro="activas";
+				}else{
+					filtro="inactivas";
+				}
+				cargarAlertas(filtro);
+			  
+			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensaje_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open");
+       		//alert('Alerta guardada con exito'); 
+			//console.log(result);
 		  }
       });
 

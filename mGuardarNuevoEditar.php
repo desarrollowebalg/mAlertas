@@ -132,24 +132,27 @@
 							$qry_mail_master = $db3->sqlQuery($sql_mail_master);
 							
 							 if($qry_mail_master){
-							  	 echo "todos guardados";
+							  	 echo "1,Alerta Generada con Exito";
 							 }else{
-								 echo "error en qry_mail_master";
+								 echo "2,Error al generar la alerta (error en qry_mail_master)";
 							 }   
 
 				 }else{
-					  echo "error en qry_detail_variables";
+					   echo "3,Error al generar la alerta (error en qry_detail_variables)";
 				 }
 				
 				
 				
 				/********************************************************/
 		 }else{
-					 echo "error en qry_mail";
+					 echo "4,Error al generar la alerta (error en qry_mai)";
+					
 		 }
 					
 	}else{
-					 echo "error en qry_master";
+
+					 echo "5,Error al generar la alerta (error en qry_master)";
+					 
  }
 
 ?>
