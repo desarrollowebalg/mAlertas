@@ -1,0 +1,83 @@
+<div style="border:0px solid #FF0000;font-size:12px;">
+	<div style="border-bottom:1px solid #CCC; height:60px;overflow:hidden;">
+		<div style="font-size:16px;heigh:15px;padding:5px;float:left;">
+			<div style="border:0px solid blue;margin:5px 5px 5px 5px;">
+				{NOMBREALERTA}
+			</div>
+		</div>
+		<div style="border:1px solid #CCC;background:#F0F0F0;width:120px;height:50px;float:right;">
+			<div style="font-weight:bold;border:0px solid #FF0000;width:55px;margin:3px auto 3px auto;">Alerta #:</div>
+			<div style="font-size:24px;text-align:center;margin:3px 2px 5px 5px;border:0px solid blue;">{NOALERTA}</div>
+		</div>
+	</div>
+	<div style="margin:10px 5px 5px 5px;float:right;border:0px solid #FF0000;">
+		Creada el:&nbsp;<strong>{FECHACREACION}</strong>
+	</div>
+	<div style="clear:both;"></div>
+	<div style="margin:0px 5px 5px 5px;float:right;border:0px solid #FF0000;">
+		por: <strong>{USUARIOCREO}</strong>
+	</div>
+	<p>&nbsp;</p>
+	<fieldset class="fieldset"><legend>Detalle de la Alerta</legend>
+		<table border="0" width="500">
+			<tr>
+				<td colspan="5" class="datosTablaTitulo">Descripción</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="datosTabla">{DESCRIPCION}</td>
+			</tr>
+			<tr>
+				<td width="150" class="datosTablaTitulo">Activa:</td>
+				<td width="100" colspan="4" class="datosTabla">{ACTIVA}</td>
+			</tr>
+			<tr>
+				<td width="150" class="datosTablaTitulo">Vigente:</td>
+				<td width="100" colspan="4" class="datosTabla">{VIGENTE}</td>
+			</tr>
+			<tr>
+				<td width="150" class="datosTablaTitulo">Aplica para:</td>
+				<td width="100" colspan="4" class="datosTabla">{TIPOEXPRESION}</td>
+			</tr>
+		</table>
+	</fieldset><br>
+	<fieldset class="fieldset"><legend>Unidades asociadas</legend>
+		<table border="0" width="500">
+			<tr>
+				<td width="100" class="datosTablaTitulo">Unidad:</td>
+			</tr>
+			<!-- BEGIN listadoUnidadesDetalle -->
+			<tr>
+				<td class="datosTabla">{listadoUnidadesDetalle.UNIDAD}</td>
+			</tr>
+			<!-- END listadoUnidadesDetalle -->
+		</table>
+	</fieldset><br>
+	<fieldset class="fieldset"><legend>Condiciones de Horario</legend>
+		<table border="0" width="500">
+			<tr>
+				<td width="100" class="datosTablaTitulo" colspan="7">Aplica para los días:</td>
+			</tr>
+			<tr>
+				<td class="datosTabla" style="text-align:center;">Lunes</td>
+				<td class="datosTabla" style="text-align:center;">Martes</td>
+				<td class="datosTabla" style="text-align:center;">Miercoles</td>
+				<td class="datosTabla" style="text-align:center;">Jueves</td>
+				<td class="datosTabla" style="text-align:center;">Viernes</td>
+				<td class="datosTabla" style="text-align:center;">Sábado</td>
+				<td class="datosTabla" style="text-align:center;">Domingo</td>
+			</tr>
+			<tr>
+				<td class="datosTabla" style="text-align:center;">{LUNES}</td>
+				<td class="datosTabla" style="text-align:center;">{MARTES}</td>
+				<td class="datosTabla" style="text-align:center;">{MIERCOLES}</td>
+				<td class="datosTabla" style="text-align:center;">{JUEVES}</td>
+				<td class="datosTabla" style="text-align:center;">{VIERNES}</td>
+				<td class="datosTabla" style="text-align:center;">{SABADO}</td>
+				<td class="datosTabla" style="text-align:center;">{DOMINGO}</td>
+			</tr>
+			<tr>
+				<td class="datosTabla" colspan="7">Programada entre las {HORAINICIO} hrs y las {HORAFIN} hrs</td>
+			</tr>
+		</table>
+	</fieldset><br>
+</div>

@@ -372,5 +372,18 @@ function quitarUnidadesDiv(idUsuarioAQuitar){
 	idDivQuitar="idUnidadDiv_"+idUsuarioAQuitar;
 	$("#"+idDivQuitar).remove();
 }
+/*
+*Funcion para mostrar el detalle de la Alerta
+*/
+function detalleAlerta(idAlerta,e){
+	idAlerta=idAlerta.split("#");
+	//alert("Detalle "+idAlerta[1]);
+	$("#detalleAlerta").dialog("open");
+	idClienteAlerta=$("#idClienteAlertas").val();
+    idUsuarioAlerta=$("#idUsuarioAlertas").val();
+	parametros="action=detalleAlerta&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&idAlerta="+idAlerta[1];
+	//ajaxTareas(accion,c,parametros,divCarga,divResultado,tipoPeticion)
+	ajaxAlertas("detalleAlerta","controlador",parametros,"detalleAlerta","detalleAlerta","GET");
+}
 
 	

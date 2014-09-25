@@ -102,6 +102,18 @@ $(document).ready(function(){
 		}
 	});
 
+	//dialog detalle tarea
+	$("#detalleAlerta").dialog({
+		autoOpen:false,
+		height: 500,
+		width: 600,
+		buttons:{
+			Cerrar:function(){
+				$("#detalleAlerta").dialog("close");
+			}
+		}
+	});
+
     //se redimensionan los tabs
     redimensionarAlertas();
     //peticion para listar las tareas
@@ -146,6 +158,9 @@ function controladorAcciones(accion,data,divResultado){
 		break;
 		case "cargarAlertas":
 			$("#"+divResultado).html(data);
+		break;
+		case "detalleAlerta":
+			$("#detalleAlerta").html(data);
 		break;
 	}
 }

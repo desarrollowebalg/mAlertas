@@ -45,11 +45,8 @@
     <div id="listadoUsuariosEmail" style="overflow:auto;"></div>
 </div>
 <!--Div detalle tarea-->
-<div id="detalleTarea" title="Detalle tarea..."></div>
+<div id="detalleAlerta" title="Detalle alerta..."></div>
 <!--Fin div detalle tarea-->
-<!--Div Editar Tarea-->
-<div id="editarTarea" title="Editar tarea..."></div>
-<!--Fin Div Editar Tarea-->
 <!--Div eliminar tareas-->
 <div id="eliminarTareas" title="Eliminar tareas..."></div>
 <!--Fin div eliminar tareas-->
