@@ -35,6 +35,10 @@
 <div id="agregarUnidades" title="Agregar Unidades a la Alerta">
     Buscar:<input type="text" id="txtBuscarUnidadCliente" class="busquedaVentanaEmergente" onkeyup="buscarUnidadesCliente()">
     <hr style="background:#CCC;">
+    <div class="estiloSeleccionarTodas ui-corner-all">
+        <input type="checkbox" id="seleccionarTodasUnidades" value="todas" onclick="if(this.checked == true){seleccionarTodas(1)} else{seleccionarTodas(0)}" />
+        <label for="seleccionarTodasUnidades">Seleccionar todas...</label>
+    </div>
     <div id="listadoUnidadesAlertas" style="overflow-y:auto;"></div>
 </div>
 <!--Fin div agregar Usuarios-->
