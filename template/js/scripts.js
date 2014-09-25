@@ -453,10 +453,11 @@ function verificarMail(idCaja,evento){
 		}else{
 			//si el mail es valido se elimina la caja de texto y se agrega un div con la opcion de eliminar el correo
 			$("#"+idCaja).remove();
+			mailOriginal=mailAValidar;
 			if(mailAValidar.length > 23){
 				mailAValidar=mailAValidar.substring(0,21)+"...";
 			}
-			strDiv="<div id='"+idCaja+"' class='destinatarios ui-corner-all' title='"+mailAValidar+"'>";
+			strDiv="<div id='"+idCaja+"' class='destinatarios ui-corner-all' title='"+mailOriginal+"'>";
             strDiv+="<div class='destinatariosMail'>"+mailAValidar+"</div>";
             strDiv+="<div class='eliminarDestinatario'>";
             strDiv+="<a href='#' onclick='eliminaCorreo(\""+idCaja+"\")'><span class='ui-icon ui-icon-circle-close'></span></a>";
