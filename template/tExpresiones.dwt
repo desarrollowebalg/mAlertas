@@ -6,6 +6,7 @@
 //			$("#parte3").val("pdi_");
 			$("#parte3").val("pdi"+c2.substring(3));
 			$("#parte4").val("P");
+			$("#parte4espejo").val("P");
 			$("#parte6").val("PDI");
 		})
 		
@@ -14,6 +15,7 @@
 			var c3 = $("#parte3").val();
 			$("#parte3").val("geo"+c3.substring(3));
 			$("#parte4").val("G");
+			$("#parte4espejo").val("G");
 			$("#parte6").val("GeoCerca");
 		})
 		
@@ -22,6 +24,7 @@
 			var c4 = $("#parte3").val();
 			$("#parte3").val("rsi"+c4.substring(3));
 			$("#parte4").val("R");
+			$("#parte4espejo").val("R");
 			$("#parte6").val("RSI");
 //			$("#parte3").val("rsi_");
 		})
@@ -54,7 +57,16 @@
 	/*	$("#TiposPDIGCRSI").click(function(){
 			cambiaPDIcod($("#TiposPDIGCRSI").val());
 		})*/
+		$("#chk_sino").click(function(){
+        if($("#chk_sino").is(':checked')){
+				 if($("#velocidadEvento").is(':checked') || $("#eEvento").is(':checked') || $("#prioridadEvento").is(':checked') ) { 
+					 $("#parte4").val($("#parte4espejo").val());
+				 }
+		}else{
+			$("#parte4").val('U');
+		}
 		
+		})
 		
 		
 		 $('#txtVelocidad').numeric();
@@ -162,6 +174,8 @@
 <input type="hidden" id="parte2" value="" />
 <input type="hidden" id="parte3" value="pdi_in=1" />
 <input type="hidden" id="parte4" value="P" />
+<input type="hidden" id="parte4espejo" value="P" />
+
 <input type="hidden" id="parte5" value="Entrada" />
 <input type="hidden" id="parte6" value="PDI" />
 <input type="hidden" id="parte7" value="{IDUSUARIO}" />

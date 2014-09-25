@@ -61,8 +61,11 @@ function liberarCerrar(iD,valor){
 		$("#banSino").val( parseInt($("#banSino").val())-1);  
 	}
 	$("#"+iD).prop('disabled', b); 
-	$("#parte4").val("U");
-	
+	  if(!$("#velocidadEvento").is(':checked') && !$("#eEvento").is(':checked') && !$("#prioridadEvento").is(':checked') ) { 
+	       $("#parte4").val($("#parte4espejo").val());
+	  }else{
+		   $("#parte4").val("U");
+	  }
 }
 
 //*************************************** funcion para validar expresiones
@@ -221,8 +224,8 @@ var resulatod2 = '';
 	//alert(resultado);
 	$("#txtExpresionAlertas").html(resultado) ;  
 	$("#insertExpresion").val(resulatod2);
-	$("#insertUSUARIO").val($("#parte7").val());
-	 $("#insertNOMBRE").val($("#parte8").val());
+	  $("#insertUSUARIO").val($("#parte7").val());
+	   $("#insertNOMBRE").val($("#parte8").val());
 	 $("#dialogo_generar_expresiones").dialog( "close" );
 }
 
@@ -351,6 +354,7 @@ function crearInsert(){
             var result = data; 
 			$("#agregarAlerta").dialog( "close" );
        		alert('Alerta guardada con exito'); 
+			console.log(result);
 		  }
       });
 

@@ -94,8 +94,15 @@
 					
 					}
 					
-					  $insert = $insert.','.$idObjectMap[0];
-					  $values = $values.',"'.$idObjectMap[1].'"';
+					  if($master[3]===''){
+						 $idObjectMap2  = 'ID_OBJECT_MAP';
+						 $idObjectMapVal = '0'; 
+					  }else{
+						 $idObjectMap2  = $idObjectMap[0];
+						 $idObjectMapVal = $idObjectMap[1];   
+					  }
+					  $insert = $insert.','.$idObjectMap2;
+					  $values = $values.',"'.$idObjectMapVal.'"';
 					  $values2 ='';
 				     for($v2=0;$v2<count($unidadesVariables);$v2++){
 						 if($values2 ===''){
