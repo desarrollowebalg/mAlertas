@@ -636,3 +636,29 @@ function seleccionarTodosCorreos(opcion){
 	 	}
 	}
 }
+/*
+*Funcion para eliminar el detail de la alerta
+*/
+function eliminarElementos(){
+	var current_index = $("#tabsAlertas").tabs("option","selected");
+	if(current_index==0){
+		filtro="vigentes";
+	}else if(current_index==1){
+		filtro="activas";
+	}else{
+		filtro="inactivas";
+	}
+	/*
+	$("input:checkbox:checked").each(function(){
+		//cada elemento seleccionado
+		//alert($(this).val());
+		cadE=$(this).attr("id");
+		alert(cadE);
+		if(cadE != undefined){
+			cadE=cadE.split("_");
+			alert(cadE[2]);
+		}
+		
+	});
+	*/
+}
