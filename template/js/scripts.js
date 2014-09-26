@@ -74,7 +74,9 @@ function validarExpersiones(){
 	
 if($("#chk_sino").is(':checked')) { 
      if($("#TiposPDIGCRSI").val() ==='-1'){
-	   alert('Elija una opción');  
+	     var msj_x = 'Debe elegir '+$("#parte6").val()+', Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open"); 
 	   return false;
      }else{
 		 //alert('crear expresion sin 3 checks'); 
@@ -85,7 +87,9 @@ if($("#chk_sino").is(':checked')) {
 		    if($("#velocidadEvento").is(':checked')) { 
               $("#txtVelocidad").prop('disabled', false); 
 				if($("#txtVelocidad").val()===''){     
-				   alert('Campo velocidad vacio, Verifique!!'); 
+				  var msj_x = 'Campo velocidad vacio, Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open"); 
 					return false; 
 				}
 		   } else{
@@ -97,7 +101,9 @@ if($("#chk_sino").is(':checked')) {
 			  
 			   $("#selEventos").prop('disabled', false);
 				if($("#selEventos").val()==='-1'){     
-				   alert('Elija un evento');  
+				   var msj_x = 'Debe espesificar evento, Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open");  
 					return false;
 				}
 		   } else{
@@ -109,7 +115,9 @@ if($("#chk_sino").is(':checked')) {
 						
 				 $("#selPriori").prop('disabled', false);
 				if($("#selPriori").val()==='-1'){     
-				   alert('Elija una prioridad'); 
+				    var msj_x = 'Debe espesificar prioridad, Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open");
 					return false; 
 				}
 		   } else{
@@ -122,14 +130,21 @@ if($("#chk_sino").is(':checked')) {
    
 }else{
    	
-	if($("#banSino").val() === '0') { 
-	    alert('Debe de especificar las condiciones basicas de la alerta y/o agregar complementos');
+	if($("#banSino").val() === '0') {
+		 
+//	    alert('Debe de especificar las condiciones basicas de la alerta y/o agregar complementos');
+				var msj_x = 'Debe de especificar las condiciones basicas de la alerta y/o incluir referencias';  
+  	            $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open"); 
 		return false;
 	}else{
 		    if($("#velocidadEvento").is(':checked')) { 
               $("#txtVelocidad").prop('disabled', false); 
 				if($("#txtVelocidad").val()===''){     
-				   alert('Campo velocidad vacio, Verifique!!'); 
+				  // alert('Campo velocidad vacio, Verifique!!'); 
+				var msj_x = 'Campo velocidad vacio, Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open"); 
 					return false; 
 				}
 		   } else{
@@ -141,7 +156,10 @@ if($("#chk_sino").is(':checked')) {
 			  
 			   $("#selEventos").prop('disabled', false);
 				if($("#selEventos").val()==='-1'){     
-				   alert('Elija un evento');  
+				 //  alert('Elija un evento');  
+				 var msj_x = 'Debe espesificar evento, Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open");   
 					return false;
 				}
 		   } else{
@@ -153,7 +171,10 @@ if($("#chk_sino").is(':checked')) {
 						
 				 $("#selPriori").prop('disabled', false);
 				if($("#selPriori").val()==='-1'){     
-				   alert('Elija una prioridad'); 
+				//   alert('Elija una prioridad');
+				  var msj_x = 'Debe espesificar prioridad, Verifique!!';  
+  			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
+				$("#divMenssajesAlertas").dialog("open");      
 					return false; 
 				}
 		   } else{

@@ -18,7 +18,7 @@ $(document).ready(function(){
 
    	$("#agregarAlerta").dialog({
 		autoOpen: false,
-		height: 500,
+		height: 550,
 		width: 600,
 		modal: true,
 		buttons: {
@@ -64,7 +64,7 @@ $(document).ready(function(){
     $("#dialogo_generar_expresiones").dialog({
 		autoOpen: false,
 		height: 200,
-		width: 600,
+		width: 650,
 		modal: true,
 		buttons: {
 			Cancelar: function() {

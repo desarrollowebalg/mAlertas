@@ -1,6 +1,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
-  		$("#rd2").click(function(){
+  		
+		
+		$("#rd2").click(function(){
 			tipoPDIgcRSI($("#rd2").val());
 			var c2 = $("#parte3").val();
 //			$("#parte3").val("pdi_");
@@ -25,7 +27,7 @@
 			$("#parte3").val("rsi"+c4.substring(3));
 			$("#parte4").val("R");
 			$("#parte4espejo").val("R");
-			$("#parte6").val("RSI");
+			$("#parte6").val("Ruta");
 //			$("#parte3").val("rsi_");
 		})
 		
@@ -40,7 +42,7 @@
 		
 		$("#eSalida").click(function(){
 			
-				var c6 = $("#parte3").val();
+			var c6 = $("#parte3").val();
 			$("#parte3").val(c6.substring(0,4)+$("#eSalida").val());
 	       $("#parte5").val("Salida");
 			//cambiaPDIinONout($("#eSalida").val());
@@ -58,13 +60,22 @@
 			cambiaPDIcod($("#TiposPDIGCRSI").val());
 		})*/
 		$("#chk_sino").click(function(){
-        if($("#chk_sino").is(':checked')){
-				 if($("#velocidadEvento").is(':checked') || $("#eEvento").is(':checked') || $("#prioridadEvento").is(':checked') ) { 
-					 $("#parte4").val($("#parte4espejo").val());
-				 }
-		}else{
-			$("#parte4").val('U');
-		}
+			
+			if($("#chk_sino").is(':checked')){
+					 if($("#velocidadEvento").is(':checked') || $("#eEvento").is(':checked') || $("#prioridadEvento").is(':checked') ) { 
+						 $("#parte4").val($("#parte4espejo").val());
+					 }
+					 $("#agreComple").css('display','');
+					  $("#agreComple2").css('display','none');
+	 				 $("#entradaSalidaPer").css('display','');	
+					 $("#entradaSalidaPer2").css('display','none');	 
+			}else{
+				$("#parte4").val('U');
+			 	$("#agreComple").css('display','none');
+	 	 		$("#entradaSalidaPer").css('display','none');
+				$("#agreComple2").css('display','');
+				$("#entradaSalidaPer2").css('display','');
+			}
 		
 		})
 		
@@ -73,16 +84,21 @@
 		 $("#txtVelocidad").prop('disabled', true);
 		 $("#selEventos").prop('disabled', true);
   	     $("#selPriori").prop('disabled', true);
+		 $("#agreComple").css('display','none');
+		 $("#agreComple2").css('display','');
+		 
+	 	 $("#entradaSalidaPer").css('display','none');
+		 $("#entradaSalidaPer2").css('display','');
     });
 </script>
 
 <table border="0" width="100%">
   <tr>
-    <td>
+    <td width="60%">
        <fieldset class="fieldset"><legend>Condiciones Basicas de la Alerta</legend>
           <table border="1" width="100%" style="border-collapse:collapse; border:#CCCCCC;">
             <tr>
-              <td width="150"> <input type="checkbox" id="velocidadEvento" onClick="liberarCerrar('txtVelocidad',this.checked);"/> Velocidad >=</td> 
+              <td width="170"> <input type="checkbox" id="velocidadEvento" onClick="liberarCerrar('txtVelocidad',this.checked);"/> Velocidad >=</td> 
               <td> <input type="text" id="txtVelocidad" size="10" /></td> 
             </tr>
             
@@ -98,7 +114,7 @@
               </td> 
             </tr>            
             <tr>
-             <td> <input type="checkbox" id="prioridadEvento" onClick="liberarCerrar('selPriori',this.checked);"/> Prioridad del Evento</td> 
+             <td> <input type="checkbox" id="prioridadEvento" onClick="liberarCerrar('selPriori',this.checked);"/> Solo eventos con prioridad</td> 
               <td>
  				<!--<select style=" width:150px;" id="selPriori">
                    BEGIN prioridades 
@@ -117,13 +133,10 @@
           </table>
        </fieldset>
     </td>
-    <td>
+    <td valign="top" width="22%"> 
+     <input type="checkbox"  id="chk_sino" />Incluir Referencias
+    <div id="agreComple" style="border: #CCC solid 0px; position:relative; alignment-baseline:baseline;">
        <table>
-         <tr>
-           <td>
-             <input type="checkbox"  id="chk_sino" />Agregar Complemento
-           </td>
-         </tr>
          <tr>
            <td>
              <input type="radio" name="r1" id="rd2" value="G" checked />Punto de interes
@@ -140,15 +153,25 @@
            </td>
          </tr>
        </table>
+      </div> 
+     <div id="agreComple2"  style=" height:100%; background: #EEE; alignment-adjust:central;">
+                
+                <br>
+                <br>
+                <p align="center">Referencias</p>
+                <br>
+
+      </div>
     </td>
     
     <td>
-       <table>
+     <div id="entradaSalidaPer" style="border:#333333 solid 0px;">
+       <table border="0">
          <tr>
            <td>
            <div id="selec_tipo_pgr" style="width:100%; border:#000000 solid 0px;">
 			 <select style=" width:100px;" id="TiposPDIGCRSI" onChange="cambiaPDIcod(this.value);">
-              <option value="-1">Elegir opci&oacute;n</option>
+              <option value="-1">Elegir PDI</option>
  				   <!-- BEGIN tipos_x -->
                         <option value="{tipos_x.ID_OBJECT_MAP}">{tipos_x.DESCRIPCION}</option>
                    <!-- END tipos_x -->               </select>	 
@@ -164,6 +187,16 @@
            </td>
          </tr>
        </table>
+       </div>
+       
+         <div id="entradaSalidaPer2"  style=" height:100%; background: #EEE ; alignment-adjust:central;">
+                
+                <br>
+                <br>
+                <p align="center">Acciones</p>
+                <br>
+				<br>
+      </div>
     </td>
   </tr>
 </table>

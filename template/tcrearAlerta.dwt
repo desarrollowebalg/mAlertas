@@ -102,7 +102,18 @@
                                     </td>
                                    <td> HORA DE FIN</td>
                                 </tr>
-                                
+                                <tr>
+                                 <td>
+                                 <br>
+                                     <fieldset class="fieldset"><legend>condiciones de alerta</legend>
+                                       <select>
+                                         <option>
+                                           hi
+                                         </option>
+                                       </select>
+                                      </fieldset>
+                                 </td>
+                                </tr>
                             </table>
                         </fieldset>
                     </td>

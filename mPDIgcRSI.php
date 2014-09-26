@@ -19,13 +19,28 @@
 	$select = '';
 	
 	//******************************* tipos
+	$opcion = '';
+	
+	if($_POST['tip_g']==='G'){
+	  $opcion = 'Elegir PDI';	
+	}
+
+	if($_POST['tip_g']==='C'){
+	  $opcion = 'Elegir Geocerca';	
+	}
+
+	if($_POST['tip_g']==='R'){
+	  $opcion = 'Elegir Ruta';	
+	}
+
+
 	
 	$sql_tipo = "SELECT ID_OBJECT_MAP,DESCRIPCION FROM 	ADM_GEOREFERENCIAS WHERE TIPO = '".$_POST['tip_g']."' AND ID_CLIENTE =".$idCliente;
 	$qry_tipo = $db->sqlQuery($sql_tipo);
 	$cnt = $db->sqlEnumRows($qry_tipo);
 	if($cnt > 0){
 		$select = '<select style=" width:100px;" id="TiposPDIGCRSI" onChange="cambiaPDIcod(this.value);">';
-		  $select .= '<option value="-1">Elegir opci&oacute;n</option>';
+		  $select .= '<option value="-1">'.$opcion.'</option>';
 	    while($row_tipo = $db->sqlFetchArray($qry_tipo)){	
 		  $select .= '<option value="'.$row_tipo['ID_OBJECT_MAP'].'">'.$row_tipo['DESCRIPCION'].'</option>';
 	   }
