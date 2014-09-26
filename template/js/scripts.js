@@ -623,8 +623,16 @@ function seleccionarTodas(opcion){
 			}	
 	 	}
 	}
-
-
-
-
+}
+function seleccionarTodosCorreos(opcion){
+	var elementos="";
+	for (var i=0;i<document.frmListadoEmailsAlertas.elements.length;i++){
+	 	if (document.frmListadoEmailsAlertas.elements[i].type=="checkbox"){
+	 		if(opcion==1){//se seleccionan todas
+				document.frmListadoEmailsAlertas.elements[i].checked=1;
+			}else{//se quita la seleccion
+				document.frmListadoEmailsAlertas.elements[i].checked=0;
+			}	
+	 	}
+	}
 }

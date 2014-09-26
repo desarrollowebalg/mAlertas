@@ -46,6 +46,10 @@
 <div id="detalleAgregarCorreos" title="Agregar correos...">
     <!--Buscar:<input type="text" id="txtBuscarCorreosCliente" class="busquedaVentanaEmergente" onkeyup="buscarCorreosClientes()">-->
     <!--<hr style="background:#CCC;">-->
+    <div class="estiloSeleccionarTodas ui-corner-all">
+        <input type="checkbox" id="seleccionarTodasCorreos" value="todas" onclick="if(this.checked == true){seleccionarTodosCorreos(1)} else{seleccionarTodosCorreos(0)}" />
+        <label for="seleccionarTodasCorreos">Seleccionar todos...</label>
+    </div>
     <div id="listadoUsuariosEmail" style="overflow:auto;"></div>
 </div>
 <!--Div detalle tarea-->

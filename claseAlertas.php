@@ -164,16 +164,27 @@ class alertas{
 		$objDb ->sqlQuery("SET NAMES 'utf8'");
 		
 		if($filtro=="S/N"){
-			$sqlE="SELECT CORREO_ELECTRONICO FROM ALERT_XP_EMAIL WHERE COD_CLIENT='".$idCliente."'";
-		}else{
-
+			//$sqlE="SELECT CORREO_ELECTRONICO FROM ALERT_XP_EMAIL WHERE COD_CLIENT='".$idCliente."'";
+			$sqlE="SELECT CORREO_ELECTRONICO FROM ALERT_XP_EMAIL WHERE COD_CLIENT='".$idCliente."' GROUP BY CORREO_ELECTRONICO";
 		}
 		$resE=$objDb->sqlQuery($sqlE);
 		if($objDb->sqlEnumRows($resE)==0){
 			$mensaje="S/N";
 		}else{
-			$rowE=$objDb->sqlFetchArray($resE);
-			$mensaje=$rowE["CORREO_ELECTRONICO"];
+			$mails=array();
+			while($rowE=$objDb->sqlFetchArray($resE)){
+				$correos=explode(";",$rowE["CORREO_ELECTRONICO"]);
+				foreach ($correos as $valor) {
+					if(count($mails)==0){
+						array_push($mails, $valor);
+					}else{
+						if(!in_array($valor, $mails)){//se busca si existe el mail en el array
+							array_push($mails, $valor);
+						}
+					}
+				}
+			}
+			$mensaje=implode(";",$mails);
 		}
 		return $mensaje;
 	}
