@@ -74,7 +74,7 @@
 				/********************************************************/
 								  
 				    $con1 = '';
-					for($v=0;$v<count($variables2);$v++){
+					/*for($v=0;$v<count($variables2);$v++){
 	  			        $con1 = explode("=", stripslashes(str_replace('>','',str_replace('"','',$variables2[$v]))));
 					    if($insert === ''){
 							$insert = $con1[0];
@@ -84,7 +84,9 @@
 							$values = $values.',"'.trim($con1[1]).'"';
 						}
 					
-					}
+					}*/
+					
+					
 					
 					  if($master[3]===''){
 						 $idObjectMap2  = 'ID_OBJECT_MAP';
@@ -94,8 +96,8 @@
 						 $idObjectMapVal = $idObjectMap[1];   
 					  }
 					  
-					  $insert = $insert.','.$idObjectMap2;
-					  $values = $values.',"'.$idObjectMapVal.'"';
+					  $insert = $idObjectMap2;
+					  $values = '"'.$idObjectMapVal.'"';
 					  $values2 ='';
 				     for($v2=0;$v2<count($unidadesVariables);$v2++){
 						 if($values2 ===''){
@@ -107,7 +109,7 @@
 					 }
 					 
 					 
-					  $sql_varaibles_detalle = "INSERT INTO ALERT_XP_DETAIL_VARIABLES(".$insert.",COD_ENTITY,DESCRIP_ENTITY,COD_ALERT_MASTER) VALUES ".$values2."";
+				 $sql_varaibles_detalle = "INSERT INTO ALERT_XP_DETAIL_VARIABLES(".$insert.",COD_ENTITY,DESCRIP_ENTITY,COD_ALERT_MASTER) VALUES ".$values2."";
 					 
 				 $qry_detail_variables = $db3->sqlQuery($sql_varaibles_detalle);					 
 				
