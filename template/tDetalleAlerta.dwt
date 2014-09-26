@@ -52,6 +52,18 @@
 			<!-- END listadoUnidadesDetalle -->
 		</table>
 	</fieldset><br>
+	<fieldset class="fieldset"><legend>Correos electrónicos asociados</legend>
+		<table border="0" width="500">
+			<tr>
+				<td width="100" class="datosTablaTitulo">Email(s):</td>
+			</tr>
+			<!-- BEGIN listadoCorreos -->
+			<tr>
+				<td class="datosTabla">{listadoCorreos.EMAIL}</td>
+			</tr>
+			<!-- END listadoCorreos -->
+		</table>
+	</fieldset><br>
 	<fieldset class="fieldset"><legend>Condiciones de Horario</legend>
 		<table border="0" width="500">
 			<tr>

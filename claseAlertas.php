@@ -104,7 +104,8 @@ class alertas{
 			$sqlADD="SELECT * FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
 			$resADD=$objBDA->sqlQuery($sqlADD);
 			while($rowADD=$objBDA->sqlFetchArray($resADD)){
-				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$rowADD["DESCRIP_ENTITY"];
+				$desUnidad=$this->extraerNombreEntidad($rowADD["COD_ENTITY"]);
+				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$desUnidad;
 			}
 			//se extrae la informacion de los correos electronicos asociados a la alerta
 			$sqlAE="SELECT CORREO_ELECTRONICO 
@@ -137,7 +138,6 @@ class alertas{
 		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
             WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' ORDER BY NOMBRE,COD_ENTITY";
 		}
-		//echo $sqlG;
 		$resG=$objMovi->sqlQuery($sqlG);
 		if($objMovi->sqlEnumRows($resG)==0){
 			$mensaje="S/N";
@@ -373,6 +373,26 @@ class alertas{
 		// render grid
 		$out = $g->render("alertas".$filtro);
 		echo $out;
+	}
+	/**
+	*@method 		extraerNombreEntity
+	*@description 	Funcion para extraer el nombre del CODENTITY
+	*@paramas 		$codEntity
+	*
+	*/
+	public function extraerNombreEntidad($codEntity){
+		$mensaje="";
+		$objMovi=$this->iniciarConexionDb();
+		$objMovi->sqlQuery("SET NAMES 'utf8'");
+		$sqlDU="SELECT DESCRIPTION FROM ALG_BD_CORPORATE_MOVI.ADM_UNIDADES WHERE COD_ENTITY='".$codEntity."'";
+		$resDU=$objMovi->sqlQuery($sqlDU);
+		if($objMovi->sqlEnumRows($resDU)==0){
+			$descripcion="Informacion No Disponible";
+		}else{
+			$rowDU=$objMovi->sqlFetchArray($resDU);
+			$descripcion=$rowDU["DESCRIPTION"];
+		}
+		return $descripcion;
 	}
 	/**
 	*@method 		regresaDatosFecha
