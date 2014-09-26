@@ -93,7 +93,10 @@ class alertas{
 		$mensaje="";
 		$objBDA=$this->iniciarConexionAlertas();
 		$objBDA->sqlQuery("SET NAMES 'utf8'");
-		$sqlAD="SELECT * FROM ALERT_XP_MASTER WHERE COD_ALERT_MASTER='".$idAlerta."' AND COD_CLIENT='".$idCliente."'";
+		$sqlCM="SELECT COD_ALERT_MASTER FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$idAlerta."'";
+		$resCM=$objBDA->sqlQuery($sqlCM);
+		$rowCM=$objBDA->sqlFetchArray($resCM);
+		$sqlAD="SELECT * FROM ALERT_XP_MASTER WHERE COD_ALERT_MASTER='".$rowCM["COD_ALERT_MASTER"]."' AND COD_CLIENT='".$idCliente."'";
 		$resAD=$objBDA->sqlQuery($sqlAD);
 		if($objBDA->sqlEnumRows($resAD)==0){
 			$mensaje="Sin Datos";
@@ -104,7 +107,8 @@ class alertas{
 			$sqlADD="SELECT * FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
 			$resADD=$objBDA->sqlQuery($sqlADD);
 			while($rowADD=$objBDA->sqlFetchArray($resADD)){
-				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$rowADD["DESCRIP_ENTITY"];
+				$desUnidad=$this->extraerNombreEntidad($rowADD["COD_ENTITY"]);
+				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$desUnidad;
 			}
 			//se extrae la informacion de los correos electronicos asociados a la alerta
 			$sqlAE="SELECT CORREO_ELECTRONICO 
@@ -137,7 +141,6 @@ class alertas{
 		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
             WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' ORDER BY NOMBRE,COD_ENTITY";
 		}
-		//echo $sqlG;
 		$resG=$objMovi->sqlQuery($sqlG);
 		if($objMovi->sqlEnumRows($resG)==0){
 			$mensaje="S/N";
@@ -196,15 +199,15 @@ class alertas{
 	*/
 	public function listarAlertas($filtro,$idCliente,$idUsuario){
 		if($filtro=="vigentes"){
-			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS,COD_ALERT_ENTITY
+			$sql="SELECT COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND VIGENTE='S'";
 		}else if($filtro=="activas"){
-			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS,COD_ALERT_ENTITY
+			$sql="SELECT COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='1'";
 		}else if($filtro=="inactivas"){
-			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS,COD_ALERT_ENTITY
+			$sql="SELECT COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='0'";
 		}
@@ -219,8 +222,8 @@ class alertas{
 		
 		$col = array();
 		$col["title"] = "# Alerta"; // caption of column
-		$col["name"] = "COD_ALERT_MASTER"; // grid column name, same as db field or alias from sql
-		$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";
+		$col["name"] = "COD_ALERT_ENTITY"; // grid column name, same as db field or alias from sql
+		//$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";
 		$col["width"] = "10"; // width on grid
 		$col["align"] = "center";
 		$col["sortable"] = true; // this column is not sortable 
@@ -304,23 +307,23 @@ class alertas{
 		$col["sortable"] = false; // this column is not sortable 
 		$col["align"] = "center";
 		//$col["link"] = "http://localhost?id={ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["link"] = "#{COD_ALERT_MASTER}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
+		$col["link"] = "#{COD_ALERT_ENTITY}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
 		$col["linkoptions"] = "title='Ver detalle de la alerta' onclick='detalleAlerta(this.href,this.event)'"; // extra params with <a> tag
 		$cols[] = $col;
 		/*
 		$col = array();
 		$col["title"] = "";
-		$col["name"] = "Editar";
+		$col["name"] = "ELIMINAR";
 		$col["width"] = "7";
 		$col["search"] = false;
 		$col["editable"] = false;
 		$col["sortable"] = false; // this column is not sortable 
 		$col["align"] = "center";
 		//$col["link"] = "http://localhost?id={ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["link"] = "#{ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["linkoptions"] = "title='Editar Registro' onclick='editarTarea(this.href)'"; // extra params with <a> tag
+		$col["link"] = "#{COD_ALERT_ENTITY}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
+		$col["linkoptions"] = "title='Eliminar Registro' onclick='eliminarAlerta(this.href)'"; // extra params with <a> tag
 		$cols[] = $col;
-
+		
 		$col = array();
 		$col["title"] = "";
 		$col["name"] = "Eliminar";
@@ -338,7 +341,7 @@ class alertas{
 		$g = new jqgrid();
 		// parametros de configuracion
 		//$grid["caption"] = "Tareas";
-		$grid["multiselect"] 	= false;
+		$grid["multiselect"] 	= true;
 		$grid["autowidth"] 		= true; // expand grid to screen width
 		$grid["resizable"] 		= true;
 		$grid["altRows"] 		= true;
@@ -373,6 +376,26 @@ class alertas{
 		// render grid
 		$out = $g->render("alertas".$filtro);
 		echo $out;
+	}
+	/**
+	*@method 		extraerNombreEntity
+	*@description 	Funcion para extraer el nombre del CODENTITY
+	*@paramas 		$codEntity
+	*
+	*/
+	public function extraerNombreEntidad($codEntity){
+		$mensaje="";
+		$objMovi=$this->iniciarConexionDb();
+		$objMovi->sqlQuery("SET NAMES 'utf8'");
+		$sqlDU="SELECT DESCRIPTION FROM ALG_BD_CORPORATE_MOVI.ADM_UNIDADES WHERE COD_ENTITY='".$codEntity."'";
+		$resDU=$objMovi->sqlQuery($sqlDU);
+		if($objMovi->sqlEnumRows($resDU)==0){
+			$descripcion="Informacion No Disponible";
+		}else{
+			$rowDU=$objMovi->sqlFetchArray($resDU);
+			$descripcion=$rowDU["DESCRIPTION"];
+		}
+		return $descripcion;
 	}
 	/**
 	*@method 		regresaDatosFecha

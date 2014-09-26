@@ -171,11 +171,11 @@ function controladorAcciones(accion,data,divResultado){
 */
 function cargarAlertas(filtro){
 	if(filtro=="vigentes"){
-		div="tabs-1";
+		div="tabVigentes";
 	}else if(filtro=="activas"){
-		div="tabs-2";
+		div="tabActivas";
 	}else if(filtro=="inactivas"){
-		div="tabs-3";
+		div="tabInactivas";
 	}
 	idCliente=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();

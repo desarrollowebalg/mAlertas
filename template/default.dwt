@@ -18,15 +18,33 @@
     </div>
 
     <div id="tabs-1">
-
+        <div id="herramientasGrid" class="ui-corner-all">
+            <div id="opcEliminar" onclick="eliminarElementos()" class="ui-state-default ui-corner-all" role="button" title="Eliminar elementos seleccionados">                
+                <div style="float:left;margin-top:-2px;"><img src="./public/images/elimina.png" border="0" /></div>
+                <div style="float:left;">&nbsp;Eliminar</div>
+            </div>
+        </div>
+        <div id="tabVigentes"></div>
     </div>
     
     <div id="tabs-2">
-
+        <div id="herramientasGrid" class="ui-corner-all">
+            <div id="opcEliminar" onclick="eliminarElementos()" class="ui-state-default ui-corner-all" role="button" title="Eliminar elementos seleccionados">                
+                <div style="float:left;margin-top:-2px;"><img src="./public/images/elimina.png" border="0" /></div>
+                <div style="float:left;">&nbsp;Eliminar</div>
+            </div>
+        </div>
+        <div id="tabActivas"></div>
     </div>
     
     <div id="tabs-3">
-        
+        <div id="herramientasGrid" class="ui-corner-all">
+            <div id="opcEliminar" onclick="eliminarElementos()" class="ui-state-default ui-corner-all" role="button" title="Eliminar elementos seleccionados">                
+                <div style="float:left;margin-top:-2px;"><img src="./public/images/elimina.png" border="0" /></div>
+                <div style="float:left;">&nbsp;Eliminar</div>
+            </div>
+        </div>
+        <div id="tabInactivas"></div>
     </div>
 </div>
 <!--fin tabs-->
