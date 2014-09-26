@@ -40,19 +40,7 @@
 			</tr>
 		</table>
 	</fieldset><br>
-	<fieldset class="fieldset"><legend>Correos electrónicos asociados</legend>
-		<table border="0" width="500">
-			<tr>
-				<td width="100" class="datosTablaTitulo">Email:</td>
-			</tr>
-			<!-- BEGIN listadoCorreos -->
-			<tr>
-				<td class="datosTabla">{listadoCorreos.EMAIL}</td>
-			</tr>
-			<!-- END listadoCorreos -->
-		</table>
-	</fieldset><br>
-	<fieldset class="fieldset"><legend>Unidades Asociadas a la Alerta</legend>
+	<fieldset class="fieldset"><legend>Unidades asociadas</legend>
 		<table border="0" width="500">
 			<tr>
 				<td width="100" class="datosTablaTitulo">Unidad:</td>
