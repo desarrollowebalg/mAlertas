@@ -98,7 +98,7 @@ if($_SERVER["HTTP_REFERER"]==""){
 			print_r($detalleAlerta);
 			echo "</pre>";*/
 
-			$tpl->set_filenames(array('controlador' => 'tdetalleAlerta'));
+			$tpl->set_filenames(array('controlador' => 'tDetalleAlerta'));
 			$datosAlerta=explode("||",$msgAlerta[0]);
 			/*echo "<pre>";
 			print_r($datosAlerta);
