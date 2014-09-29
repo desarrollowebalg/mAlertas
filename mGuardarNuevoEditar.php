@@ -127,7 +127,6 @@
 						  }
 						//$cadenaMailMaster = $id_mail.','.$id_master;
 					  }
-					 
 					        $sql_mail_master = "INSERT INTO ALERT_XP_EMAIL_MASTER
 												(COD_ALERT_XP_EMAIL,COD_ALERT_MASTER,COD_ALERT_ENTITY, COD_ENTITY, DESCRIP_ENTITY)
 												 VALUES ".$cadenaMailMaster;
