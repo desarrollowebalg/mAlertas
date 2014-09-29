@@ -423,7 +423,7 @@ function crearInsert(){
             var result = data.split(','); 
 			$("#agregarAlerta").dialog( "close" );
 			  if(result[0]==='1'){
-				  var mensaje_x = result[1];
+				    var mensaje_x = result[1];
 			  }else{
 				    var mensaje_x = result[1];
 			  }
@@ -441,7 +441,7 @@ function crearInsert(){
 			    $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensaje_x+"</p>");
 				$("#divMenssajesAlertas").dialog("open");
        		//alert('Alerta guardada con exito'); 
-			console.log(result);
+			console.log(result[0]+''+result[1]);
 		  }
       });
 

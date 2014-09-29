@@ -115,14 +115,18 @@
 				
 				 if($qry_detail_variables){
 				     
-				       $sql_recuperar_unidades = "SELECT COD_ALERT_ENTITY, COD_ENTITY, DESCRIP_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER =".$id_master;
+				       $sql_recuperar_unidades = "SELECT A.COD_ALERT_ENTITY, A.COD_ENTITY,B.DESCRIPTION 
+													FROM ALERT_XP_DETAIL_VARIABLES A INNER JOIN
+														 ADM_UNIDADES B ON A.COD_ENTITY = B.COD_ENTITY
+													WHERE A.COD_ALERT_MASTER =".$id_master;
+													
 				       $qry_recuperar_unidades = $db3->sqlQuery($sql_recuperar_unidades);	
 					  if($qry_recuperar_unidades){
 					      while($row_recuperar_unidades = $db->sqlFetchArray($qry_recuperar_unidades)){	
 						     if($cadenaMailMaster === ''){
-						$cadenaMailMaster = "('".$id_mail."','".$id_master."','".$row_recuperar_unidades['COD_ALERT_ENTITY']."','".$row_recuperar_unidades['COD_ENTITY']."','".$row_recuperar_unidades['DESCRIP_ENTITY']."')"; 
+					$cadenaMailMaster = "('".$id_mail."','".$id_master."','".$row_recuperar_unidades['COD_ALERT_ENTITY']."','".$row_recuperar_unidades['COD_ENTITY']."','".$row_recuperar_unidades['DESCRIPTION']."')"; 
 							 }else{
-						$cadenaMailMaster = $cadenaMailMaster.",('".$id_mail."','".$id_master."','".$row_recuperar_unidades['COD_ALERT_ENTITY']."','".$row_recuperar_unidades['COD_ENTITY']."','".$row_recuperar_unidades['DESCRIP_ENTITY']."')"; 	 
+					$cadenaMailMaster = $cadenaMailMaster.",('".$id_mail."','".$id_master."','".$row_recuperar_unidades['COD_ALERT_ENTITY']."','".$row_recuperar_unidades['COD_ENTITY']."','".$row_recuperar_unidades['DESCRIPTION']."')"; 	 
 							 }
 						  }
 						//$cadenaMailMaster = $id_mail.','.$id_master;
@@ -135,25 +139,25 @@
 							 if($qry_mail_master){
 							  	 echo "1,Alerta Generada con Exito";
 							 }else{
-								 echo "2,Error al generar la alerta (error en qry_mail_master)";
+								 echo "2,Error al generar la alerta (error en ALERT_XP_EMAIL_MASTER):";
 							 }   
 
 				 }else{
-					   echo "3,Error al generar la alerta (error en qry_detail_variables)";
+					   echo "3,Error al generar la alerta (error en ALERT_XP_DETAIL_VARIABLES)";
 				 }
 				
 				
 				
 				/********************************************************/
 		 }else{
-					 echo "4,Error al generar la alerta (error en qry_mai)";
+					 echo "4,Error al generar la alerta (error en ALERT_XP_EMAIL)";
 					
 		 }
 					
 	}else{
 
-					 echo "5,Error al generar la alerta (error en qry_master)";
+					 echo "5,Error al generar la alerta (error en ALERT_XP_MASTER)";
 					 
- }
+     }
 
 ?>
