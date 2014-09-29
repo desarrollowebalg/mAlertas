@@ -262,12 +262,12 @@ function validarTodo(){
 	   return false;
   }
  
-  if($("#txtCorreoElectronico").find('div').length===1){
+  /*if($("#txtCorreoElectronico").find('div').length===1){
 	   mensajez = 'No se ha definido correo(s) electronico(s), verifique!!';
 	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
       $("#divMenssajesAlertas").dialog("open");
 	   return false;
-  }
+  }*/
 //  console.log($("#txtCorreoElectronico").find('div').length);
 
 
@@ -324,7 +324,11 @@ function crearInsert(){
 	   }
 	   insert = insert +',"'+ act +'"';
 	   
-	   $("#txtCorreoElectronico div").each(function (index) {
+	  
+	  if($("#txtCorreoElectronico").find('div').length===1){
+	 			correos ='';
+	  }else{
+	    $("#txtCorreoElectronico div").each(function (index) {
 		     if(($( this ).attr( "title" ))!==undefined){
 				  if(correos===''){
 					  correos = $( this ).attr( "title" );
@@ -332,9 +336,9 @@ function crearInsert(){
 					  correos = correos+';'+$( this ).attr( "title" );
 				  }
 			 }
-		     
+	  
 	   })
-	    //insert = insert +','+ correos;
+	  }//insert = insert +','+ correos;
 	    insert = insert +',"'+ $("#insertExpresion").val()+'"';
 		
 	    if($("#chkLunes").is(':checked') ) {				// lunes
