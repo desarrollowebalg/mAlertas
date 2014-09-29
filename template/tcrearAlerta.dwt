@@ -106,7 +106,7 @@
                                  <td colspan="2">
                                  <br>
                                      <fieldset class="fieldset"><legend>Alerta visible en monitoreo</legend>
-                                       <select>
+                                       <select id="alertaGenerada">
                                              <!-- BEGIN eventosX -->
                                                <option value="{eventosX.CLV_EVENTO}">{eventosX.DESCRIPCION}</option>
                  							  <!-- END eventosX -->

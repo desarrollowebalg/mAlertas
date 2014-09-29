@@ -415,7 +415,8 @@ function crearInsert(){
   $.ajax({
           url: "index.php?m=mAlertas&c=mGuardarNuevoEditar",
 		   data : {
-            cadena:insert
+            cadena:insert,
+			alertaG:$("#alertaGenerada").val()
 		   },
 		  type: "POST",
           success: function(data) {

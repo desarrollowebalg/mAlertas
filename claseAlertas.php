@@ -442,7 +442,7 @@ class alertas{
 		$conta_x = -1;
 		$objDbE = $this->iniciarConexionDb();
 		$objDbE ->sqlQuery("SET NAMES 'utf8'");
-		$sql_events = "SELECT COD_EVENT,DESCRIPTION FROM ADM_EVENTOS";
+		$sql_events = "SELECT COD_EVENT,DESCRIPTION FROM ADM_EVENTOS WHERE PRIORITY = 1 AND FLAG_EVENT_ALERT = 1 ORDER BY COD_EVENT";
 		$resEvents  = $objDbE->sqlQuery($sql_events);
 		 while($row_evento = $objDbE->sqlFetchArray($resEvents)){
 			 $conta_x = $conta_x+1;	

@@ -100,16 +100,16 @@
 					  $values = '"'.$idObjectMapVal.'"';
 					  $values2 ='';
 				     for($v2=0;$v2<count($unidadesVariables);$v2++){
-						 if($values2 ===''){
-							$values2 = '('.$values.',"'.$unidadesVariables[$v2].'","'.$unidadesVariables[$v2].'","'.$id_master.'")'; 
+ 						if($values2 ===''){
+							$values2 = '('.$values.',"'.$unidadesVariables[$v2].'","'.$unidadesVariables[$v2].'","'.$id_master.'","'.$_POST['alertaG'].'","'.$idCliente.'")'; 
 						 }else{
-							 $values2 = $values2.',('.$values.',"'.$unidadesVariables[$v2].'","'.$unidadesVariables[$v2].'","'.$id_master.'")'; 
+				 $values2 = $values2.',('.$values.',"'.$unidadesVariables[$v2].'","'.$unidadesVariables[$v2].'","'.$id_master.'","'.$_POST['alertaG'].'","'.$idCliente.'")';
 						 }
 						 
 					 }
 					 
 					 
-				 $sql_varaibles_detalle = "INSERT INTO ALERT_XP_DETAIL_VARIABLES(".$insert.",COD_ENTITY,DESCRIP_ENTITY,COD_ALERT_MASTER) VALUES ".$values2."";
+		 $sql_varaibles_detalle = "INSERT INTO ALERT_XP_DETAIL_VARIABLES(".$insert.",COD_ENTITY,DESCRIP_ENTITY,COD_ALERT_MASTER,COD_EVENT_ALERT,COD_CLIENT_ALERT) VALUES ".$values2."";
 					 
 				 $qry_detail_variables = $db3->sqlQuery($sql_varaibles_detalle);					 
 				
