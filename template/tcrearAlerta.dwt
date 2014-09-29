@@ -103,13 +103,13 @@
                                    <td> HORA DE FIN</td>
                                 </tr>
                                 <tr>
-                                 <td>
+                                 <td colspan="2">
                                  <br>
-                                     <fieldset class="fieldset"><legend>condiciones de alerta</legend>
+                                     <fieldset class="fieldset"><legend>Alerta visible en monitoreo</legend>
                                        <select>
-                                         <option>
-                                           hi
-                                         </option>
+                                             <!-- BEGIN eventosX -->
+                                               <option value="{eventosX.CLV_EVENTO}">{eventosX.DESCRIPCION}</option>
+                 							  <!-- END eventosX -->
                                        </select>
                                       </fieldset>
                                  </td>

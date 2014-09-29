@@ -37,6 +37,18 @@ if($_SERVER["HTTP_REFERER"]==""){
 	            	'MINUTOS' =>	$minutos
 	        	));
 			}
+			$arreglo_y = array();
+			$arreglo_y = $objA->regresarDatosEventos();
+			
+		    for($ev=0;$ev<count($arreglo_y);$ev++){	 
+				 $tpl->assign_block_vars('eventosX',array(
+				'CLV_EVENTO'  => $arreglo_y[$ev][0],
+				'DESCRIPCION' => $arreglo_y[$ev][1],
+				));
+			}
+			
+			
+			
 			//se muestra el template
 			$tpl->pparse('controlador');
 		break;

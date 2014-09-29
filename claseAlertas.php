@@ -431,6 +431,26 @@ class alertas{
 		}
 		return $textoFecha;
 	}
+/**
+	*@method 		regresa datos de eventos
+	*@description 	Funcion para formatear la fecha con dia de la semana y mes en modo legible
+	*@paramas 		$fecha
+	*
+	*/
+	public function regresarDatosEventos(){
+		$arreglo_x = array();
+		$conta_x = -1;
+		$objDbE = $this->iniciarConexionDb();
+		$objDbE ->sqlQuery("SET NAMES 'utf8'");
+		$sql_events = "SELECT COD_EVENT,DESCRIPTION FROM ADM_EVENTOS";
+		$resEvents  = $objDbE->sqlQuery($sql_events);
+		 while($row_evento = $objDbE->sqlFetchArray($resEvents)){
+			 $conta_x = $conta_x+1;	
+			$arreglo_x[$conta_x][0] = $row_evento['COD_EVENT'];
+			$arreglo_x[$conta_x][1] = $row_evento['DESCRIPTION'];
+	     }
+		 return $arreglo_x;
+	}
 
 }//fin de la clase Cuestionarios
 
