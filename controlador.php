@@ -9,9 +9,8 @@ if($_SERVER["HTTP_REFERER"]==""){
 	echo "0";
 }else{
 	include "claseAlertas.php";
-	//se instancia la clase que contiene las funciones de los cuestionarios
+	//se instancia la clase que contiene las funciones de las alertas
 	$objA=new alertas();
-	
 	switch($_GET["action"]){
 		case "mostrarFormularioAlerta":
 			$tpl->set_filenames(array('controlador' => 'tcrearAlerta'));
@@ -176,6 +175,13 @@ if($_SERVER["HTTP_REFERER"]==""){
 				'FECHACREACION'			=> $textoFecha
 			));
 			$tpl->pparse('controlador');
+		break;
+		case "eliminarAlertasDetalle":
+			/*echo "<pre>";
+			print_r($_GET);
+			echo "</pre>";*/
+			$eliminarAlerta=$objA->eliminarAlertas($_GET["idCliente"],$_GET["idUsuario"],$_GET["elementoEliminar"]);
+			echo $eliminarAlerta;
 		break;
 	}
 	

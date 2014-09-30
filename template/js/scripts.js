@@ -70,8 +70,6 @@ function liberarCerrar(iD,valor){
 
 //*************************************** funcion para validar expresiones
 function validarExpersiones(){
-	
-	
 if($("#chk_sino").is(':checked')) { 
      if($("#TiposPDIGCRSI").val() ==='-1'){
 	     var msj_x = 'Debe elegir '+$("#parte6").val()+', Verifique!!';  
@@ -665,8 +663,48 @@ function seleccionarTodosCorreos(opcion){
 /*
 *Funcion para eliminar el detail de la alerta
 */
+var alertasEliminar= new Array();
+function confirmacionEliminacion(){
+	$("#divConfirmacionesMensajesAlertas").html("<br><span class='ui-icon ui-icon-alert' style='float:left;margin-right:10px;'></span>¿Esta seguro de eliminar los registros seleccionados?");
+	$("#divConfirmacionesMensajesAlertas").dialog("open");
+}
 function eliminarElementos(){
-	var current_index = $("#tabsAlertas").tabs("option","selected");
+	var current_index = $("#tabsAlertas").tabs("option","selected");//se obtiene el tab actual
+	if(current_index==0){//se filtran los valores
+		filtro="gview_alertasvigentes";
+	}else if(current_index==1){
+		filtro="gview_alertasactivas";
+	}else{
+		filtro="gview_alertasinactivas";
+	}
+	$("#" + filtro + " input:checkbox:checked").each(function(){//se verifica cuales han sido seleccionado	
+		cadE=$(this).attr("id");//cada elemento seleccionado
+		if(cadE != undefined){
+			cadE=cadE.split("_");
+			alertasEliminar.push(cadE[2]);
+		}
+	});
+	elementosEliminar=alertasEliminar.join();
+	//alert(elementosEliminar);
+	alertasEliminar.length=0;//se vacia el array de eliminacion
+	//se manda la peticion ajax para eliminar los registros
+	$("#eliminarAlertas").dialog("open");
+	idClienteAlerta=$("#idClienteAlertas").val();
+    idUsuarioAlerta=$("#idUsuarioAlertas").val();
+    parametros="action=eliminarAlertasDetalle&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&elementoEliminar="+elementosEliminar;
+    ajaxAlertas("eliminarAlertasDetalle","controlador",parametros,"eliminarAlertas","eliminarAlertas","GET");
+}
+function evaluaEliminacion(resultado){
+	$("#eliminarAlertas").dialog("close");
+	if(resultado==1){
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>Registro(s) eliminado(s)</p>");//se elimino
+		$("#divMenssajesAlertas").dialog("open");
+	}else{
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>Ocurrio un error al efectuar la eliminación</p>");//error al eliminar la alerta
+		$("#divMenssajesAlertas").dialog("open");
+		//$("#divMenssajesAlertas").html(resultado);
+	}
+	var current_index = $("#tabsAlertas").tabs("option","selected");//se obtiene el tab actual
 	if(current_index==0){
 		filtro="vigentes";
 	}else if(current_index==1){
@@ -674,17 +712,5 @@ function eliminarElementos(){
 	}else{
 		filtro="inactivas";
 	}
-	/*
-	$("input:checkbox:checked").each(function(){
-		//cada elemento seleccionado
-		//alert($(this).val());
-		cadE=$(this).attr("id");
-		alert(cadE);
-		if(cadE != undefined){
-			cadE=cadE.split("_");
-			alert(cadE[2]);
-		}
-		
-	});
-	*/
+	cargarAlertas(filtro);
 }

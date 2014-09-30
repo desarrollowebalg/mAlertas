@@ -18,32 +18,26 @@
     </div>
 
     <div id="tabs-1">
-        <!--<div id="herramientasGrid" class="ui-corner-all">
-            <div id="opcEliminar" onclick="eliminarElementos()" class="ui-state-default ui-corner-all" role="button" title="Eliminar elementos seleccionados">                
-                <div style="float:left;margin-top:-2px;"><img src="./public/images/elimina.png" border="0" /></div>
-                <div style="float:left;">&nbsp;Eliminar</div>
-            </div>
-        </div>-->
+        <div id="herramientasGrid" class="ui-corner-all">
+           <button id="opcEliminar" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+           <button id="opcActDes" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+        </div>
         <div id="tabVigentes"></div>
     </div>
     
     <div id="tabs-2">
-        <!--<div id="herramientasGrid" class="ui-corner-all">
-            <div id="opcEliminar" onclick="eliminarElementos()" class="ui-state-default ui-corner-all" role="button" title="Eliminar elementos seleccionados">                
-                <div style="float:left;margin-top:-2px;"><img src="./public/images/elimina.png" border="0" /></div>
-                <div style="float:left;">&nbsp;Eliminar</div>
-            </div>
-        </div>-->
+        <div id="herramientasGrid" class="ui-corner-all">
+            <button id="opcEliminar" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+            <button id="opcActDes" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+        </div>
         <div id="tabActivas"></div>
     </div>
     
     <div id="tabs-3">
-        <!--<div id="herramientasGrid" class="ui-corner-all">
-            <div id="opcEliminar" onclick="eliminarElementos()" class="ui-state-default ui-corner-all" role="button" title="Eliminar elementos seleccionados">                
-                <div style="float:left;margin-top:-2px;"><img src="./public/images/elimina.png" border="0" /></div>
-                <div style="float:left;">&nbsp;Eliminar</div>
-            </div>
-        </div>-->
+        <div id="herramientasGrid" class="ui-corner-all">
+            <button id="opcEliminar" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+            <button id="opcActDes" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+        </div>
         <div id="tabInactivas"></div>
     </div>
 </div>
@@ -73,13 +67,13 @@
 <!--Div detalle tarea-->
 <div id="detalleAlerta" title="Detalle alerta..."></div>
 <!--Fin div detalle tarea-->
-<!--Div eliminar tareas-->
-<div id="eliminarTareas" title="Eliminar tareas..."></div>
-<!--Fin div eliminar tareas-->
+<!--Div eliminar alertas-->
+<div id="eliminarAlertas" title="Eliminar alertas..."></div>
+<!--Fin div eliminar alertas-->
 <!--div mensajes/errores-->
 <div id="divMenssajesAlertas"></div>
 <!--div confirmaciones-->
-<div id="divConfirmacionesMenssajesTareas"></div>
+<div id="divConfirmacionesMensajesAlertas" title="Advertencia..."></div>
 
 <!--div dialog importador-->
  <div id="dialogo_generar_expresiones"  title="Generador de Expresiones"></div>

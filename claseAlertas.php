@@ -84,6 +84,71 @@ class alertas{
 		}
 	}
 	/**
+	*@method 		eliminarAlertas
+	*@description 	Funcion para eliminar el detalle de las alertas
+	*@paramas 				
+	*
+	*/
+	public function eliminarAlertas($idCliente,$idUsuario,$elementosEliminar){
+		$mensaje="";
+		$objBDA=$this->iniciarConexionAlertas();
+		$objBDA->sqlQuery("SET NAMES 'utf8'");
+		$elementosEliminar=explode(",",$elementosEliminar);
+		foreach($elementosEliminar as $valorEliminar){
+			//se extrae el identificador de la alerta
+			$sqlIdAlerta="SELECT COD_ALERT_MASTER FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
+			$resIdAlerta=$objBDA->sqlQuery($sqlIdAlerta);
+			if($objBDA->sqlEnumRows($resIdAlerta)!=0){
+				$rowIdAlerta=$objBDA->sqlFetchArray($resIdAlerta);//identificador de la alerta
+				//se verifica la cantidad de elementos a Eliminar
+				$sqlContador="SELECT COUNT(*) AS TOTALDETALLES FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowIdAlerta["COD_ALERT_MASTER"]."'";
+				$resContador=$objBDA->sqlQuery($sqlContador);
+				$rowContador=$objBDA->sqlFetchArray($resContador);
+				$rowContador["TOTALDETALLES"];
+				
+				//se evalua la operacion en la base de datos
+				if($rowContador["TOTALDETALLES"]==1){
+					//echo "<br>Se elimina todo";
+					//se inicia el proceso de eliminacion para el detalle de la alerta
+					$sqlEliminarDetalle="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
+					
+					$resEliminarDetalle=$objBDA->sqlQuery($sqlEliminarDetalle);
+					if($resEliminarDetalle){
+						//se elimina xp_email_master
+						$sqlEliminarMailMaster="DELETE FROM ALERT_XP_EMAIL_MASTER WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
+						$resEliminarMailMaster=$objBDA->sqlQuery($sqlEliminarMailMaster);
+						if($resEliminarMailMaster){
+							//se elimina la alerta de la tabla principal
+							$sqlEliminarMaster="DELETE FROM ALERT_XP_MASTER WHERE COD_ALERT_MASTER='".$rowIdAlerta["COD_ALERT_MASTER"]."'";
+							$objBDA->sqlQuery($sqlEliminarMaster);
+						}
+					}
+					
+					$mensaje=1;
+				}else{
+					//echo "<br>Se elimina el detalle";
+					//se inicia el proceso de eliminacion para el detalle de la alerta
+					$sqlEliminarDetalle="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
+					
+					$resEliminarDetalle=$objBDA->sqlQuery($sqlEliminarDetalle);
+					if($resEliminarDetalle){
+						//se elimina xp_email_master
+						$sqlEliminarMailMaster="DELETE FROM ALERT_XP_EMAIL_MASTER WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
+						$resEliminarMailMaster=$objBDA->sqlQuery($sqlEliminarMailMaster);
+						if($resEliminarMailMaster){
+							$mensaje=1;
+						}
+					}
+					
+				}
+
+			}else{
+				$mensaje=0;
+			}
+		}//recorrido del array para eliminar
+		return $mensaje;
+	}
+	/**
 	*@method 		mostrarDetalleAlerta
 	*@description 	Funcion para mostrar el detalle de la alerta generada
 	*@paramas 				
@@ -199,15 +264,15 @@ class alertas{
 	*/
 	public function listarAlertas($filtro,$idCliente,$idUsuario){
 		if($filtro=="vigentes"){
-			$sql="SELECT COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
+			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND VIGENTE='S'";
 		}else if($filtro=="activas"){
-			$sql="SELECT COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
+			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='1'";
 		}else if($filtro=="inactivas"){
-			$sql="SELECT COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
+			$sql="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,COD_ALERT_ENTITY,NAME_ALERT, IF(VIGENTE='N','NO','SI') AS VIGENTE,IF (ACTIVE = 1,'ACTIVA','NO ACTIVA') AS ACTIVE,IF(TYPE_EXPRESION='U','UNIDAD',(IF(TYPE_EXPRESION='P','PDI',(IF(TYPE_EXPRESION='G','GEOCERCA',(IF(TYPE_EXPRESION='R','RSI','N/A'))))))) AS TYPE_EXPRESION,DESCRIP_ENTITY,NICKNAME_USER_CREATE,FECHA_CREATE,CONCAT('Detalle') AS MAS
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='0'";
 		}
@@ -221,9 +286,21 @@ class alertas{
 		//definicion de las columnas del grid
 		
 		$col = array();
-		$col["title"] = "# Alerta"; // caption of column
+		$col["title"] = "Referencia #"; // caption of column
 		$col["name"] = "COD_ALERT_ENTITY"; // grid column name, same as db field or alias from sql
 		//$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";
+		$col["width"] = "10"; // width on grid
+		$col["align"] = "center";
+		//$col["sortable"] = true; // this column is not sortable 
+		//$col["resizable"] = true;
+		//$col["search"] = true;
+		$col["viewable"] = false;
+		$cols[] = $col;
+
+		$col = array();
+		$col["title"] = "Referencia"; // caption of column
+		$col["name"] = "COD_ALERT_MASTER"; // grid column name, same as db field or alias from sql
+		$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";
 		$col["width"] = "10"; // width on grid
 		$col["align"] = "center";
 		$col["sortable"] = true; // this column is not sortable 

@@ -104,7 +104,7 @@ $(document).ready(function(){
 		}
 	});
 
-	//dialog detalle tarea
+	//dialog detalle alerta
 	$("#detalleAlerta").dialog({
 		autoOpen:false,
 		height: 500,
@@ -116,15 +116,39 @@ $(document).ready(function(){
 		}
 	});
 
-    //se redimensionan los tabs
-    redimensionarAlertas();
-    //peticion para listar las tareas
-    cargarAlertas("vigentes");
-	//esto es nuevo cre
-	//que no me lo reconoce
-	
+	//dialog eliminar alertas
+	$("#eliminarAlertas").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Cerrar: function() {
+				$("#eliminarAlertas").dialog( "close" );
+			}
+		}
+	});
 
-	
+	$("#opcEliminar").click(function(){
+		confirmacionEliminacion();
+	});
+
+	$("#divConfirmacionesMensajesAlertas").dialog({
+		autoOpen: false,
+		height: 130,
+		width: 350,
+		modal: true,
+		buttons: {
+			Cancelar: function() {
+				$("#divConfirmacionesMensajesAlertas").dialog( "close" );
+			},
+			Eliminar:function(){
+				$("#divConfirmacionesMensajesAlertas").dialog("close");
+				eliminarElementos();//se llama a la funcion para el proceso de eliminacion
+			}
+		}
+    });
+
+    redimensionarAlertas();//se redimensionan los tabs
+    cargarAlertas("vigentes");//peticion para listar las tareas
 });
 
 /*
@@ -163,6 +187,10 @@ function controladorAcciones(accion,data,divResultado){
 		break;
 		case "detalleAlerta":
 			$("#detalleAlerta").html(data);
+		break;
+		case "eliminarAlertasDetalle":
+			//$("#eliminarAlertas").html(data);
+			evaluaEliminacion(data);
 		break;
 	}
 }
