@@ -33,7 +33,7 @@
                 </tr>  
                 <tr>
                     <td colspan="2">
-                        <span class="camposObligatorios" style="float:left;">*</span>
+                        <span class="camposObligatorios" style="float:left;">&nbsp;</span>
                         <div id="txtCorreoElectronico">
                             <div id="agregaCajaEmail">Agregar correo...</div>
                         </div>

@@ -625,12 +625,12 @@ function quitarUnidadesDiv(idUsuarioAQuitar){
 */
 function detalleAlerta(idAlerta,e){
 	idAlerta=idAlerta.split("#");
-	//alert("Detalle "+idAlerta[1]);
+	idAlertaC=idAlerta[1].split("-");
+	//alert(idAlertaC[0]);
 	$("#detalleAlerta").dialog("open");
 	idClienteAlerta=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();
-	parametros="action=detalleAlerta&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&idAlerta="+idAlerta[1];
-	//ajaxTareas(accion,c,parametros,divCarga,divResultado,tipoPeticion)
+	parametros="action=detalleAlerta&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&idAlerta="+idAlertaC[0];
 	ajaxAlertas("detalleAlerta","controlador",parametros,"detalleAlerta","detalleAlerta","GET");
 }
 /*
@@ -681,11 +681,12 @@ function eliminarElementos(){
 		cadE=$(this).attr("id");//cada elemento seleccionado
 		if(cadE != undefined){
 			cadE=cadE.split("_");
-			alertasEliminar.push(cadE[2]);
+			idEliminarEntity=cadE[2].split("-");
+			alertasEliminar.push(idEliminarEntity[1]);
+			//alert(idEliminarEntity[1]);
 		}
 	});
 	elementosEliminar=alertasEliminar.join();
-	//alert(elementosEliminar);
 	alertasEliminar.length=0;//se vacia el array de eliminacion
 	//se manda la peticion ajax para eliminar los registros
 	$("#eliminarAlertas").dialog("open");
