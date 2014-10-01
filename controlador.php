@@ -45,9 +45,6 @@ if($_SERVER["HTTP_REFERER"]==""){
 				'DESCRIPCION' => $arreglo_y[$ev][1],
 				));
 			}
-			
-			
-			
 			//se muestra el template
 			$tpl->pparse('controlador');
 		break;
@@ -86,9 +83,6 @@ if($_SERVER["HTTP_REFERER"]==""){
 			}
 		break;
 		case "cargarAlertas":
-			/*echo "<pre>";
-			print_r($_GET);
-			echo "</pre>";*/
 			$objA->listarAlertas($_GET["filtro"],$_GET["idCliente"],$_GET["idUsuarioAlertas"]);
 		break;
 		case "detalleAlerta":
@@ -177,17 +171,13 @@ if($_SERVER["HTTP_REFERER"]==""){
 			$tpl->pparse('controlador');
 		break;
 		case "eliminarAlertasDetalle":
-			/*echo "<pre>";
-			print_r($_GET);
-			echo "</pre>";*/
-			$eliminarAlerta=$objA->eliminarAlertas($_GET["idCliente"],$_GET["idUsuario"],$_GET["elementoEliminar"]);
+			$eliminarAlerta=$objA->eliminarAlertas($_GET["idCliente"],$_GET["idUsuario"],$_GET["elementoActualizar"]);
 			echo $eliminarAlerta;
 		break;
-	}
-	
-	switch($_POST["action"]){
-		
+		case "activarDesactivarAlertas":
+			$actualizacion=$objA->actualizarAlertasActDes($_GET["idCliente"],$_GET["idUsuario"],$_GET["elementoActualizar"]);
+			echo $actualizacion;
+		break;
 	}
 }
-
 ?>

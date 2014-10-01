@@ -84,6 +84,40 @@ class alertas{
 		}
 	}
 	/**
+	*@method 		actualizarAlertasActDes
+	*@description 	Funcion para activar / desactivar una o varias alertas
+	*@paramas 				
+	*
+	*/
+	public function actualizarAlertasActDes($idCliente,$idUsuario,$elementosActualizar){
+		$mensaje="";
+		$objBDA=$this->iniciarConexionAlertas();
+		$objBDA->sqlQuery("SET NAMES 'utf8'");
+		$elementosActualizar=explode(",",$elementosActualizar);
+		foreach($elementosActualizar as $valorActualizar){
+			//se extrae el identificador de la alerta
+			$sqlIdAlerta="SELECT ALERT_XP_MASTER.COD_ALERT_MASTER AS COD_ALERT_MASTER,ACTIVE FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER WHERE COD_ALERT_ENTITY='".$valorActualizar."'";
+			$resIdAlerta=$objBDA->sqlQuery($sqlIdAlerta);
+			if($objBDA->sqlEnumRows($resIdAlerta)!=0){
+				$rowDatosAlerta=$objBDA->sqlFetchArray($resIdAlerta);//identificador de la alerta
+				if($rowDatosAlerta["ACTIVE"]=="0"){
+					$sqlAct="UPDATE ALERT_XP_MASTER SET ACTIVE='1' WHERE COD_ALERT_MASTER='".$rowDatosAlerta["COD_ALERT_MASTER"]."'";
+				}else if($rowDatosAlerta["ACTIVE"]=="1"){
+					$sqlAct="UPDATE ALERT_XP_MASTER SET ACTIVE='0' WHERE COD_ALERT_MASTER='".$rowDatosAlerta["COD_ALERT_MASTER"]."'";
+				}
+				$resAct=$objBDA->sqlQuery($sqlAct);//se ejecuta la funcion
+				if($resAct){
+					$mensaje=1;
+				}else{
+					$mensaje=0;
+				}
+			}else{
+				$mensaje=0;
+			}
+		}
+		return $mensaje;
+	}
+	/**
 	*@method 		eliminarAlertas
 	*@description 	Funcion para eliminar el detalle de las alertas
 	*@paramas 				
@@ -166,11 +200,11 @@ class alertas{
 			$rowAD=$objBDA->sqlFetchArray($resAD);
 			$mensaje=$rowAD["COD_ALERT_MASTER"]."||".$rowAD["NAME_ALERT"]."||".$rowAD["HORARIO_FLAG_LUNES"]."||".$rowAD["HORARIO_FLAG_MARTES"]."||".$rowAD["HORARIO_FLAG_MIERCOLES"]."||".$rowAD["HORARIO_FLAG_JUEVES"]."||".$rowAD["HORARIO_FLAG_VIERNES"]."||".$rowAD["HORARIO_FLAG_SABADO"]."||".$rowAD["HORARIO_FLAG_DOMINGO"]."||".$rowAD["HORARIO_HORA_INICIO"]."||".$rowAD["HORARIO_HORA_FIN"]."||".$rowAD["TYPE_EXPRESION"]."||".$rowAD["ACTIVE"]."||".$rowAD["VIGENTE"]."||".$rowAD["COD_USER_CREATE"]."||".$rowAD["NICKNAME_USER_CREATE"]."||".$rowAD["FECHA_CREATE"]."?????";
 			//SE EXTRAE EL DETALLE DE LA ALERTA
-			$sqlADD="SELECT * FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
+			$sqlADD="SELECT ID_OBJECT_MAP,COD_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
 			$resADD=$objBDA->sqlQuery($sqlADD);
 			while($rowADD=$objBDA->sqlFetchArray($resADD)){
 				$desUnidad=$this->extraerNombreEntidad($rowADD["COD_ENTITY"]);
-				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$desUnidad;
+				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$desUnidad."???";
 			}
 			//se extrae la informacion de los correos electronicos asociados a la alerta
 			$sqlAE="SELECT CORREO_ELECTRONICO 
@@ -273,38 +307,21 @@ class alertas{
 			FROM ALERT_XP_MASTER INNER JOIN ALERT_XP_DETAIL_VARIABLES ON ALERT_XP_MASTER.COD_ALERT_MASTER=ALERT_XP_DETAIL_VARIABLES.COD_ALERT_MASTER
 			WHERE COD_CLIENT='".$idCliente."' AND ACTIVE='0'";
 		}
-		//echo $sql;
-		//exit();
-		//conexion hacia la base de datos
-		$conn=$this->iniciarConexionDbGrid();
-		// set your db encoding -- for ascent chars (if required)
-		mysql_query("SET NAMES 'utf8'",$conn);
+		$conn=$this->iniciarConexionDbGrid();//conexion hacia la base de datos
+		mysql_query("SET NAMES 'utf8'",$conn);// set your db encoding -- for ascent chars (if required)
 		include "public/libs/phpgridv1.5.2/lib/inc/jqgrid_dist.php";
 		//definicion de las columnas del grid
-		
 		$col = array();
 		$col["title"] = "Alerta-#"; // caption of column
 		$col["name"] = "CLAVE"; // grid column name, same as db field or alias from sql
-		$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";
-		$col["width"] = "10"; // width on grid
-		$col["align"] = "center";
-		$col["sortable"] = true; // this column is not sortable 
-		$col["resizable"] = true;
-		$col["search"] = true;
-		$col["viewable"] = false;
-		$cols[] = $col;
-		/*
-		$col = array();
-		$col["title"] = "Referencia"; // caption of column
-		$col["name"] = "COD_ALERT_MASTER"; // grid column name, same as db field or alias from sql
-		$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";
+		$col["dbname"] = "ALERT_XP_MASTER.COD_ALERT_MASTER";//campo en la base de datos si es de tipo [TABLA].[CAMPO]
 		$col["width"] = "10"; // width on grid
 		$col["align"] = "center";
 		$col["sortable"] = true; // this column is not sortable 
 		$col["resizable"] = true;
 		$col["search"] = true;
 		$cols[] = $col;
-		*/
+		
 		$col = array();
 		$col["title"] = "Nombre Alerta"; // caption of column
 		$col["name"] = "NAME_ALERT"; // grid column name, same as db field or alias from sql
@@ -317,7 +334,7 @@ class alertas{
 		$col = array();
 		$col["title"] = "Vigente"; // caption of column
 		$col["name"] = "VIGENTE"; // grid column name, same as db field or alias from sql
-		$col["width"] = "10"; // width on grid
+		$col["width"] = "7"; // width on grid
 		$col["align"] = "center";
 		$col["resizable"] = true;
 		$col["search"] = true;
@@ -326,7 +343,7 @@ class alertas{
 		$col = array();
 		$col["title"] = "Activa"; // caption of column
 		$col["name"] = "ACTIVE"; // grid column name, same as db field or alias from sql
-		$col["width"] = "13"; // width on grid
+		$col["width"] = "11"; // width on grid
 		$col["align"] = "center";
 		$col["resizable"] = true;
 		$col["search"] = true;
@@ -335,7 +352,6 @@ class alertas{
 		$col = array();
 		$col["title"] = "Tipo de Expresión"; // caption of column
 		$col["name"] = "TYPE_EXPRESION"; // grid column name, same as db field or alias from sql
-		//$col["dbname"] = "DSP_ESTATUS.DESCRIPCION";
 		$col["width"] = "15"; // width on grid
 		$col["align"] = "center";
 		$col["resizable"] = true;
@@ -345,7 +361,6 @@ class alertas{
 		$col = array();
 		$col["title"] = "UNIDAD"; // caption of column
 		$col["name"] = "DESCRIP_ENTITY"; // grid column name, same as db field or alias from sql
-		//$col["dbname"] = "DSP2_PRIORIDAD.DESCRIPCION";
 		$col["width"] = "20"; // width on grid
 		$col["align"] = "left";
 		$col["resizable"] = true;
@@ -355,7 +370,6 @@ class alertas{
 		$col = array();
 		$col["title"] = "Creada por"; // caption of column
 		$col["name"] = "NICKNAME_USER_CREATE"; // grid column name, same as db field or alias from sql
-		//$col["dbname"] = "ADM_USUARIOS.NOMBRE_COMPLETO";
 		$col["width"] = "20"; // width on grid
 		$col["align"] = "center";
 		$col["resizable"] = true;
@@ -365,8 +379,7 @@ class alertas{
 		$col = array();
 		$col["title"] = "Fecha de Creación"; // caption of column
 		$col["name"] = "FECHA_CREATE"; // grid column name, same as db field or alias from sql
-		//$col["dbname"] = "ADM_USUARIOS.NOMBRE_COMPLETO";
-		$col["width"] = "14"; // width on grid
+		$col["width"] = "19"; // width on grid
 		$col["align"] = "center";
 		$col["resizable"] = true;
 		$col["search"] = true;
@@ -380,52 +393,22 @@ class alertas{
 		$col["editable"] = false;
 		$col["sortable"] = false; // this column is not sortable 
 		$col["align"] = "center";
-		//$col["link"] = "http://localhost?id={ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
 		$col["link"] = "#{CLAVE}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
 		$col["linkoptions"] = "title='Ver detalle de la alerta' onclick='detalleAlerta(this.href,this.event)'"; // extra params with <a> tag
 		$cols[] = $col;
-		/*
-		$col = array();
-		$col["title"] = "";
-		$col["name"] = "ELIMINAR";
-		$col["width"] = "7";
-		$col["search"] = false;
-		$col["editable"] = false;
-		$col["sortable"] = false; // this column is not sortable 
-		$col["align"] = "center";
-		//$col["link"] = "http://localhost?id={ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["link"] = "#{COD_ALERT_ENTITY}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["linkoptions"] = "title='Eliminar Registro' onclick='eliminarAlerta(this.href)'"; // extra params with <a> tag
-		$cols[] = $col;
-		
-		$col = array();
-		$col["title"] = "";
-		$col["name"] = "Eliminar";
-		$col["width"] = "7";
-		$col["search"] = false;
-		$col["editable"] = false;
-		$col["sortable"] = false; // this column is not sortable 
-		$col["align"] = "center";
-		//$col["link"] = "http://localhost?id={ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["link"] = "#{ID_TAREA}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["linkoptions"] = "title='Eliminar Registro' onclick='eliminarTarea(this.href)'"; // extra params with <a> tag
-		$cols[] = $col;
-		*/
-		//se instancia el objeto
-		$g = new jqgrid();
+	
+		$g = new jqgrid();//se instancia el objeto
 		// parametros de configuracion
-		//$grid["caption"] = "Tareas";
+		//$grid["caption"] = "Alertas";
 		$grid["multiselect"] 	= true;
 		$grid["autowidth"] 		= true; // expand grid to screen width
-		$grid["resizable"] 		= true;
+		//$grid["resizable"] 		= true;
 		$grid["altRows"] 		= true;
 		$grid["altclass"] 		="alternarRegistros";
-		$grid["scroll"] 		= true;
-		//$grid["height"] 		= "100%";
+		$grid["scroll"] 		= false;
 		$grid["sortorder"]		="desc";
-
+		//$grid["rowNum"] 		= 10; // by default 20 
 		$g->set_options($grid);
-
 		$g->set_actions(array(  
                         "add"=>false,
                         "edit"=>false,
@@ -436,20 +419,15 @@ class alertas{
                         "autofilter" => true,
                         "search" => "advance",
                         "inlineadd" => false,
-                        "showhidecolumns" => false
+                        "showhidecolumns" => true
                     )
                 );
-
-		// set database table for CRUD operations
-		$g->table = "ALERT_XP_MASTER";
+		$g->table = "ALERT_XP_MASTER";// set database table for CRUD operations
 		$g->set_columns($cols);
-
-		// subqueries are also supported now (v1.2)
-		
-		$g->select_command = $sql;
-		// render grid
-		$out = $g->render("alertas".$filtro);
+		$g->select_command = $sql;// comando SQL
+		$out = $g->render("alertas".$filtro);// render grid
 		echo $out;
+		echo "<script type='text/javascript'> redimensionarAlertas(); </script>";
 	}
 	/**
 	*@method 		extraerNombreEntity

@@ -255,4 +255,6 @@ width:18px;
 	padding:5px;
 	overflow:hidden;
 }
-
+.tabsContenedores{
+	width: 100%;
+}

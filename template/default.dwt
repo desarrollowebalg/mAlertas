@@ -1,44 +1,41 @@
 <link rel="stylesheet" type="text/css" href="{PATH}/css/estilosAlertas.css">
 <script src="{PATH}/js/inicio.js"></script>
 <script src="{PATH}/js/scripts.js"></script>
-
-<!--<link rel="stylesheet" type="text/css" media="screen" href="public/libs/phpgridv1.5.2/lib/js/jqgrid/css/ui.jqgrid.css">-->
-
 <input type="hidden" id="idClienteAlertas" value="{IDCLIENTE}" />
 <input type="hidden" id="idUsuarioAlertas" value="{IDUSUARIO}" />
 <!--Tabs-->
 <div id="tabsAlertas">
     <ul>
-        <li><a href="#tabs-1" id="vigentes">Vigentes</a></li>
-        <li><a href="#tabs-2" id="activas">Activas</a></li>
-        <li><a href="#tabs-3" id="inactivas">Inactivas</a></li>
+        <li><a href="#tabAlertasVigentes" id="vigentes">Vigentes</a></li>
+        <li><a href="#tabAlertasActivas" id="activas">Activas</a></li>
+        <li><a href="#tabAlertasInactivas" id="inactivas">Inactivas</a></li>
     </ul>
     <div class="divContenedorBotones1">
         <button id="crearAlerta" class="btnInfoAlertas ui-state-default ui-corner-all" title="Cerrar Sesión"><span class="ui-icon ui-icon-plus float_left"></span>Crear Alerta</button>
     </div>
 
-    <div id="tabs-1">
+    <div id="tabAlertasVigentes">
         <div id="herramientasGrid" class="ui-corner-all">
-           <button id="opcEliminar" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
-           <button id="opcActDes" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+           <button id="opcEliminarV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+           <button id="opcActDesV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
         </div>
-        <div id="tabVigentes"></div>
+        <div id="tabVigentes" class="tabsContenedores"></div>
     </div>
     
-    <div id="tabs-2">
+    <div id="tabAlertasActivas">
         <div id="herramientasGrid" class="ui-corner-all">
-            <button id="opcEliminar" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
-            <button id="opcActDes" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+            <button id="opcEliminarA" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+            <button id="opcActDesA" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
         </div>
-        <div id="tabActivas"></div>
+        <div id="tabActivas" class="tabsContenedores"></div>
     </div>
     
-    <div id="tabs-3">
+    <div id="tabAlertasInactivas">
         <div id="herramientasGrid" class="ui-corner-all">
-            <button id="opcEliminar" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
-            <button id="opcActDes" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+            <button id="opcEliminarI" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+            <button id="opcActDesI" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
         </div>
-        <div id="tabInactivas"></div>
+        <div id="tabInactivas" class="tabsContenedores"></div>
     </div>
 </div>
 <!--fin tabs-->
@@ -68,7 +65,7 @@
 <div id="detalleAlerta" title="Detalle alerta..."></div>
 <!--Fin div detalle tarea-->
 <!--Div eliminar alertas-->
-<div id="eliminarAlertas" title="Eliminar alertas..."></div>
+<div id="eliminarAlertas" title="Detalles Alertas..."></div>
 <!--Fin div eliminar alertas-->
 <!--div mensajes/errores-->
 <div id="divMenssajesAlertas"></div>

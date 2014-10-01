@@ -1,5 +1,4 @@
 var cajaEmail=0;//contador para las cajas de texto
-
 //*************************************** funcion para cargar el dwt de expresiones
 function expresionesAlertas() {
 	    $.ajax({
@@ -11,19 +10,14 @@ function expresionesAlertas() {
 			$('#dialogo_generar_expresiones').html(result); 
 		  }
       });
-	 
 }
-
 //*************************************** funcion para cargar el tipo PDI/GC/RSI
-
 function tipoPDIgcRSI(tipes) {
-	
 	var sel = '<select style=" width:100px;">'+
               '<option>'+
                'Cargando'+
               '</option>'+
              '</select>';
-
 	 $('#selec_tipo_pgr').html(sel);
 		    $.ajax({
           url: "index.php?m=mAlertas&c=mPDIgcRSI",
@@ -36,23 +30,17 @@ function tipoPDIgcRSI(tipes) {
        		$('#selec_tipo_pgr').html(result); 
 		  }
       });
-	  
 	 // alert('ya se corrigio '+tipes);
-	 
 }
 //******************************** funcion para cambiar valor de caja de pdi_in, out, on
-
 function cambiaPDIinONout(dato){
 	$("#parte3").val(dato);
 }
-
 function cambiaPDIcod(dato2){
 	$("#parte2").val("ID_OBJECT_MAP="+dato2);
 }
-
 //********************************* funcion activa desactiva combos y textbox
 function liberarCerrar(iD,valor){
-
 	if(valor === true){
 		var b = false;
 		$("#banSino").val( parseInt($("#banSino").val())+1);  
@@ -67,7 +55,6 @@ function liberarCerrar(iD,valor){
 		   $("#parte4").val("U");
 	  }
 }
-
 //*************************************** funcion para validar expresiones
 function validarExpersiones(){
 if($("#chk_sino").is(':checked')) { 
@@ -77,11 +64,9 @@ if($("#chk_sino").is(':checked')) {
 				$("#divMenssajesAlertas").dialog("open"); 
 	   return false;
      }else{
-		 //alert('crear expresion sin 3 checks'); 
-		 
+		 //alert('crear expresion sin 3 checks'); 		 
 		 if($("#banSino").val() !== '0') { 
 	      //alert('crear expresion con  3 checks'); 
-		  
 		    if($("#velocidadEvento").is(':checked')) { 
               $("#txtVelocidad").prop('disabled', false); 
 				if($("#txtVelocidad").val()===''){     
@@ -94,9 +79,7 @@ if($("#chk_sino").is(':checked')) {
 				$("#txtVelocidad").prop('disabled', true);
 				$("#parte11").val('');
 		   }
-		   
-		   if($("#eEvento").is(':checked')) {  
-			  
+		   if($("#eEvento").is(':checked')) {    
 			   $("#selEventos").prop('disabled', false);
 				if($("#selEventos").val()==='-1'){     
 				   var msj_x = 'Debe espesificar evento, Verifique!!';  
@@ -110,7 +93,6 @@ if($("#chk_sino").is(':checked')) {
 		   }
 		   
 		   if($("#prioridadEvento").is(':checked')) {  
-						
 				 $("#selPriori").prop('disabled', false);
 				if($("#selPriori").val()==='-1'){     
 				    var msj_x = 'Debe espesificar prioridad, Verifique!!';  
@@ -125,11 +107,8 @@ if($("#chk_sino").is(':checked')) {
 	
 	    } 
 	 }
-   
 }else{
-   	
-	if($("#banSino").val() === '0') {
-		 
+	if($("#banSino").val() === '0') {	 
 //	    alert('Debe de especificar las condiciones basicas de la alerta y/o agregar complementos');
 				var msj_x = 'Debe de especificar las condiciones basicas de la alerta y/o incluir referencias';  
   	            $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+msj_x+"</p>");
@@ -160,13 +139,11 @@ if($("#chk_sino").is(':checked')) {
 				$("#divMenssajesAlertas").dialog("open");   
 					return false;
 				}
-		   } else{
+		   }else{
 			   $("#selEventos").prop('disabled', true);
 			   $("#parte12").val('');
 		   }
-		   
 		   if($("#prioridadEvento").is(':checked')) {  
-						
 				 $("#selPriori").prop('disabled', false);
 				if($("#selPriori").val()==='-1'){     
 				//   alert('Elija una prioridad');
@@ -175,23 +152,18 @@ if($("#chk_sino").is(':checked')) {
 				$("#divMenssajesAlertas").dialog("open");      
 					return false; 
 				}
-		   } else{
+		   }else{
 				$("#selPriori").prop('disabled', true);
 				$("#parte13").val('');
 		   }
 	}
-	
 }
-	
    generaExpresiones();
 }
-
 //************************ funcion que genera las expresiones
-
 function generaExpresiones(){
 var resultado  = '';	
 var resulatod2 = '';
-
 	  if($("#velocidadEvento").is(':checked')) {
 		   
 		 if($("#parte11").val()==''){ 
@@ -201,12 +173,10 @@ var resulatod2 = '';
 		 resultado = '<p> velocidad='+ $("#txtVelocidad").val()+'</p>';
 		 resulatod2 =  $("#parte11").val();
 	  }
-	  
 	  if($("#eEvento").is(':checked')) { 
 		 if($("#parte12").val()===''){ 
 		   $("#parte12").val('uni_pk_event='+  $("#selEventos").val());
-		 }
-		 
+		 } 
 		  resultado =  resultado +'<p> Evento= '+ $("#selEventos option:selected").html()+'</p>';
 		if(resulatod2 == ''){ 
 		     resulatod2  =  $("#parte12").val();
@@ -214,7 +184,6 @@ var resulatod2 = '';
 			 resulatod2  = resulatod2 +' AND '+$("#parte12").val();
 		}
 	  }
-	    
 	   if($("#prioridadEvento").is(':checked')) { 
 		 if($("#parte13").val()===''){ 
 		   $("#parte13").val('uni_prio_event='+ $("#selPriori").val());
@@ -227,7 +196,6 @@ var resulatod2 = '';
 			resulatod2 = resulatod2 +' AND '+$("#parte13").val();
 		}
 	  }
-	  
 	  if($("#chk_sino").is(':checked')) { 
 	     resultado =  resultado +'<p>'+$("#parte6").val()+'='+$("#TiposPDIGCRSI option:selected").html() +' y validara la '+$("#parte5").val()+'</p>';
 	      if(resulatod2 == ''){ 
@@ -236,10 +204,7 @@ var resulatod2 = '';
 			resulatod2 = resulatod2 +' AND '+$("#parte3").val();  
 		  }
 	  }
-	  
- 
     resulatod2 = resulatod2+'","'+  $("#parte4").val();
-	  
 	//alert(resultado);
 	   $("#txtExpresionAlertas").html(resultado) ;  
 	   $("#insertExpresion").val(resulatod2);
@@ -259,7 +224,6 @@ function validarTodo(){
       $("#divMenssajesAlertas").dialog("open");
 	   return false;
   }
- 
   /*if($("#txtCorreoElectronico").find('div').length===1){
 	   mensajez = 'No se ha definido correo(s) electronico(s), verifique!!';
 	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
@@ -267,62 +231,46 @@ function validarTodo(){
 	   return false;
   }*/
 //  console.log($("#txtCorreoElectronico").find('div').length);
-
-
   if( $('#txtExpresionAlertas').is(':empty')){
 	   mensajez = 'No se ha definido una Expresión, verifique!!';
 	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
       $("#divMenssajesAlertas").dialog("open");
 	   return false;
   }
-
   if(!$("#chkLunes").is(':checked') && !$("#chkMartes").is(':checked') && !$("#chkMiercoles").is(':checked') && !$("#chkJueves").is(':checked') && !$("#chkViernes").is(':checked') && !$("#chkSabado").is(':checked') && !$("#chkDomingo").is(':checked')){
  	   mensajez = 'No se ha definido un(os) día(s) , verifique!!';
 	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
       $("#divMenssajesAlertas").dialog("open");
 	   return false;
   }
-  
-   if( $('#txtUnidadesAsignadas').is(':empty')){
+  if( $('#txtUnidadesAsignadas').is(':empty')){
 	   mensajez = 'No se ha definido unidad(es), verifique!!';
 	  $("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensajez+"</p>");
       $("#divMenssajesAlertas").dialog("open");
 	   return false;
-  }
-   
-   crearInsert();
+  } 
+  crearInsert();
 }
-
-
-
 /************************** funcion que crea los inserts *******/
 function crearInsert(){
 	//alert('g');
 	var insert = 's';
 	var correos = '';
 	var unidades = '';
-	var partes ='';
-	
-	
+	var partes ='';	
 		insert = '"'+$("#txtNombreAlerta").val()+'"';
-	
-	   
 	   if($("#chkVigente").is(':checked')) {			// vigente
 		  var vig = 1;
 	   }else{
 		  var vig = 0; 
 	   }
-	   
 	   insert = insert +',"'+vig+'"';
-	   
 	   if($("#chkActiva").is(':checked')) {				// activa
 		  var act = 'S';
 	   }else{
 		  var act = 'N'; 
 	   }
 	   insert = insert +',"'+ act +'"';
-	   
-	  
 	  if($("#txtCorreoElectronico").find('div').length===1){
 	 			correos ='';
 	  }else{
@@ -338,65 +286,51 @@ function crearInsert(){
 	   })
 	  }//insert = insert +','+ correos;
 	    insert = insert +',"'+ $("#insertExpresion").val()+'"';
-		
 	    if($("#chkLunes").is(':checked') ) {				// lunes
 		  var lunes = 1;
 	    }else{
 		  var lunes = 0; 
 	    }
-
        insert = insert +','+ lunes;
-	   
 		if($("#chkMartes").is(':checked') ) {				// martes
 		  var martes = 1;
 	    }else{
 		  var martes = 0; 
 	    }		
-
 	  insert = insert +','+ martes;
-	
 		if($("#chkMiercoles").is(':checked') ) {				// martes
 		  var miercoles = 1;
 	    }else{
 		  var miercoles = 0; 
 	    }		
 	 insert = insert +','+ miercoles;
-
 		if($("#chkJueves").is(':checked') ) {				// martes
 		  var jueves = 1;
 	    }else{
 		  var jueves = 0; 
 	    }		
 	 insert = insert +','+ jueves;
-
 		if($("#chkViernes").is(':checked') ) {				// martes
 		  var viernes = 1;
 	    }else{
 		  var viernes = 0; 
 	    }		
 	 insert = insert +','+ viernes;
-
 		if($("#chkSabado").is(':checked') ) {				// martes
 		  var sabado = 1;
 	    }else{
 		  var sabado = 0; 
 	    }		
 	 insert = insert +','+ sabado;
-
 		if($("#chkDomingo").is(':checked') ) {				// martes
 		  var domingo = 1;
 	    }else{
 		  var domingo = 0; 
 	    }		
-		  
 		  insert = insert +','+ domingo;
-		 
 		  insert = insert +',"'+$("#hrInicio").val()+':'+$("#mnInicio").val()+':00","'+$("#hrFin").val()+':'+$("#mnFin").val()+':00"';
-		 
 		  insert = insert +',"'+$("#insertUSUARIO").val()+'","'+$("#insertNOMBRE").val()+'"';
-
           insert = insert +'|'+correos;
-		  
 		 $("#txtUnidadesAsignadas div").each(function (index) {   /// div de unidades
 		     if(($( this ).attr( "id" ))!==undefined){
 				partes = $( this ).attr( "id" ).split('_');
@@ -407,13 +341,9 @@ function crearInsert(){
 				  }
 				  //console.log($( this ).attr( "id" ))
 			 }
-		     
 	   })  
-		  
 		   insert = insert +'|'+unidades+'|'+$("#parte2").val();
-
 		console.log(insert);	
-	
   $.ajax({
           url: "index.php?m=mAlertas&c=mGuardarNuevoEditar",
 		   data : {
@@ -446,7 +376,6 @@ function crearInsert(){
 			console.log(result[0]+''+result[1]);
 		  }
       });
-
 }
 //********************************
 
@@ -466,8 +395,7 @@ function agregarCajaCorreo(){
 */
 function verificarMail(idCaja,evento){
 	if(evento.which==13){
-		//se recupera el correo electronico
-		mailAValidar=$("#"+idCaja).val();
+		mailAValidar=$("#"+idCaja).val();//se recupera el correo electronico
 		if(mailAValidar==''){
 			$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, ingrese un correo electronico.</p>");
 			$("#divMenssajesAlertas").dialog("open");
@@ -568,8 +496,7 @@ function mostrarUnidadesCliente(filtro){
 function buscarUnidadesCliente(){
 	txtFiltro=$("#txtBuscarUnidadCliente").val();
 	if(txtFiltro.length >=3 || txtFiltro != ""){
-		//se llama a la funcion cargarUsuarios
-		mostrarUnidadesCliente(txtFiltro);
+		mostrarUnidadesCliente(txtFiltro);//se llama a la funcion cargarUsuarios
 	}else{
 		mostrarUnidadesCliente('S/N');
 	}
@@ -590,22 +517,16 @@ function agregarUnidadesSeleccionadas(){
 		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, seleccione por lo menos una unidad para la alerta actual.</p>");
 		$("#divMenssajesAlertas").dialog("open");
 	}else{
-		//alert("Unidades a asignar");
 		$("#agregarUnidades").dialog( "close" );//se cierra el dialog de unidades
 		arrayElementos=elementos.split(",,,");//separacion
 		for(var i=0;i<arrayElementos.length;i++){
 			unidadesAg=arrayElementos[i].split("|");
-			//console.log("usuarioAg :"+unidadesAg);
 			idDivUsuarios="idUnidadDiv_"+unidadesAg[0];
-			//console.log("idDivUsuarios: "+idDivUsuarios);
 			//se arma la estructura
 			unidadesAgDiv="<div id='"+idDivUsuarios+"' class='estiloUsuariosAgregadosDiv'><a href='#' onclick='quitarUnidadesDiv("+unidadesAg[0]+")' title='Quitar Usuario de la tarea'><img src='./public/images/cross.png' border='0' /></a>&nbsp;"+unidadesAg[1]+"</div>";
-			//console.log("usuariosDiv :"+unidadesAgDiv);
-			//se verifica que no exista el usuario ya en el listado
-			//console.log(divRespuesta);
+			//se verifica que no exista el usuario ya en el listado			
 			if ($('#'+idDivUsuarios).length==0){
- 				//se agregan los usuarios al divResultado
-				$("#txtUnidadesAsignadas").append(unidadesAgDiv);	
+				$("#txtUnidadesAsignadas").append(unidadesAgDiv);//se agregan los usuarios al divResultado
 			}else{
 				console.log("existe :"+idDivUsuarios);
 			}
@@ -626,7 +547,6 @@ function quitarUnidadesDiv(idUsuarioAQuitar){
 function detalleAlerta(idAlerta,e){
 	idAlerta=idAlerta.split("#");
 	idAlertaC=idAlerta[1].split("-");
-	//alert(idAlertaC[0]);
 	$("#detalleAlerta").dialog("open");
 	idClienteAlerta=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();
@@ -661,14 +581,26 @@ function seleccionarTodosCorreos(opcion){
 	}
 }
 /*
-*Funcion para eliminar el detail de la alerta
+*Funcion de mensajes en Alertas
 */
-var alertasEliminar= new Array();
-function confirmacionEliminacion(){
-	$("#divConfirmacionesMensajesAlertas").html("<br><span class='ui-icon ui-icon-alert' style='float:left;margin-right:10px;'></span>¿Esta seguro de eliminar los registros seleccionados?");
+function mostrarMensaje(mensaje){
+	$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>"+mensaje+"</p>");
+	$("#divMenssajesAlertas").dialog("open");
+}
+/*
+*Funcion de confirmacion de mensajes
+*/
+function mostrarConfirmacion(mensaje){
+	$("#divConfirmacionesMensajesAlertas").html("<br><span class='ui-icon ui-icon-alert' style='float:left;margin-right:10px;'></span>"+mensaje);
 	$("#divConfirmacionesMensajesAlertas").dialog("open");
 }
-function eliminarElementos(){
+/*
+*Funcion para eliminar el detail de la alerta
+*/
+var alertasEliminar = new Array();
+var alertasActDes = new Array();
+var banderaAccion = "";
+function seleccionarElementos(opcion){
 	var current_index = $("#tabsAlertas").tabs("option","selected");//se obtiene el tab actual
 	if(current_index==0){//se filtran los valores
 		filtro="gview_alertasvigentes";
@@ -679,31 +611,53 @@ function eliminarElementos(){
 	}
 	$("#" + filtro + " input:checkbox:checked").each(function(){//se verifica cuales han sido seleccionado	
 		cadE=$(this).attr("id");//cada elemento seleccionado
+		alert(cadE);
 		if(cadE != undefined){
 			cadE=cadE.split("_");
 			idEliminarEntity=cadE[2].split("-");
 			alertasEliminar.push(idEliminarEntity[1]);
-			//alert(idEliminarEntity[1]);
 		}
 	});
-	elementosEliminar=alertasEliminar.join();
+	if(alertasEliminar.length==0){
+		mostrarMensaje("Seleccione por lo menos un registro del listado");
+	}else{
+		if(opcion==0){
+			mostrarConfirmacion("¿Esta seguro de eliminar los registros seleccionados?");
+			banderaAccion=0;
+		}else{
+			mostrarConfirmacion("¿Esta seguro de Activar/Desactivar los registros seleccionados?<br>Este Proceso afectará a todas las unidades relacionadas con la alerta");
+			banderaAccion=1;
+		}	
+	} 
+}
+function enviaAccion(opcion){
+	var elementosEliminar=alertasEliminar.join();
 	alertasEliminar.length=0;//se vacia el array de eliminacion
-	//se manda la peticion ajax para eliminar los registros
 	$("#eliminarAlertas").dialog("open");
 	idClienteAlerta=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();
-    parametros="action=eliminarAlertasDetalle&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&elementoEliminar="+elementosEliminar;
-    ajaxAlertas("eliminarAlertasDetalle","controlador",parametros,"eliminarAlertas","eliminarAlertas","GET");
+    if(opcion==0){//se manda la peticion ajax para eliminar/actualizar los registros
+		parametros="action=eliminarAlertasDetalle&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&elementoActualizar="+elementosEliminar;
+    	ajaxAlertas("eliminarAlertasDetalle","controlador",parametros,"eliminarAlertas","eliminarAlertas","GET");
+    }else if(opcion==1){
+		parametros="action=activarDesactivarAlertas&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&elementoActualizar="+elementosEliminar;
+    	ajaxAlertas("activarDesactivarAlertas","controlador",parametros,"eliminarAlertas","eliminarAlertas","GET");
+    }
 }
-function evaluaEliminacion(resultado){
+function evaluaResultado(resultado,opcion){
 	$("#eliminarAlertas").dialog("close");
-	if(resultado==1){
-		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>Registro(s) eliminado(s)</p>");//se elimino
-		$("#divMenssajesAlertas").dialog("open");
-	}else{
-		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-notice' style='float:left; margin:0 7px 20px 0;'></span>Ocurrio un error al efectuar la eliminación</p>");//error al eliminar la alerta
-		$("#divMenssajesAlertas").dialog("open");
-		//$("#divMenssajesAlertas").html(resultado);
+	if(opcion==0){
+		if(resultado==1){
+			mostrarMensaje("Registro(s) eliminado(s)");
+		}else{
+			mostrarMensaje("Ocurrio un error al efectuar la eliminación");
+		}
+	}else if(opcion==1){
+		if(resultado==1){
+			mostrarMensaje("Registro(s) actualizado(s)");
+		}else{
+			mostrarMensaje("Ocurrio un error al actualizar los registros");
+		}
 	}
 	var current_index = $("#tabsAlertas").tabs("option","selected");//se obtiene el tab actual
 	if(current_index==0){
@@ -714,4 +668,5 @@ function evaluaEliminacion(resultado){
 		filtro="inactivas";
 	}
 	cargarAlertas(filtro);
+	banderaAccion="";
 }

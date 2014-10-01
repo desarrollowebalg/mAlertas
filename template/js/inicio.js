@@ -2,20 +2,16 @@
 $(document).ready(function(){
    	//declaraciones y llamado a funciones del modulo
     $("#tabsAlertas").tabs();
-
     //declaracion de eventos para los tabs
 	$("#vigentes").click(function(){
     	cargarAlertas("vigentes");
     });    
-
     $("#activas").click(function(){
     	cargarAlertas("activas");
     });
-
 	$("#inactivas").click(function(){
     	cargarAlertas("inactivas");
     });    
-
    	$("#agregarAlerta").dialog({
 		autoOpen: false,
 		height: 550,
@@ -26,13 +22,10 @@ $(document).ready(function(){
 				$("#agregarAlerta").dialog( "close" );
 			},
 			Agregar:function(){
-				validarTodo();
-				
-				//se llama a la funcion para agregar los usuarios seleccionados
+				validarTodo();//se llama a la funcion para agregar los usuarios seleccionados
 			}
 		}
    	});
-
    	$("#agregarUnidades").dialog({
 		autoOpen: false,
 		height: 350,
@@ -43,24 +36,18 @@ $(document).ready(function(){
 				$("#agregarUnidades").dialog( "close" );
 			},
 			Agregar:function(){
-				//se llama a la funcion para agregar las unidades seleccionadas
-				agregarUnidadesSeleccionadas();
+				agregarUnidadesSeleccionadas();//se llama a la funcion para agregar las unidades seleccionadas
 			}
 		}
    	});
-
-    //boton crear Tarea
+    //boton crear Alerta
     $("#crearAlerta").click(function(){
     	$("#agregarAlerta").dialog("open");
-    	//$("#divNuevaTarea").dialog("open");
     	idClienteAlerta=$("#idClienteAlertas").val();
     	idUsuarioAlerta=$("#idUsuarioAlertas").val();
     	parametros="action=mostrarFormularioAlerta&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta;
 		ajaxAlertas("mostrarFormularioAlerta","controlador",parametros,"agregarAlerta","agregarAlerta","GET");
     })
-    
-
-
     $("#dialogo_generar_expresiones").dialog({
 		autoOpen: false,
 		height: 200,
@@ -72,11 +59,9 @@ $(document).ready(function(){
 			},
 			Agregar:function(){
 				validarExpersiones();
-				//se llama a la funcion para agregar las expresiones
 			}
 		}
    	});
-
     $("#detalleAgregarCorreos").dialog({
 		autoOpen: false,
 		height: 300,
@@ -87,14 +72,11 @@ $(document).ready(function(){
 				$("#detalleAgregarCorreos").dialog( "close" );
 			},
 			Agregar:function(){
-				//se llama a la funcion para agregar los emails seleccionados
-				agregarCorreosElectronicos();
+				agregarCorreosElectronicos();//se llama a la funcion para agregar los emails seleccionados
 			}
 		}
     });
-
-    //mensajes de error
-	$("#divMenssajesAlertas").dialog({
+	$("#divMenssajesAlertas").dialog({//mensajes de error
 		autoOpen: false,
 		modal: true,
 		buttons: {
@@ -103,9 +85,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-
-	//dialog detalle alerta
-	$("#detalleAlerta").dialog({
+	$("#detalleAlerta").dialog({//dialog detalle alerta
 		autoOpen:false,
 		height: 500,
 		width: 600,
@@ -115,9 +95,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-
-	//dialog eliminar alertas
-	$("#eliminarAlertas").dialog({
+	$("#eliminarAlertas").dialog({//dialog eliminar alertas
 		autoOpen: false,
 		modal: true,
 		buttons: {
@@ -126,31 +104,36 @@ $(document).ready(function(){
 			}
 		}
 	});
-
-	$("#opcEliminar").click(function(){
-		confirmacionEliminacion();
+	$("#opcEliminarV, #opcEliminarA, #opcEliminarI").click(function(){
+		seleccionarElementos(0);
 	});
-
+	$("#opcActDesV, #opcActDesA, #opcActDesI").click(function(){
+		seleccionarElementos(1);
+	});
 	$("#divConfirmacionesMensajesAlertas").dialog({
 		autoOpen: false,
-		height: 130,
+		height: 170,
 		width: 350,
 		modal: true,
 		buttons: {
 			Cancelar: function() {
 				$("#divConfirmacionesMensajesAlertas").dialog( "close" );
+				alertasEliminar.length=0;
+				banderaAccion="";
 			},
-			Eliminar:function(){
+			Aceptar:function(){
 				$("#divConfirmacionesMensajesAlertas").dialog("close");
-				eliminarElementos();//se llama a la funcion para el proceso de eliminacion
+				if(banderaAccion==0){
+					enviaAccion(0);//se llama a la funcion para el proceso de eliminacion
+				}else if(banderaAccion==1){
+					enviaAccion(1);//se llama a la funcion para el proceso de eliminacion
+				}
 			}
 		}
     });
-
     redimensionarAlertas();//se redimensionan los tabs
     cargarAlertas("vigentes");//peticion para listar las tareas
 });
-
 /*
 *Funcion que controla las peticiones ajax
 */
@@ -190,10 +173,15 @@ function controladorAcciones(accion,data,divResultado){
 		break;
 		case "eliminarAlertasDetalle":
 			//$("#eliminarAlertas").html(data);
-			evaluaEliminacion(data);
+			evaluaResultado(data,banderaAccion);
+		break;
+		case "activarDesactivarAlertas":
+			//$("#eliminarAlertas").html(data);
+			evaluaResultado(data,banderaAccion);
 		break;
 	}
 }
+
 /*
 *Funcion para cargar los diferentes status de las tareas
 */
@@ -216,4 +204,11 @@ function cargarAlertas(filtro){
 function redimensionarAlertas(){
 	altoAlertas=$("#adm_content").height();
     $("#tabsAlertas").css("height",(altoAlertas-5)+"px");
+    $("#tabAlertasVigentes, #tabAlertasActivas, #tabAlertasInactivas").css("height",(altoAlertas-50)+"px");
+    if($("#gbox_alertasvigentes").length){
+    	$("#gbox_alertasvigentes").css("height",(altoAlertas-80)+"px");
+    	$("#gview_alertasvigentes").css("height",(altoAlertas-107)+"px");
+    	$(".ui-jqgrid-bdiv").css("height",(altoAlertas-154)+"px");	
+    }
+
 }

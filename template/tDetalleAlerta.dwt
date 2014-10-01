@@ -47,7 +47,7 @@
 			</tr>
 			<!-- BEGIN listadoUnidadesDetalle -->
 			<tr>
-				<td class="datosTabla">{listadoUnidadesDetalle.UNIDAD}</td>
+				<td class="datosTabla">&raquo;&nbsp;{listadoUnidadesDetalle.UNIDAD}</td>
 			</tr>
 			<!-- END listadoUnidadesDetalle -->
 		</table>
