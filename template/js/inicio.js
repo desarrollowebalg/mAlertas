@@ -17,6 +17,7 @@ $(document).ready(function(){
 		height: 550,
 		width: 600,
 		modal: true,
+		resizable: false,
 		buttons: {
 			Cancelar: function() {
 				$("#agregarAlerta").dialog( "close" );
@@ -31,6 +32,7 @@ $(document).ready(function(){
 		height: 350,
 		width: 400,
 		modal: true,
+		resizable: false,
 		buttons: {
 			Cancelar: function() {
 				$("#agregarUnidades").dialog( "close" );
@@ -67,6 +69,7 @@ $(document).ready(function(){
 		height: 300,
 		width: 350,
 		modal: true,
+		resizable: false,
 		buttons: {
 			Cancelar: function() {
 				$("#detalleAgregarCorreos").dialog( "close" );
@@ -79,6 +82,7 @@ $(document).ready(function(){
 	$("#divMenssajesAlertas").dialog({//mensajes de error
 		autoOpen: false,
 		modal: true,
+		resizable: false,
 		buttons: {
 			Cerrar: function() {
 				$("#divMenssajesAlertas").dialog( "close" );
@@ -89,6 +93,7 @@ $(document).ready(function(){
 		autoOpen:false,
 		height: 500,
 		width: 600,
+		resizable: false,
 		buttons:{
 			Cerrar:function(){
 				$("#detalleAlerta").dialog("close");
@@ -98,6 +103,7 @@ $(document).ready(function(){
 	$("#eliminarAlertas").dialog({//dialog eliminar alertas
 		autoOpen: false,
 		modal: true,
+		resizable: false,
 		buttons: {
 			Cerrar: function() {
 				$("#eliminarAlertas").dialog( "close" );
@@ -115,6 +121,7 @@ $(document).ready(function(){
 		height: 170,
 		width: 350,
 		modal: true,
+		resizable: false,
 		buttons: {
 			Cancelar: function() {
 				$("#divConfirmacionesMensajesAlertas").dialog( "close" );

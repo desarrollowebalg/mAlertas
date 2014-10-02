@@ -16,8 +16,9 @@
 
     <div id="tabAlertasVigentes">
         <div id="herramientasGrid" class="ui-corner-all">
-           <button id="opcEliminarV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
-           <button id="opcActDesV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
+            <!--<button id="opcActualizaV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Actualizar datos..."><span class="ui-icon ui-icon-refresh"></span></button>-->
+            <button id="opcEliminarV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Eliminar elementos seleccionados"><span class="ui-icon ui-icon-closethick float_left"></span>Eliminar</button>
+            <button id="opcActDesV" class="btnEliminarAlertas ui-state-default ui-corner-all" title="Activar / Desactivar Alerta(s)"><span class="ui-icon ui-icon-transferthick-e-w float_left"></span>Activar/Desactivar</button>
         </div>
         <div id="tabVigentes" class="tabsContenedores"></div>
     </div>

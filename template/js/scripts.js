@@ -611,8 +611,7 @@ function seleccionarElementos(opcion){
 	}
 	$("#" + filtro + " input:checkbox:checked").each(function(){//se verifica cuales han sido seleccionado	
 		cadE=$(this).attr("id");//cada elemento seleccionado
-		alert(cadE);
-		if(cadE != undefined){
+		if(cadE != "cb_alertasvigentes" && cadE != "cb_alertasactivas" && cadE != "cb_alertasinactivas"){
 			cadE=cadE.split("_");
 			idEliminarEntity=cadE[2].split("-");
 			alertasEliminar.push(idEliminarEntity[1]);
@@ -643,6 +642,7 @@ function enviaAccion(opcion){
 		parametros="action=activarDesactivarAlertas&idCliente="+idClienteAlerta+"&idUsuario="+idUsuarioAlerta+"&elementoActualizar="+elementosEliminar;
     	ajaxAlertas("activarDesactivarAlertas","controlador",parametros,"eliminarAlertas","eliminarAlertas","GET");
     }
+    //alert(parametros);
 }
 function evaluaResultado(resultado,opcion){
 	$("#eliminarAlertas").dialog("close");
