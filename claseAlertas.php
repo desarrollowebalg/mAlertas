@@ -30,7 +30,7 @@ class alertas{
 	*
 	*/
    	private function iniciarConexionDbGrid(){
-   		$objBd=mysql_connect($this->host,$this->user,$this->pass);
+   		$objBd=@mysql_connect($this->host,$this->user,$this->pass);
    		if($objBd){
    			@mysql_select_db($this->bname)or die("Error al conectar con la base de datos");
    		}
