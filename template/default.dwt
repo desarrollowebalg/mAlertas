@@ -11,6 +11,7 @@
         <li><a href="#tabAlertasInactivas" id="inactivas">Inactivas</a></li>
     </ul>
     <div class="divContenedorBotones1">
+        <button id="ayudaAlerta" class="btnInfoAlertas ui-state-default ui-corner-all" title="Cerrar Sesión"><span class="ui-icon ui-icon-help float_left"></span>Ayuda</button>
         <button id="crearAlerta" class="btnInfoAlertas ui-state-default ui-corner-all" title="Cerrar Sesión"><span class="ui-icon ui-icon-plus float_left"></span>Crear Alerta</button>
     </div>
 

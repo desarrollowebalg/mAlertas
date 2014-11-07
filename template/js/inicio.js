@@ -138,6 +138,25 @@ $(document).ready(function(){
 			}
 		}
     });
+
+    $("#ayudaAlerta").click(function(){
+    	var horizontalPadding = 0;
+		var verticalPadding = 0;
+		$('<iframe id="frameAyudaAlertas" src="http://movi.2gps.net/manuals/videos.php?video=alertas&bar=0" />').dialog({
+			title: 'Ayuda - Alertas',
+			autoOpen: true,
+			width: 597,
+			height: 330,
+			modal: true,
+			resizable: false,
+			autoResize: true,
+			overlay: {
+			    opacity: 0.5,
+			    background: "black"
+			}
+		}).width(600 - horizontalPadding).height(330 - verticalPadding);
+    });
+
     redimensionarAlertas();//se redimensionan los tabs
     cargarAlertas("vigentes");//peticion para listar las tareas
 });
