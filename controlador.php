@@ -117,8 +117,9 @@ if($_SERVER["HTTP_REFERER"]==""){
 	            ));
 			}
 			for($i=0;$i<count($correos);$i++){
+				$correoE=str_replace("???","",$correos[$i]);
 				$tpl->assign_block_vars('listadoCorreos',array(
-						'EMAIL'		=>  $correos[$i]
+						'EMAIL'		=>  $correoE
 	            ));	
 			}
 			($datosAlerta[16]==" ") ? $fechaCreacion="Sin Fecha especificada" : $fechaCreacion=explode(" ",$datosAlerta[16]);
