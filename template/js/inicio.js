@@ -146,15 +146,18 @@ $(document).ready(function(){
 			title: 'Ayuda - Alertas',
 			autoOpen: true,
 			width: 597,
-			height: 330,
+			height: 390,
 			modal: true,
 			resizable: false,
 			autoResize: true,
-			overlay: {
-			    opacity: 0.5,
-			    background: "black"
-			}
-		}).width(600 - horizontalPadding).height(330 - verticalPadding);
+			buttons: {
+				Cerrar: function() {
+					$("#frameAyudaAlertas").remove();
+					$( this ).dialog( "close" );
+				}
+			},
+			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		}).width(600 - horizontalPadding).height(390 - verticalPadding);
     });
 
     redimensionarAlertas();//se redimensionan los tabs
