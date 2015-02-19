@@ -103,7 +103,7 @@ if($_SERVER["HTTP_REFERER"]==""){
 			print_r($detalleAlerta);
 			echo "</pre>";*/
 
-			$tpl->set_filenames(array('controlador' => 'tDetalleAlerta'));
+			$tpl->set_filenames(array('controlador' => 'tDetalleAlerta1'));
 			$datosAlerta=explode("||",$msgAlerta[0]);
 			/*echo "<pre>";
 			print_r($datosAlerta);
@@ -149,7 +149,14 @@ if($_SERVER["HTTP_REFERER"]==""){
 			($datosAlerta[8]==0) ? $imagenDomingo="<img src='./public/images/cross.png' border='0' />" : $imagenDomingo="<img src='./public/images/icon-unselect.png' border='0' />";
 			
 			($datosAlerta[12]==1) ? $activa="SI" : $activa="NO";
-			($datosAlerta[13]=="N") ? $vigente="NO" : $vigente="SI";			
+			($datosAlerta[13]=="N") ? $vigente="NO" : $vigente="SI";
+			//modificacion para mostrar el origen de la alerta
+			$expresionAlerta=$datosAlerta[17];
+			//$expresionAlerta=explode("AND",$expresionAlerta);
+
+			//echo "<pre>";
+			//print_r($expresionAlerta);
+			//echo "</pre>";			
 
 			$tpl->assign_vars(array(
 				'NOALERTA'          	=> $datosAlerta[0],
@@ -167,7 +174,8 @@ if($_SERVER["HTTP_REFERER"]==""){
 				'ACTIVA'				=> $activa,
 				'VIGENTE'				=> $vigente,
 				'USUARIOCREO'			=> $usuarioCreo,
-				'FECHACREACION'			=> $textoFecha
+				'FECHACREACION'			=> $textoFecha,
+				'EXPRESIONALERTA'		=> $expresionAlerta
 			));
 			$tpl->pparse('controlador');
 		break;

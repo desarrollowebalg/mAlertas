@@ -80,3 +80,4 @@
 <!--div dialog mensajes de aviso-->
  <div id="dialogo_mensajes_importador"></div>
  <!--Fin div dialog importador-->
+<div id="agregarCorreoElectronico" title="Agregar correo..."><p style="font-size:12px;">Escriba el correo a agregar:</p><input type="text" id="txtAgregaCorreoAlerta" name="txtAgregaCorreoAlerta" style="width:315px;font-size:18px;font-weight:bold;" /></div>

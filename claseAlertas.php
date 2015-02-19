@@ -198,7 +198,7 @@ class alertas{
 			$mensaje="Sin Datos";
 		}else{
 			$rowAD=$objBDA->sqlFetchArray($resAD);
-			$mensaje=$rowAD["COD_ALERT_MASTER"]."||".$rowAD["NAME_ALERT"]."||".$rowAD["HORARIO_FLAG_LUNES"]."||".$rowAD["HORARIO_FLAG_MARTES"]."||".$rowAD["HORARIO_FLAG_MIERCOLES"]."||".$rowAD["HORARIO_FLAG_JUEVES"]."||".$rowAD["HORARIO_FLAG_VIERNES"]."||".$rowAD["HORARIO_FLAG_SABADO"]."||".$rowAD["HORARIO_FLAG_DOMINGO"]."||".$rowAD["HORARIO_HORA_INICIO"]."||".$rowAD["HORARIO_HORA_FIN"]."||".$rowAD["TYPE_EXPRESION"]."||".$rowAD["ACTIVE"]."||".$rowAD["VIGENTE"]."||".$rowAD["COD_USER_CREATE"]."||".$rowAD["NICKNAME_USER_CREATE"]."||".$rowAD["FECHA_CREATE"]."?????";
+			$mensaje=$rowAD["COD_ALERT_MASTER"]."||".$rowAD["NAME_ALERT"]."||".$rowAD["HORARIO_FLAG_LUNES"]."||".$rowAD["HORARIO_FLAG_MARTES"]."||".$rowAD["HORARIO_FLAG_MIERCOLES"]."||".$rowAD["HORARIO_FLAG_JUEVES"]."||".$rowAD["HORARIO_FLAG_VIERNES"]."||".$rowAD["HORARIO_FLAG_SABADO"]."||".$rowAD["HORARIO_FLAG_DOMINGO"]."||".$rowAD["HORARIO_HORA_INICIO"]."||".$rowAD["HORARIO_HORA_FIN"]."||".$rowAD["TYPE_EXPRESION"]."||".$rowAD["ACTIVE"]."||".$rowAD["VIGENTE"]."||".$rowAD["COD_USER_CREATE"]."||".$rowAD["NICKNAME_USER_CREATE"]."||".$rowAD["FECHA_CREATE"]."||".$rowAD["ALARM_EXPRESION"]."?????";
 			//SE EXTRAE EL DETALLE DE LA ALERTA
 			$sqlADD="SELECT ID_OBJECT_MAP,COD_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
 			$resADD=$objBDA->sqlQuery($sqlADD);

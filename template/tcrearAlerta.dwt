@@ -131,7 +131,6 @@
             <div class="estiloTextoLeyenda">Los campos marcados con <span class="camposObligatorios">*</span> son obligatorios</div>
         </div>
         <input type="hidden" id="hdnEliminaTarea" />
-        
     <!--</form>-->
 </div>
 <!--Fin formulario nueva tarea-->

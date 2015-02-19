@@ -142,7 +142,7 @@ $(document).ready(function(){
     $("#ayudaAlerta").click(function(){
     	var horizontalPadding = 0;
 		var verticalPadding = 0;
-		$('<iframe id="frameAyudaAlertas" src="http://movi.2gps.net/manuals/videos.php?video=alertas&bar=0" />').dialog({
+		$('<iframe id="frameAyudaAlertas" src="http://movi.2gps.net/manuals/videos.php?video=alertas&bar=1&atras=0&manual=1" />').dialog({
 			title: 'Ayuda - Alertas',
 			autoOpen: true,
 			width: 597,
@@ -158,6 +158,22 @@ $(document).ready(function(){
 			},
 			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 		}).width(600 - horizontalPadding).height(390 - verticalPadding);
+    });
+
+    $("#agregarCorreoElectronico").dialog({
+		autoOpen: false,
+		height: 170,
+		width: 350,
+		modal: true,
+		resizable: false,
+		buttons: {
+			Cancelar: function() {
+				$("#agregarCorreoElectronico").dialog( "close" );
+			},
+			Aceptar:function(){
+				verificarMail();
+			}
+		}
     });
 
     redimensionarAlertas();//se redimensionan los tabs

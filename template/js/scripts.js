@@ -383,17 +383,21 @@ function crearInsert(){
 *Funcion para agregar una caja de texto para introducir el correo electronico
 */
 function agregarCajaCorreo(){
+	/*
 	idCajaMail="cajaMail_"+cajaEmail;
 	cajaMail="<input type='text' id='"+idCajaMail+"' class='cajaMails' onkeypress='verificarMail(idCajaMail,event)' />"
 	$("#txtCorreoElectronico").prepend(cajaMail);
 	$("#"+idCajaMail).focus();
 	cajaEmail+=1;
 	cajaMail="";
+	*/
+	$("#agregarCorreoElectronico").dialog("open");
+	$("#txtAgregaCorreoAlerta").attr("value","");
 }
 /*
 *Funcion para verificar el mail introducido
 */
-function verificarMail(idCaja,evento){
+/*function verificarMail(idCaja,evento){
 	if(evento.which==13){
 		mailAValidar=$("#"+idCaja).val();//se recupera el correo electronico
 		if(mailAValidar==''){
@@ -418,6 +422,34 @@ function verificarMail(idCaja,evento){
             strDiv="";
 		}
 	}
+}*/
+function verificarMail(){
+	mailAValidar=$("#txtAgregaCorreoAlerta").val();//se recupera el correo electronico
+
+	if(mailAValidar==''){
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, ingrese un correo electronico.</p>");
+		$("#divMenssajesAlertas").dialog("open");
+	}else if(validar_email(mailAValidar)==false){
+		$("#divMenssajesAlertas").html("<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Error, el correo electronico no es valido.</p>");
+		$("#divMenssajesAlertas").dialog("open");
+	}else{
+		//si el mail es valido se elimina la caja de texto y se agrega un div con la opcion de eliminar el correo
+		//$("#"+idCaja).remove();
+		mailOriginal=mailAValidar;
+		if(mailAValidar.length > 23){
+			mailAValidar=mailAValidar.substring(0,21)+"...";
+		}
+		idCaja=cajaEmail;
+		strDiv="<div id='"+idCaja+"' class='destinatarios ui-corner-all' title='"+mailOriginal+"'>";
+        strDiv+="<div class='destinatariosMail'>"+mailAValidar+"</div>";
+        strDiv+="<div class='eliminarDestinatario'>";
+        strDiv+="<a href='#' onclick='eliminaCorreo(\""+idCaja+"\")'><span class='ui-icon ui-icon-circle-close'></span></a>";
+        strDiv+="</div></div>";
+        $("#txtCorreoElectronico").prepend(strDiv);
+        strDiv="";
+        cajaEmail+=1;
+	}
+	$("#agregarCorreoElectronico").dialog("close");
 }
 /*
 *Funcion para eliminar un destinatario de los existentes

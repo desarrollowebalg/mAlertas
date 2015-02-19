@@ -24,7 +24,7 @@
 				<td colspan="5" class="datosTablaTitulo">Descripción</td>
 			</tr>
 			<tr>
-				<td colspan="5" class="datosTabla">{DESCRIPCION}</td>
+				<td colspan="5" class="datosTabla">{EXPRESIONALERTA}</td>
 			</tr>
 			<tr>
 				<td width="150" class="datosTablaTitulo">Activa:</td>
