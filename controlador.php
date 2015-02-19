@@ -89,9 +89,9 @@ if($_SERVER["HTTP_REFERER"]==""){
 			$msgAlerta=$objA->mostrarDetalleAlerta($_GET["idCliente"],$_GET["idUsuario"],$_GET["idAlerta"]);
 			//se separa la cadena original
 			$msgAlerta=explode("?????",$msgAlerta);
-			/*echo "<pre>";
-			print_r($msgAlerta);
-			echo "</pre>";*/
+			//echo "<pre>";
+			//print_r($msgAlerta);
+			//echo "</pre>";
 			
 			$detalleAlerta=explode("??",$msgAlerta[1]);
 			
@@ -99,9 +99,9 @@ if($_SERVER["HTTP_REFERER"]==""){
 			/*echo "<pre>";
 			print_r($correos);
 			echo "</pre>";*/
-			/*echo "<pre>";
+			echo "<pre>";
 			print_r($detalleAlerta);
-			echo "</pre>";*/
+			echo "</pre>";
 
 			$tpl->set_filenames(array('controlador' => 'tDetalleAlerta1'));
 			$datosAlerta=explode("||",$msgAlerta[0]);
@@ -113,7 +113,8 @@ if($_SERVER["HTTP_REFERER"]==""){
 				$tpl->assign_block_vars('listadoUnidadesDetalle',array(
 						'IDOBJECTMAP'	=>  $detalleAlerta1[0],
 	                    'IDUNIDAD' 		=>	$detalleAlerta1[1],
-	                    'UNIDAD'		=>	$detalleAlerta1[2]
+	                    'UNIDAD'		=>	$detalleAlerta1[2],
+	                    'IDREGISTRO'	=>	$detalleAlerta1[3]
 	            ));
 			}
 			for($i=0;$i<count($correos);$i++){

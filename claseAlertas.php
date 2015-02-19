@@ -138,14 +138,11 @@ class alertas{
 				$sqlContador="SELECT COUNT(*) AS TOTALDETALLES FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowIdAlerta["COD_ALERT_MASTER"]."'";
 				$resContador=$objBDA->sqlQuery($sqlContador);
 				$rowContador=$objBDA->sqlFetchArray($resContador);
-				$rowContador["TOTALDETALLES"];
-				
+				$rowContador["TOTALDETALLES"];	
 				//se evalua la operacion en la base de datos
 				if($rowContador["TOTALDETALLES"]==1){
-					//echo "<br>Se elimina todo";
 					//se inicia el proceso de eliminacion para el detalle de la alerta
 					$sqlEliminarDetalle="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
-					
 					$resEliminarDetalle=$objBDA->sqlQuery($sqlEliminarDetalle);
 					if($resEliminarDetalle){
 						//se elimina xp_email_master
@@ -160,7 +157,6 @@ class alertas{
 					
 					$mensaje=1;
 				}else{
-					//echo "<br>Se elimina el detalle";
 					//se inicia el proceso de eliminacion para el detalle de la alerta
 					$sqlEliminarDetalle="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$valorEliminar."'";
 					
@@ -173,9 +169,7 @@ class alertas{
 							$mensaje=1;
 						}
 					}
-					
 				}
-
 			}else{
 				$mensaje=0;
 			}
@@ -200,11 +194,11 @@ class alertas{
 			$rowAD=$objBDA->sqlFetchArray($resAD);
 			$mensaje=$rowAD["COD_ALERT_MASTER"]."||".$rowAD["NAME_ALERT"]."||".$rowAD["HORARIO_FLAG_LUNES"]."||".$rowAD["HORARIO_FLAG_MARTES"]."||".$rowAD["HORARIO_FLAG_MIERCOLES"]."||".$rowAD["HORARIO_FLAG_JUEVES"]."||".$rowAD["HORARIO_FLAG_VIERNES"]."||".$rowAD["HORARIO_FLAG_SABADO"]."||".$rowAD["HORARIO_FLAG_DOMINGO"]."||".$rowAD["HORARIO_HORA_INICIO"]."||".$rowAD["HORARIO_HORA_FIN"]."||".$rowAD["TYPE_EXPRESION"]."||".$rowAD["ACTIVE"]."||".$rowAD["VIGENTE"]."||".$rowAD["COD_USER_CREATE"]."||".$rowAD["NICKNAME_USER_CREATE"]."||".$rowAD["FECHA_CREATE"]."||".$rowAD["ALARM_EXPRESION"]."?????";
 			//SE EXTRAE EL DETALLE DE LA ALERTA
-			$sqlADD="SELECT ID_OBJECT_MAP,COD_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
+			$sqlADD="SELECT ID_OBJECT_MAP,COD_ENTITY,COD_ALERT_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$rowAD["COD_ALERT_MASTER"]."'";
 			$resADD=$objBDA->sqlQuery($sqlADD);
 			while($rowADD=$objBDA->sqlFetchArray($resADD)){
 				$desUnidad=$this->extraerNombreEntidad($rowADD["COD_ENTITY"]);
-				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$desUnidad."???";
+				$mensaje.=$rowADD["ID_OBJECT_MAP"]."|||".$rowADD["COD_ENTITY"]."|||".$desUnidad."|||".$rowADD["COD_ALERT_ENTITY"]."???";
 			}
 			//se extrae la informacion de los correos electronicos asociados a la alerta
 			$sqlAE="SELECT CORREO_ELECTRONICO 
@@ -219,8 +213,7 @@ class alertas{
 	/**
 	*@method 		mostrarUnidadesCliente
 	*@description 	Funcion para mostrar las diferentes unidades de los cientes
-	*@paramas 				
-	*
+	*@paramas 			
 	*/
 	public function mostrarUnidadesCliente($idCliente,$idUsuarioAlerta,$filtro){
 		$mensaje="";
@@ -254,14 +247,12 @@ class alertas{
 	/**
 	*@method 		mostrarCorreosCliente
 	*@description 	Funcion para mostrar los correos electronicos del cliente seleccionado
-	*@paramas 				
-	*
+	*@paramas 
 	*/
 	public function mostrarCorreosCliente($idCliente,$idUsuarioAlerta,$filtro){
 		$mensaje="";
 		$objDb=$this->iniciarConexionAlertas();
 		$objDb ->sqlQuery("SET NAMES 'utf8'");
-		
 		if($filtro=="S/N"){
 			//$sqlE="SELECT CORREO_ELECTRONICO FROM ALERT_XP_EMAIL WHERE COD_CLIENT='".$idCliente."'";
 			$sqlE="SELECT CORREO_ELECTRONICO FROM ALERT_XP_EMAIL WHERE COD_CLIENT='".$idCliente."' GROUP BY CORREO_ELECTRONICO";

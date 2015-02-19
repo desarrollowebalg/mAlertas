@@ -41,7 +41,7 @@
 		</table>
 	</fieldset><br>
 	<fieldset class="fieldset"><legend>Unidades asociadas</legend>
-		<table border="0" width="500">
+		<table border="1" width="500">
 			<tr>
 				<td width="100" class="datosTablaTitulo">Unidad:</td>
 			</tr>
