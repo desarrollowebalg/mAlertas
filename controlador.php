@@ -99,15 +99,17 @@ if($_SERVER["HTTP_REFERER"]==""){
 			/*echo "<pre>";
 			print_r($correos);
 			echo "</pre>";*/
-			echo "<pre>";
-			print_r($detalleAlerta);
-			echo "</pre>";
+			//echo "<pre>";
+			//print_r($detalleAlerta);
+			//echo "</pre>";
 
 			$tpl->set_filenames(array('controlador' => 'tDetalleAlerta1'));
 			$datosAlerta=explode("||",$msgAlerta[0]);
 			/*echo "<pre>";
 			print_r($datosAlerta);
 			echo "</pre>";*/
+			(count($detalleAlerta) > 1) ? $mostrar="inline;" : $mostrar="none;";
+			
 			for($i=0;$i<count($detalleAlerta);$i++){
 				$detalleAlerta1=explode("|||",$detalleAlerta[$i]);
 				$tpl->assign_block_vars('listadoUnidadesDetalle',array(
@@ -176,7 +178,8 @@ if($_SERVER["HTTP_REFERER"]==""){
 				'VIGENTE'				=> $vigente,
 				'USUARIOCREO'			=> $usuarioCreo,
 				'FECHACREACION'			=> $textoFecha,
-				'EXPRESIONALERTA'		=> $expresionAlerta
+				'EXPRESIONALERTA'		=> $expresionAlerta,
+				'MOSTRARBTNBORRAR'		=> $mostrar
 			));
 			$tpl->pparse('controlador');
 		break;
@@ -187,6 +190,14 @@ if($_SERVER["HTTP_REFERER"]==""){
 		case "activarDesactivarAlertas":
 			$actualizacion=$objA->actualizarAlertasActDes($_GET["idCliente"],$_GET["idUsuario"],$_GET["elementoActualizar"]);
 			echo $actualizacion;
+		break;
+	}
+	switch($_POST["action"]){
+		case "eliminarUnidadAlerta":
+			//echo "<pre>";
+			//print_r($_POST);
+			//echo "</pre>";
+			$objA->eliminarUnidadesAlerta($_POST["idUnidades"],$_POST["noAlerta"],$_POST["idUsuarioAlerta"],$_POST["idCliente"]);
 		break;
 	}
 }

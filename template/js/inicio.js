@@ -176,6 +176,24 @@ $(document).ready(function(){
 		}
     });
 
+    $("#confirmacionEliminarUnidad").dialog({
+    	autoOpen:false,
+    	height: 140,
+    	width:350,
+    	modal:true,
+    	resizable:false,
+    	buttons:{
+    		Cancelar:function(){
+    			$("#confirmacionEliminarUnidad").dialog("close");
+    			unidadAEliminar=0;
+    		},
+    		Aceptar:function(){
+    			console.log("Eliminar unidad");
+    			eliminarUnidadAlerta();
+    		}
+    	}
+    });
+
     redimensionarAlertas();//se redimensionan los tabs
     cargarAlertas("vigentes");//peticion para listar las tareas
 });
@@ -192,14 +210,14 @@ function ajaxAlertas(accion,c,parametros,divCarga,divResultado,tipoPeticion){
 		},
 		success: function(data) {
 			//$("#"+divResultado).html(data);
-			controladorAcciones(accion,data,divResultado);
+			controladorAccionesAlertas(accion,data,divResultado);
 		}
 	});
 }
 /*
 *Funcion que administra las diferentes acciones de las respuestas de las peticiones
 */
-function controladorAcciones(accion,data,divResultado){
+function controladorAccionesAlertas(accion,data,divResultado){
 	switch(accion){
 		case "mostrarFormularioAlerta":
 			$("#"+divResultado).show().html(data);
@@ -223,6 +241,9 @@ function controladorAcciones(accion,data,divResultado){
 		case "activarDesactivarAlertas":
 			//$("#eliminarAlertas").html(data);
 			evaluaResultado(data,banderaAccion);
+		break;
+		case "eliminarUnidadAlerta":
+			$("#"+divResultado).html(data);
 		break;
 	}
 }

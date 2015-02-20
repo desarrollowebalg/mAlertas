@@ -84,6 +84,33 @@ class alertas{
 		}
 	}
 	/**
+	*@method 		eliminarUnidadAlerta
+	*@descripction 	Funcion para eliminar un unidad de la alerta seleccionada
+	*@params 		@idRegistro
+	*/
+	public function eliminarUnidadesAlerta($idRegistros,$noAlerta,$idUsuarioAlerta,$idCliente){
+		$mensaje="";
+		$objBDA=$this->iniciarConexionAlertas();
+		$objBDA->sqlQuery("SET NAMES 'UTF8'");
+		$idRegistros=explode(",,,",$idRegistros);
+		for($i=0;$i<count($idRegistros);$i++){
+			echo "<br>".$sql="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$idRegistros[$i]."'";
+			$res=$objBDA->sqlQuery($sql);
+		}
+		echo "<script type='text/javascript'> detalleAlerta('0#".$noAlerta."-0',0) 
+			var current_index = $('#tabsAlertas').tabs('option','selected');//se obtiene el tab actual
+			if(current_index==0){
+				filtro='vigentes';
+			}else if(current_index==1){
+				filtro='activas';
+			}else{
+				filtro='inactivas';
+			}
+			cargarAlertas(filtro);
+
+		 </script>";
+	}
+	/**
 	*@method 		actualizarAlertasActDes
 	*@description 	Funcion para activar / desactivar una o varias alertas
 	*@paramas 				

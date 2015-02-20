@@ -81,3 +81,6 @@
  <div id="dialogo_mensajes_importador"></div>
  <!--Fin div dialog importador-->
 <div id="agregarCorreoElectronico" title="Agregar correo..."><p style="font-size:12px;">Escriba el correo a agregar:</p><input type="text" id="txtAgregaCorreoAlerta" name="txtAgregaCorreoAlerta" style="width:315px;font-size:18px;font-weight:bold;" /></div>
+<!--Cambios para eliminar y agregar alertas-->
+<div id="confirmacionEliminarUnidad" title="Eliminar unidad de Alerta"><p><span class="ui-icon ui-icon-alert" style="float:left;"></span>&nbsp;¿Esta seguro de eliminar la(s) unidad(es) seleccionada(s) de la Alerta actual?</p></div>
+<div></div>

@@ -1,3 +1,16 @@
+<script type="text/javascript">
+	$(function(){
+		$("#btnBorrarUnidadesAlerta").click(function(){
+			//confirmacionEliminarUnidadAlerta();
+			$("#confirmacionEliminarUnidad").dialog("open");
+		});
+
+		$("#btnAgregarUnidadesAlerta").click(function(){
+			mostrarUnidadesCliente("S/N");
+		});
+	});
+</script>
+<form id="frmDetalleAlerta1" name="frmDetalleAlerta1">
 <div style="border:0px solid #FF0000;font-size:12px;">
 	<div style="border-bottom:1px solid #CCC; height:60px;overflow:hidden;">
 		<div style="font-size:16px;heigh:15px;padding:5px;float:left;">
@@ -8,6 +21,7 @@
 		<div style="border:1px solid #CCC;background:#F0F0F0;width:120px;height:50px;float:right;">
 			<div style="font-weight:bold;border:0px solid #FF0000;width:55px;margin:3px auto 3px auto;">Alerta #:</div>
 			<div style="font-size:24px;text-align:center;margin:3px 2px 5px 5px;border:0px solid blue;">{NOALERTA}</div>
+			<input type="hidden" name="hdnNoAlerta" id="hdnNoAlerta" value="{NOALERTA}" />
 		</div>
 	</div>
 	<div style="margin:10px 5px 5px 5px;float:right;border:0px solid #FF0000;">
@@ -40,16 +54,30 @@
 			</tr>
 		</table>
 	</fieldset><br>
+	<div id="accionesUnidadesAddDelete"></div>
 	<fieldset class="fieldset"><legend>Unidades asociadas</legend>
-		<table border="1" width="500">
+		<table border="0" width="500">
 			<tr>
-				<td width="100" class="datosTablaTitulo">Unidad:</td>
+				<td colspan="2">
+					<div id="herramientasGrid" class="ui-corner-all">
+					<input type="button" id="btnAgregarUnidadesAlerta" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="height:25px;margin:2px;" value="Agregar Unidades">
+					<input type="button" id="btnBorrarUnidadesAlerta" class="ui-button ui-widget ui-state-error ui-corner-all ui-button-text-only" style="height:25px;margin:2px;display:{MOSTRARBTNBORRAR}" value="Borrar Unidades">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="50" class="datosTablaTitulo">&nbsp;</td>
+				<td width="450" class="datosTablaTitulo">Unidad:</td>
 			</tr>
 			<!-- BEGIN listadoUnidadesDetalle -->
 			<tr>
-				<td class="datosTabla">&raquo;&nbsp;{listadoUnidadesDetalle.UNIDAD}</td>
+				<td class="datosTabla" style="text-align:center;"><input type="checkbox" id="chkAB_{listadoUnidadesDetalle.IDREGISTRO}" name="chkUnidadAlertaElimina" value="{listadoUnidadesDetalle.IDREGISTRO}"></td>
+				<td class="datosTabla">&raquo;&nbsp;<label for="chkAB_{listadoUnidadesDetalle.IDREGISTRO}">{listadoUnidadesDetalle.UNIDAD}</label></td>
 			</tr>
 			<!-- END listadoUnidadesDetalle -->
+			<tr>
+				<td colspan="2"><div id="txtUnidadesAsignadasAlerta"></div></td>
+			</tr>
 		</table>
 	</fieldset><br>
 	<fieldset class="fieldset"><legend>Correos electrónicos asociados</legend>
@@ -93,3 +121,4 @@
 		</table>
 	</fieldset><br>
 </div>
+</form>

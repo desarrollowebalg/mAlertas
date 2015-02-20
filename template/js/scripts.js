@@ -577,6 +577,7 @@ function quitarUnidadesDiv(idUsuarioAQuitar){
 *Funcion para mostrar el detalle de la Alerta
 */
 function detalleAlerta(idAlerta,e){
+	console.log(idAlerta);
 	idAlerta=idAlerta.split("#");
 	idAlertaC=idAlerta[1].split("-");
 	$("#detalleAlerta").dialog("open");
@@ -701,4 +702,30 @@ function evaluaResultado(resultado,opcion){
 	}
 	cargarAlertas(filtro);
 	banderaAccion="";
+}
+function eliminarUnidadAlerta(){
+	$("#confirmacionEliminarUnidad").dialog("close");
+	var elementos="";
+	for (var i=0;i<document.frmDetalleAlerta1.elements.length;i++){
+	 	if (document.frmDetalleAlerta1.elements[i].type=="checkbox"){
+	 		if (document.frmDetalleAlerta1.elements[i].checked){				
+	 			if (elementos=="")
+	 				elementos=elementos+document.frmDetalleAlerta1.elements[i].value;
+	 			else
+	 				elementos=elementos+",,,"+document.frmDetalleAlerta1.elements[i].value;
+	 		}	
+	 	}
+	}
+	console.log(elementos);
+	if(elementos==""){
+		mostrarMensaje("Error, debe seleccionar al menos una unidad para poderla borrar");
+	}else{
+		hdnNoAlerta=$("#hdnNoAlerta").val();
+		idClienteAlerta=$("#idClienteAlertas").val();
+    	idUsuarioAlerta=$("#idUsuarioAlertas").val();
+		parametros="action=eliminarUnidadAlerta&idUnidades="+elementos+"&noAlerta="+hdnNoAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&idCliente="+idClienteAlerta;
+		ajaxAlertas("eliminarUnidadAlerta","controlador",parametros,"accionesUnidadesAddDelete","accionesUnidadesAddDelete","POST");	
+	}
+
+	
 }
