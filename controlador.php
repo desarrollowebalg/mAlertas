@@ -66,12 +66,15 @@ if($_SERVER["HTTP_REFERER"]==""){
 			}
 		break;
 		case "mostrarUnidadesCliente":
-			$unidades=$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"]);
+			$unidades=$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"],$_GET["origen"],$_GET["alerta"]);
 			if($unidades=="S/N"){
 				echo "( 0 ) registros encontrados.";
 			}else{
 				$unidades=explode("|||||",$unidades);
 				$tpl->set_filenames(array('controlador' => 'tListadoUnidades'));
+				$tpl->assign_vars(array(
+					'ORIGEN'	=> 	$_GET["origen"]
+				));
 				for($i=0;$i<count($unidades);$i++){
 					$unidad=explode("|||",$unidades[$i]);
 					$tpl->assign_block_vars('listadoUnidades',array(

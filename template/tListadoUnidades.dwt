@@ -1,4 +1,5 @@
 <form name="frmListadoUnidades" id="frmListadoUnidades">
+	<input type="hidden" name="hdnOrigenC" id="hdnOrigenC" value="{ORIGEN}" />
 	<!-- BEGIN listadoUnidades -->	
 		<div class="estiloListadoUsuarios ui-corner-all">
 			<input type='checkbox' id='{listadoUnidades.IDUNIDAD}' value='{listadoUnidades.IDUNIDAD}|{listadoUnidades.UNIDAD}' />

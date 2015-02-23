@@ -14,7 +14,7 @@
     });
 
     $("#btnAgragarExpresion").click(function(){
-      mostrarUnidadesCliente("S/N");
+      mostrarUnidadesCliente("S/N","nuevo",0);
     });
   });
 </script>

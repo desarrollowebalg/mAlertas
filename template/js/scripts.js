@@ -518,22 +518,40 @@ function agregarCorreosElectronicos(){
 		$("#detalleAgregarCorreos").dialog("close");
 	}
 }
-function mostrarUnidadesCliente(filtro){
+function mostrarUnidadesCliente(filtro,origen,alerta){
+	console.log(origen)
+	/*
+	* Modificacion para la inclusion de unidades en alertas
+	*/
 	$("#agregarUnidades").dialog("open");
 	idClienteAlerta=$("#idClienteAlertas").val();
     idUsuarioAlerta=$("#idUsuarioAlertas").val();
-    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro="+filtro;
+    parametros="action=mostrarUnidadesCliente&idCliente="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&filtro="+filtro+"&origen="+origen+"&alerta="+alerta;
 	ajaxAlertas("mostrarUnidadesCliente","controlador",parametros,"listadoUnidadesAlertas","listadoUnidadesAlertas","GET");
 }
 function buscarUnidadesCliente(){
 	txtFiltro=$("#txtBuscarUnidadCliente").val();
-	if(txtFiltro.length >=3 || txtFiltro != ""){
-		mostrarUnidadesCliente(txtFiltro);//se llama a la funcion cargarUsuarios
+	origen=$("#hdnOrigenC").val();
+	if(origen=="agregar"){
+		alerta=$("#hdnNoAlerta").val();
 	}else{
-		mostrarUnidadesCliente('S/N');
+		alerta=0;
+	}
+	if(txtFiltro.length >=3 || txtFiltro != ""){
+		mostrarUnidadesCliente("\""+txtFiltro+"\"","\""+origen+"\"",alerta);//se llama a la funcion cargarUsuarios
+	}else{
+		mostrarUnidadesCliente("S/N","\""+origen+"\"",alerta);
 	}
 }
 function agregarUnidadesSeleccionadas(){
+	/*Modificacion para agregra o quitar unidades*/
+	origen=$("#hdnOrigenC").val();
+	if(origen=="nuevo"){
+		divResultadoAddUnidades="txtUnidadesAsignadas";
+	}else{
+		divResultadoAddUnidades="txtUnidadesAsignadasAlerta";
+	}
+	console.log(divResultadoAddUnidades)
 	var elementos="";
 	for (var i=0;i<document.frmListadoUnidades.elements.length;i++){
 	 	if (document.frmListadoUnidades.elements[i].type=="checkbox"){
@@ -557,8 +575,8 @@ function agregarUnidadesSeleccionadas(){
 			//se arma la estructura
 			unidadesAgDiv="<div id='"+idDivUsuarios+"' class='estiloUsuariosAgregadosDiv'><a href='#' onclick='quitarUnidadesDiv("+unidadesAg[0]+")' title='Quitar Usuario de la tarea'><img src='./public/images/cross.png' border='0' /></a>&nbsp;"+unidadesAg[1]+"</div>";
 			//se verifica que no exista el usuario ya en el listado			
-			if ($('#'+idDivUsuarios).length==0){
-				$("#txtUnidadesAsignadas").append(unidadesAgDiv);//se agregan los usuarios al divResultado
+			if ($('#'+idDivUsuarios+" div").length==0){
+				$("#"+divResultadoAddUnidades).append(unidadesAgDiv);//se agregan los usuarios al divResultado
 			}else{
 				console.log("existe :"+idDivUsuarios);
 			}

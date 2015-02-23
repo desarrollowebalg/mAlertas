@@ -6,7 +6,7 @@
 		});
 
 		$("#btnAgregarUnidadesAlerta").click(function(){
-			mostrarUnidadesCliente("S/N");
+			mostrarUnidadesCliente("S/N","agregar",{NOALERTA});
 		});
 	});
 </script>
@@ -76,7 +76,7 @@
 			</tr>
 			<!-- END listadoUnidadesDetalle -->
 			<tr>
-				<td colspan="2"><div id="txtUnidadesAsignadasAlerta"></div></td>
+				<td colspan="2"><div id="txtUnidadesAsignadasAlerta" style="border:1px solid #FF0000;"></div></td>
 			</tr>
 		</table>
 	</fieldset><br>

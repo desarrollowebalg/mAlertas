@@ -242,20 +242,31 @@ class alertas{
 	*@description 	Funcion para mostrar las diferentes unidades de los cientes
 	*@paramas 			
 	*/
-	public function mostrarUnidadesCliente($idCliente,$idUsuarioAlerta,$filtro){
+	public function mostrarUnidadesCliente($idCliente,$idUsuarioAlerta,$filtro,$origen,$alerta){
 		$mensaje="";
 		$objMovi=$this->iniciarConexionDb();
 		$objMovi->sqlQuery("SET NAMES 'utf8'");
 		if($filtro=="S/N"){
-			$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
-            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) 
-		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
-            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' ORDER BY NOMBRE,COD_ENTITY";
+			if($origen=="nuevo"){
+				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
+	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' ORDER BY NOMBRE,COD_ENTITY";
+			}else if($origen=="agregar"){
+				//se extraen las unidades de las alertas
+				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
+	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.COD_ENTITY NOT IN (".$this->extraerIdsUnidadesAlerta($alerta).") ORDER BY NOMBRE,COD_ENTITY";
+			}
 		}else{
-			$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
-            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) 
-		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
-            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' ORDER BY NOMBRE,COD_ENTITY";
+			if($origen=="nuevo"){
+				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
+	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' ORDER BY NOMBRE,COD_ENTITY";
+			}else if($origen=="agregar"){
+				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
+	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' AND ADM_UNIDADES.COD_ENTITY NOT IN (".$this->extraerIdsUnidadesAlerta($alerta).") ORDER BY NOMBRE,COD_ENTITY";
+			}
 		}
 		$resG=$objMovi->sqlQuery($sqlG);
 		if($objMovi->sqlEnumRows($resG)==0){
@@ -268,6 +279,17 @@ class alertas{
 					$mensaje.="|||||".$rowG["ID_GRUPO"]."|||".$rowG["NOMBRE"]."|||".$rowG["COD_ENTITY"]."|||".$rowG["DESCRIPTION"];
 				}
 			}
+		}
+		return $mensaje;
+	}
+	private function extraerIdsUnidadesAlerta($alerta){
+		$mensaje="";
+		$objDb=$this->iniciarConexionAlertas();
+		$objDb ->sqlQuery("SET NAMES 'utf8'");
+		$sql="SELECT COD_ENTITY FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$alerta."'";
+		$res=$objDb->sqlQuery($sql);
+		while($row=$objDb->sqlFetchArray($res)){
+			($mensaje=="") ? $mensaje=$row["COD_ENTITY"] : $mensaje.=",".$row["COD_ENTITY"];
 		}
 		return $mensaje;
 	}
