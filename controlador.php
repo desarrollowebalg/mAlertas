@@ -66,6 +66,9 @@ if($_SERVER["HTTP_REFERER"]==""){
 			}
 		break;
 		case "mostrarUnidadesCliente":
+			//echo "<pre>";
+			//print_r($_GET);
+			//echo "</pre>";
 			$unidades=$objA->mostrarUnidadesCliente($_GET["idCliente"],$_GET["idUsuarioAlerta"],$_GET["filtro"],$_GET["origen"],$_GET["alerta"]);
 			if($unidades=="S/N"){
 				echo "( 0 ) registros encontrados.";
@@ -201,6 +204,12 @@ if($_SERVER["HTTP_REFERER"]==""){
 			//print_r($_POST);
 			//echo "</pre>";
 			$objA->eliminarUnidadesAlerta($_POST["idUnidades"],$_POST["noAlerta"],$_POST["idUsuarioAlerta"],$_POST["idCliente"]);
+		break;
+		case "agregarUnidadesAlerta":
+			echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
+			$objA->agregarUnidadesAlerta($_POST["unidades"],$_POST["noAlerta"],$_POST["idClienteAlerta"],$_POST["idUsuarioAlerta"]);
 		break;
 	}
 }

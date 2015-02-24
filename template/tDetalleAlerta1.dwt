@@ -8,6 +8,10 @@
 		$("#btnAgregarUnidadesAlerta").click(function(){
 			mostrarUnidadesCliente("S/N","agregar",{NOALERTA});
 		});
+
+		$("#btnGuardarAgregarUnidadesAlerta").click(function(){
+			guardarNuevasUnidadesAlerta();
+		});
 	});
 </script>
 <form id="frmDetalleAlerta1" name="frmDetalleAlerta1">
@@ -60,8 +64,8 @@
 			<tr>
 				<td colspan="2">
 					<div id="herramientasGrid" class="ui-corner-all">
-					<input type="button" id="btnAgregarUnidadesAlerta" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="height:25px;margin:2px;" value="Agregar Unidades">
-					<input type="button" id="btnBorrarUnidadesAlerta" class="ui-button ui-widget ui-state-error ui-corner-all ui-button-text-only" style="height:25px;margin:2px;display:{MOSTRARBTNBORRAR}" value="Borrar Unidades">
+						<input type="button" id="btnAgregarUnidadesAlerta" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="height:25px;margin:2px;" value="Agregar Unidades">
+						<input type="button" id="btnBorrarUnidadesAlerta" class="ui-button ui-widget ui-state-error ui-corner-all ui-button-text-only" style="height:25px;margin:2px;display:{MOSTRARBTNBORRAR}" value="Borrar Unidades">
 					</div>
 				</td>
 			</tr>
@@ -76,7 +80,13 @@
 			</tr>
 			<!-- END listadoUnidadesDetalle -->
 			<tr>
-				<td colspan="2"><div id="txtUnidadesAsignadasAlerta" style="border:1px solid #FF0000;"></div></td>
+				<td colspan="2">
+					<div id="herramientasGrid2" class="ui-corner-all" style="display:none;">
+						<input type="button" id="btnGuardarAgregarUnidadesAlerta" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="height:25px;margin:2px;display:none;" value="Guardar Nuevas Unidades">
+						<div id="txtUnidadesAsignadasAlerta" style="border:1px solid #F0F0F0;"></div>
+						<div id="resultadoGuardadoUnidades"></div>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</fieldset><br>

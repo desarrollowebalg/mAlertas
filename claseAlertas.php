@@ -83,6 +83,35 @@ class alertas{
 			echo "<br>Error al encontrar el archivo";
 		}
 	}
+	/*
+	*
+	*/
+	public function agregarUnidadesAlerta($unidades,$noAlerta,$idClienteAlerta,$idUsuarioAlerta){
+		$mensaje="";
+		$objBDA=$this->iniciarConexionAlertas();
+		$objBDA->sqlQuery("SET NAMES 'UTF8'");
+		$sqlR="SELECT COD_ALERT_MASTER,ID_OBJECT_MAP,COD_ENTITY,DESCRIP_ENTITY,CUMPLE_EXPRESION,COD_EVENT_ALERT,COD_CLIENT_ALERT FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_MASTER='".$noAlerta."' LIMIT 1";
+		//se separan las unidades
+		$res=$objBDA->sqlQuery($sqlR);
+		$row=$objBDA->sqlFetchArray($res);
+		$unidades=explode(",",$unidades);
+		for($i=0;$i<count($unidades);$i++){
+			$sqlI="INSERT INTO ALERT_XP_DETAIL_VARIABLES (COD_ALERT_MASTER,ID_OBJECT_MAP,COD_ENTITY,DESCRIP_ENTITY,CUMPLE_EXPRESION,COD_EVENT_ALERT,COD_CLIENT_ALERT) VALUES ('".$noAlerta."','".$row["ID_OBJECT_MAP"]."','".$unidades[$i]."','".$unidades[$i]."','".$row["CUMPLE_EXPRESION"]."','".$row["COD_EVENT_ALERT"]."','".$row["COD_CLIENT_ALERT"]."')";
+			$res=$objBDA->sqlQuery($sqlI);
+		}
+		echo "<script type='text/javascript'> detalleAlerta('0#".$noAlerta."-0',0) 
+			var current_index = $('#tabsAlertas').tabs('option','selected');//se obtiene el tab actual
+			if(current_index==0){
+				filtro='vigentes';
+			}else if(current_index==1){
+				filtro='activas';
+			}else{
+				filtro='inactivas';
+			}
+			cargarAlertas(filtro);
+
+		 </script>";
+	}
 	/**
 	*@method 		eliminarUnidadAlerta
 	*@descripction 	Funcion para eliminar un unidad de la alerta seleccionada
@@ -250,22 +279,22 @@ class alertas{
 			if($origen=="nuevo"){
 				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
 	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
-	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' ORDER BY NOMBRE,COD_ENTITY";
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' GROUP BY ADM_UNIDADES.COD_ENTITY ORDER BY NOMBRE,COD_ENTITY";
 			}else if($origen=="agregar"){
 				//se extraen las unidades de las alertas
 				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
 	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
-	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.COD_ENTITY NOT IN (".$this->extraerIdsUnidadesAlerta($alerta).") ORDER BY NOMBRE,COD_ENTITY";
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.COD_ENTITY NOT IN (".$this->extraerIdsUnidadesAlerta($alerta).") GROUP BY ADM_UNIDADES.COD_ENTITY ORDER BY NOMBRE,COD_ENTITY";
 			}
 		}else{
 			if($origen=="nuevo"){
 				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
 	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
-	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' ORDER BY NOMBRE,COD_ENTITY";
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' GROUP BY ADM_UNIDADES.COD_ENTITY ORDER BY NOMBRE,COD_ENTITY";
 			}else if($origen=="agregar"){
 				$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
 	            FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
-	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' AND ADM_UNIDADES.COD_ENTITY NOT IN (".$this->extraerIdsUnidadesAlerta($alerta).") ORDER BY NOMBRE,COD_ENTITY";
+	            WHERE ADM_USUARIOS_GRUPOS.ID_USUARIO = '".$idUsuarioAlerta."' AND ADM_UNIDADES.DESCRIPTION LIKE '%".$filtro."%' AND ADM_UNIDADES.COD_ENTITY NOT IN (".$this->extraerIdsUnidadesAlerta($alerta).") GROUP BY ADM_UNIDADES.COD_ENTITY ORDER BY NOMBRE,COD_ENTITY";
 			}
 		}
 		$resG=$objMovi->sqlQuery($sqlG);

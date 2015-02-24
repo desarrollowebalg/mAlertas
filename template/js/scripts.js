@@ -532,15 +532,17 @@ function mostrarUnidadesCliente(filtro,origen,alerta){
 function buscarUnidadesCliente(){
 	txtFiltro=$("#txtBuscarUnidadCliente").val();
 	origen=$("#hdnOrigenC").val();
+	//console.log("origen "+origen);
 	if(origen=="agregar"){
-		alerta=$("#hdnNoAlerta").val();
+		alerta=$("#hdnNoAlerta").val(); origen="agregar";
 	}else{
-		alerta=0;
+		alerta=0; origen="nuevo";
 	}
+	//console.log("alerta "+alerta);
 	if(txtFiltro.length >=3 || txtFiltro != ""){
-		mostrarUnidadesCliente("\""+txtFiltro+"\"","\""+origen+"\"",alerta);//se llama a la funcion cargarUsuarios
+		mostrarUnidadesCliente(txtFiltro,origen,alerta);//se llama a la funcion cargarUsuarios
 	}else{
-		mostrarUnidadesCliente("S/N","\""+origen+"\"",alerta);
+		mostrarUnidadesCliente('S/N',origen,alerta);
 	}
 }
 function agregarUnidadesSeleccionadas(){
@@ -550,8 +552,10 @@ function agregarUnidadesSeleccionadas(){
 		divResultadoAddUnidades="txtUnidadesAsignadas";
 	}else{
 		divResultadoAddUnidades="txtUnidadesAsignadasAlerta";
+		$("#herramientasGrid2").show();
+		$("#btnGuardarAgregarUnidadesAlerta").show();
 	}
-	console.log(divResultadoAddUnidades)
+	//console.log(divResultadoAddUnidades)
 	var elementos="";
 	for (var i=0;i<document.frmListadoUnidades.elements.length;i++){
 	 	if (document.frmListadoUnidades.elements[i].type=="checkbox"){
@@ -734,7 +738,7 @@ function eliminarUnidadAlerta(){
 	 		}	
 	 	}
 	}
-	console.log(elementos);
+	//console.log(elementos);
 	if(elementos==""){
 		mostrarMensaje("Error, debe seleccionar al menos una unidad para poderla borrar");
 	}else{
@@ -743,7 +747,24 @@ function eliminarUnidadAlerta(){
     	idUsuarioAlerta=$("#idUsuarioAlertas").val();
 		parametros="action=eliminarUnidadAlerta&idUnidades="+elementos+"&noAlerta="+hdnNoAlerta+"&idUsuarioAlerta="+idUsuarioAlerta+"&idCliente="+idClienteAlerta;
 		ajaxAlertas("eliminarUnidadAlerta","controlador",parametros,"accionesUnidadesAddDelete","accionesUnidadesAddDelete","POST");	
-	}
-
-	
+	}	
+}
+function guardarNuevasUnidadesAlerta(){
+	unidadesAgregar="";
+	$("#txtUnidadesAsignadasAlerta div").each(function(index){
+		//console.log($(this).attr("id"));
+		unidadAddAlerta=$(this).attr("id");
+		unidadAddAlerta=unidadAddAlerta.split("_");
+		if(unidadesAgregar==""){
+			unidadesAgregar=unidadAddAlerta[1];
+		}else{
+			unidadesAgregar+=","+unidadAddAlerta[1];
+		}
+	});
+	//console.log(unidadesAgregar);
+	hdnNoAlerta=$("#hdnNoAlerta").val();
+	idClienteAlerta=$("#idClienteAlertas").val();
+    idUsuarioAlerta=$("#idUsuarioAlertas").val();
+	parametros="action=agregarUnidadesAlerta&unidades="+unidadesAgregar+"&noAlerta="+hdnNoAlerta+"&idClienteAlerta="+idClienteAlerta+"&idUsuarioAlerta="+idUsuarioAlerta;
+	ajaxAlertas("agregarUnidadesAlerta","controlador",parametros,"resultadoGuardadoUnidades","resultadoGuardadoUnidades","POST");
 }

@@ -91,8 +91,8 @@ $(document).ready(function(){
 	});
 	$("#detalleAlerta").dialog({//dialog detalle alerta
 		autoOpen:false,
-		height: 500,
-		width: 600,
+		height: 600,
+		width: 680,
 		resizable: false,
 		buttons:{
 			Cerrar:function(){
@@ -243,6 +243,9 @@ function controladorAccionesAlertas(accion,data,divResultado){
 			evaluaResultado(data,banderaAccion);
 		break;
 		case "eliminarUnidadAlerta":
+			$("#"+divResultado).html(data);
+		break;
+		case "agregarUnidadesAlerta":
 			$("#"+divResultado).html(data);
 		break;
 	}
