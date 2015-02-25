@@ -123,7 +123,7 @@ class alertas{
 		$objBDA->sqlQuery("SET NAMES 'UTF8'");
 		$idRegistros=explode(",,,",$idRegistros);
 		for($i=0;$i<count($idRegistros);$i++){
-			echo "<br>".$sql="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$idRegistros[$i]."'";
+			$sql="DELETE FROM ALERT_XP_DETAIL_VARIABLES WHERE COD_ALERT_ENTITY='".$idRegistros[$i]."'";
 			$res=$objBDA->sqlQuery($sql);
 		}
 		echo "<script type='text/javascript'> detalleAlerta('0#".$noAlerta."-0',0) 
