@@ -600,7 +600,9 @@ function quitarUnidadesDiv(idUsuarioAQuitar){
 */
 function detalleAlerta(idAlerta,e){
 	//console.log(idAlerta);
-	e.preventDefault();
+	if (e !=0 ){
+		e.preventDefault();	
+	}
 	idAlerta=idAlerta.split("#");
 	idAlertaC=idAlerta[1].split("-");
 	$("#detalleAlerta").dialog("open");
