@@ -599,7 +599,8 @@ function quitarUnidadesDiv(idUsuarioAQuitar){
 *Funcion para mostrar el detalle de la Alerta
 */
 function detalleAlerta(idAlerta,e){
-	console.log(idAlerta);
+	//console.log(idAlerta);
+	e.preventDefault();
 	idAlerta=idAlerta.split("#");
 	idAlertaC=idAlerta[1].split("-");
 	$("#detalleAlerta").dialog("open");

@@ -463,7 +463,7 @@ class alertas{
 		$col["sortable"] = false; // this column is not sortable 
 		$col["align"] = "center";
 		$col["link"] = "#{CLAVE}"; // e.g. http://domain.com?id={id} given that, there is a column with $col["name"] = "id" exist
-		$col["linkoptions"] = "title='Ver detalle de la alerta' onclick='detalleAlerta(this.href,this.event)'"; // extra params with <a> tag
+		$col["linkoptions"] = "title='Ver detalle de la alerta' onclick='detalleAlerta(this.href,event)'"; // extra params with <a> tag
 		$cols[] = $col;
 	
 		$g = new jqgrid();//se instancia el objeto
