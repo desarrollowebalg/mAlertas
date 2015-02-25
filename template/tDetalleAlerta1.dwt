@@ -16,7 +16,7 @@
 </script>
 <form id="frmDetalleAlerta1" name="frmDetalleAlerta1">
 <div style="border:0px solid #FF0000;font-size:12px;">
-	<div style="border-bottom:1px solid #CCC; height:60px;overflow:hidden;">
+	<div style="border-bottom:1px solid #CCC; height:60px;overflow:hidden;position:fixed;width:640px;background:url(./public/images/fondo2.png)repeat;">
 		<div style="font-size:16px;heigh:15px;padding:5px;float:left;">
 			<div style="border:0px solid blue;margin:5px 5px 5px 5px;">
 				{NOMBREALERTA}
@@ -28,7 +28,7 @@
 			<input type="hidden" name="hdnNoAlerta" id="hdnNoAlerta" value="{NOALERTA}" />
 		</div>
 	</div>
-	<div style="margin:10px 5px 5px 5px;float:right;border:0px solid #FF0000;">
+	<div style="margin:70px 5px 5px 5px;float:right;border:0px solid #FF0000;">
 		Creada el:&nbsp;<strong>{FECHACREACION}</strong>
 	</div>
 	<div style="clear:both;"></div>
