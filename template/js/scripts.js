@@ -264,12 +264,14 @@ function crearInsert(){
 	   }else{
 		  var vig = 0; 
 	   }
+	   var vig=1;
 	   insert = insert +',"'+vig+'"';
 	   if($("#chkActiva").is(':checked')) {				// activa
 		  var act = 'S';
 	   }else{
 		  var act = 'N'; 
 	   }
+	   var act='N';
 	   insert = insert +',"'+ act +'"';
 	  if($("#txtCorreoElectronico").find('div').length===1){
 	 			correos ='';
